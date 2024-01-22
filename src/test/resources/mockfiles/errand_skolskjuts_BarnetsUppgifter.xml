@@ -1,0 +1,299 @@
+<FlowInstance>
+	<Header>
+		<Flow>
+			<FamilyID>136</FamilyID>
+			<Version>28</Version>
+			<FlowID>2177</FlowID>
+			<Name>
+				<![CDATA[Ansökan om skolskjuts]]>
+			</Name>
+		</Flow>
+		<FlowInstanceID>165476</FlowInstanceID>
+		<Status>
+			<ID>14069</ID>
+			<Name>
+				<![CDATA[Inskickat]]>
+			</Name>
+		</Status>
+		<Poster>
+			<Firstname>
+				<![CDATA[KALLE]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[ANKA]]>
+			</Lastname>
+			<Email>
+				<![CDATA[kalle.anka@ankeborg.se]]>
+			</Email>
+			<ID>18995</ID>
+		</Poster>
+		<Owner>
+			<Firstname>
+				<![CDATA[Kalle]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[Anka]]>
+			</Lastname>
+			<Email>
+				<![CDATA[kalle.anka@ankeborg.se]]>
+			</Email>
+			<ID>18995</ID>
+		</Owner>
+		<Posted>2024-01-16T10:03:39</Posted>
+		<Editor>
+			<Firstname>
+				<![CDATA[Kalle]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[Anka]]>
+			</Lastname>
+			<Email>
+				<![CDATA[kalle.anka@ankeborg.se]]>
+			</Email>
+			<ID>18995</ID>
+		</Editor>
+		<Updated>2024-01-16T10:04:01</Updated>
+		<FirstSubmitted>2024-01-16T10:04:01</FirstSubmitted>
+		<LastSubmitted>2024-01-16T10:04:01</LastSubmitted>
+	</Header>
+	<Values>
+		<Handlaggare>
+			<QueryID>60087</QueryID>
+			<Name>
+				<![CDATA[Handläggare]]>
+			</Name>
+			<Value>
+				<![CDATA[Andersson, Anna]]>
+			</Value>
+		</Handlaggare>
+		<KontaktuppgifterPrivatperson>
+			<QueryID>60088</QueryID>
+			<Name>
+				<![CDATA[Ange dina kontaktuppgifter]]>
+			</Name>
+			<Firstname>
+				<![CDATA[Kalle]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[Anka]]>
+			</Lastname>
+			<Address>
+				<![CDATA[Ankeborgsvägen 2]]>
+			</Address>
+			<ZipCode>
+				<![CDATA[857 31]]>
+			</ZipCode>
+			<PostalAddress>
+				<![CDATA[SUNDSVALL]]>
+			</PostalAddress>
+			<Phone>
+				<![CDATA[0701234567]]>
+			</Phone>
+			<Email>
+				<![CDATA[kalle.anka@ankeborg.se]]>
+			</Email>
+			<MobilePhone>
+				<![CDATA[0701234567]]>
+			</MobilePhone>
+			<ContactBySMS>
+				<![CDATA[true]]>
+			</ContactBySMS>
+		</KontaktuppgifterPrivatperson>
+		<VemGallerArendet>
+			<QueryID>60089</QueryID>
+			<Name>
+				<![CDATA[Vem gäller ärendet?]]>
+			</Name>
+			<Value>Jag ansöker för en elev som jag är familjehem/god man/förmyndare för</Value>
+		</VemGallerArendet>
+		<BarnetsUppgifter>
+			<Barnets_personummer>
+				<![CDATA[20010101111]]>
+			</Barnets_personummer>
+			<Barnets_fornamn>
+				<![CDATA[Kajsa]]>
+			</Barnets_fornamn>
+			<Barnets_efternamn>
+				<![CDATA[Anka]]>
+			</Barnets_efternamn>
+		</BarnetsUppgifter>
+		<DatumAnsokan>
+			<QueryID>60095</QueryID>
+			<Name>
+				<![CDATA[Från vilket datum ansöker du om skolskjuts?]]>
+			</Name>
+			<StartDate>2024-01-17</StartDate>
+		</DatumAnsokan>
+		<OmBarnetBorPaFleraAdresser>
+			<QueryID>60096</QueryID>
+			<Name>
+				<![CDATA[Har eleven växelvis boende?]]>
+			</Name>
+			<Value>Nej</Value>
+		</OmBarnetBorPaFleraAdresser>
+		<AnsokanBarnetsAdressEllerAnnan>
+			<QueryID>60100</QueryID>
+			<Name>
+				<![CDATA[gäller Ansökan från någon av elevens adresser eller annan plats?]]>
+			</Name>
+			<Value>Annan plats</Value>
+		</AnsokanBarnetsAdressEllerAnnan>
+		<AnnanPlats>
+			<QueryID>60101</QueryID>
+			<Name>
+				<![CDATA[Ange annan plats]]>
+			</Name>
+			<Value>Korttidsboende</Value>
+			<Value>Korttidstillsyn (eftis)</Value>
+		</AnnanPlats>
+		<NamnKorttidsboendeOchSchema>
+			<QueryID>60102</QueryID>
+			<Name>
+				<![CDATA[Ange namn på korttidsboende samt schema för behov av resor mellan korttidsboende och skola]]>
+			</Name>
+			<Value>
+				<![CDATA[Korttidsboendet, ibland]]>
+			</Value>
+		</NamnKorttidsboendeOchSchema>
+		<NamnEftis>
+			<QueryID>60103</QueryID>
+			<Name>
+				<![CDATA[Ange namn på korttidstillsyn (eftis).]]>
+			</Name>
+			<Value>
+				<![CDATA[Ankeborgs Fritidsgård, Ankeborgsgatan 123]]>
+			</Value>
+		</NamnEftis>
+		<EftisUdda>
+			<QueryID>60104</QueryID>
+			<Name>
+				<![CDATA[Kryssa i vilka dagar som skolskjuts önskas mellan skola och korttidstillsyn (eftis) - udda veckor]]>
+			</Name>
+			<Value>Måndag från skolan</Value>
+			<Value>Tisdag från skolan</Value>
+			<Value>Onsdag från skolan</Value>
+			<Value>Torsdag från skolan</Value>
+			<Value>Fredag från skolan</Value>
+		</EftisUdda>
+		<EftisJamna>
+			<QueryID>60105</QueryID>
+			<Name>
+				<![CDATA[Kryssa i vilka dagar som skolskjuts önskas mellan skola och korttidstillsyn (eftis) - jämna veckor]]>
+			</Name>
+			<Value>Måndag från skolan</Value>
+			<Value>Tisdag från skolan</Value>
+			<Value>Onsdag från skolan</Value>
+			<Value>Torsdag från skolan</Value>
+			<Value>Fredag från skolan</Value>
+		</EftisJamna>
+		<VarforSkolskjuts>
+			<QueryID>60112</QueryID>
+			<Name>
+				<![CDATA[Varför behöver eleven skolskjuts?]]>
+			</Name>
+			<Value>Lat</Value>
+		</VarforSkolskjuts>
+		<BeskrivningSvartTaSigTillSkolan>
+			<QueryID>60118</QueryID>
+			<Name>
+				<![CDATA[Beskriv varför eleven har svårt att själv ta sig till skolan]]>
+			</Name>
+			<Value>
+				<![CDATA[Kajsa tycker det är jobbigt att gå ut när det är kallt]]>
+			</Value>
+		</BeskrivningSvartTaSigTillSkolan>
+		<SkolaAnsokan>
+			<QueryID>60127</QueryID>
+			<Name>
+				<![CDATA[Ange vilken skola Ansökan gäller]]>
+			</Name>
+			<Value>Anpassad gymnasieskola ankeborg</Value>
+		</SkolaAnsokan>
+		<Arskurs>
+			<QueryID>60128</QueryID>
+			<Name>
+				<![CDATA[Ange vilken årskurs eleven går i från det datum du ansöker om skolskjuts]]>
+			</Name>
+			<Value>årskurs 3 Anpassad gymnasieskola</Value>
+		</Arskurs>
+		<BarnetGarI>
+			<QueryID>60129</QueryID>
+			<Name>
+				<![CDATA[Ange vilken skolform eleven går i från det datum du ansöker om skolskjuts]]>
+			</Name>
+			<Value>Anpassad gymnasieskola</Value>
+		</BarnetGarI>
+		<Dagar>
+			<QueryID>60162</QueryID>
+			<Name>
+				<![CDATA[Kryssa i vilka dagar som skolskjuts önskas mellan hem och skola]]>
+			</Name>
+			<Value>Alla dagar till skolan</Value>
+		</Dagar>
+		<approval>
+			<QueryID>60167</QueryID>
+			<Name>
+				<![CDATA[Jag samtycker till att beslut om skolskjuts fattas automatiserat utan mänsklig inblandning]]>
+			</Name>
+			<Value>Ja</Value>
+		</approval>
+		<BeslutPeriod>
+			<QueryID>60168</QueryID>
+			<Name>
+				<![CDATA[Ange period för beslut]]>
+			</Name>
+			<StartDate>2024-01-17</StartDate>
+			<EndDate>2024-06-14</EndDate>
+		</BeslutPeriod>
+		<Beslut>
+			<QueryID>60169</QueryID>
+			<Name>
+				<![CDATA[Ange beslut]]>
+			</Name>
+			<Value>Beviljad</Value>
+		</Beslut>
+		<OmFritidsplats>
+			<QueryID>60170</QueryID>
+			<Name>
+				<![CDATA[Om eleven har fritidsplats, ange namn på fritidsplatsen]]>
+			</Name>
+			<Value>
+				<![CDATA[ankeborgs fritidsgård]]>
+			</Value>
+		</OmFritidsplats>
+		<OmFritidsplatsAndras>
+			<QueryID>60171</QueryID>
+			<Name>
+				<![CDATA[Om eleven har fritidsplats, ange namn på fritidsplatsen]]>
+			</Name>
+			<Value>
+				<![CDATA[ankeborgs fritidsgård]]>
+			</Value>
+		</OmFritidsplatsAndras>
+		<DatumAndradFritidsplats>
+			<QueryID>60172</QueryID>
+			<Name>
+				<![CDATA[Ange datum för ändrad fritidsplats]]>
+			</Name>
+			<StartDate>2024-01-17</StartDate>
+		</DatumAndradFritidsplats>
+	</Values>
+	<SigningEvents>
+		<SignEvent>
+			<SignedChecksum>5BF0087D164BE783E2611B43808191C33F3410F2</SignedChecksum>
+			<Date>2024-01-16T10:04:01</Date>
+			<Signer>
+				<Firstname>
+					<![CDATA[Kalle]]>
+				</Firstname>
+				<Lastname>
+					<![CDATA[Anka]]>
+				</Lastname>
+				<Email>
+					<![CDATA[kalle.anka@ankeborg.se]]>
+				</Email>
+				<ID>18995</ID>
+			</Signer>
+		</SignEvent>
+	</SigningEvents>
+</FlowInstance>

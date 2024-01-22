@@ -1,0 +1,36 @@
+integration:
+  citizen:
+    base-url: http://citizen.url
+  messaging:
+    base-url: http://messaging.url
+  open-e:
+    base-url: opene
+    password: somePasword
+    username: someUsername
+mapper:
+  link-template: http://link.template
+  recipients-elevresa: someemail@test.se
+  recipients-skolskjuts: someemail@test.se
+service:
+  family-id: 344,349
+scheduling:
+  expression: "-"
+
+spring:
+  main:
+    banner-mode: 'off'
+  security:
+    oauth2:
+      client:
+        provider:
+          citizen:
+            token-uri: http://token.url
+          messaging:
+            token-uri: http://token.url
+        registration:
+          citizen:
+            client-id: the-client-id
+            client-secret: the-client-secret
+          messaging:
+            client-id: the-client-id
+            client-secret: the-client-secret

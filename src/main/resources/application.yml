@@ -1,0 +1,27 @@
+openapi:
+  name: ${spring.application.name}
+  title: ${spring.application.name}
+  version: '@project.version@'
+spring:
+  application:
+    name: api-citizenchanges
+  security:
+    oauth2:
+      client:
+        registration:
+          citizen:
+            authorization-grant-type: client_credentials
+            provider: citizen
+          messaging:
+            authorization-grant-type: client_credentials
+            provider: messaging
+integration:
+  citizen:
+    connect-timeout: 5
+    read-timeout: 30
+  messaging:
+    connect-timeout: 5
+    read-timeout: 30
+  open-e:
+    connect-timeout: 5
+    read-timeout: 30

@@ -1,0 +1,40 @@
+integration:
+  citizen:
+    base-url: http://localhost:${wiremock.server.port:}/citizen
+  messaging:
+    base-url: http://localhost:${wiremock.server.port:}/messaging
+  open-e:
+    base-url: http://localhost:${wiremock.server.port:}/opene
+    password: somePassword
+    username: someUsername
+mapper:
+  link-template: http://link.template
+  recipients-elevresa: someemail@test.se
+  recipients-skolskjuts: someemail@test.se
+service:
+  family-id: 344,349
+scheduling:
+  expression: "-"
+
+spring:
+  main:
+    banner-mode: 'off'
+  security:
+    oauth2:
+      client:
+        provider:
+          citizen:
+            token-uri: http://localhost:${wiremock.server.port:}/api-gateway/token
+          messaging:
+            token-uri: http://localhost:${wiremock.server.port:}/api-gateway/token
+        registration:
+          citizen:
+            client-id: the-client-id
+            client-secret: the-client-secret
+            authorization-grant-type: client_credentials
+            provider: citizen
+          messaging:
+            client-id: the-client-id
+            client-secret: the-client-secret
+            authorization-grant-type: client_credentials
+            provider: messaging

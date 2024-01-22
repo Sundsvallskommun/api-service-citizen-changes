@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<FlowInstances>
+	<FlowInstance>
+		<flowInstanceID>1234</flowInstanceID>
+	</FlowInstance>
+	<FlowInstance>
+		<flowInstanceID>1235</flowInstanceID>
+	</FlowInstance>
+	<FlowInstance>
+		<flowInstanceID>1236</flowInstanceID>
+	</FlowInstance>
+	<FlowInstance>
+		<flowInstanceID>1237</flowInstanceID>
+	</FlowInstance>
+	<FlowInstance>
+		<flowInstanceID>1238</flowInstanceID>
+	</FlowInstance>
+	<FlowInstance>
+		<flowInstanceID>1239</flowInstanceID>
+	</FlowInstance>
+</FlowInstances>

@@ -1,0 +1,216 @@
+<FlowInstance>
+	<Header>
+		<Flow>
+			<FamilyID>261</FamilyID>
+			<Version>22</Version>
+			<FlowID>1234</FlowID>
+			<Name>
+				<![CDATA[Busskortsansökan för gymnasieelever]]>
+			</Name>
+		</Flow>
+		<FlowInstanceID>12</FlowInstanceID>
+		<Status>
+			<ID>123</ID>
+			<Name>
+				<![CDATA[Manuell handläggning]]>
+			</Name>
+		</Status>
+		<Poster>
+			<Firstname>
+				<![CDATA[KALLE]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[ANKA]]>
+			</Lastname>
+			<Email>
+				<![CDATA[ankeborg@sundsvall.se]]>
+			</Email>
+			<ID>41501</ID>
+		</Poster>
+		<Owner>
+			<Firstname>
+				<![CDATA[KALLE]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[ANKA]]>
+			</Lastname>
+			<Email>
+				<![CDATA[kalle.anka@ankeborg.se]]>
+			</Email>
+			<ID>41501</ID>
+		</Owner>
+		<Posted>2024-01-15T18:01:24</Posted>
+		<Editor>
+			<Firstname>
+				<![CDATA[Kajsa]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[Anka]]>
+			</Lastname>
+			<Email>
+				<![CDATA[kajsa.anka@ankeborg.se]]>
+			</Email>
+			<ID>9380</ID>
+		</Editor>
+		<Updated>2024-01-16T11:27:06</Updated>
+		<FirstSubmitted>2024-01-15T18:01:24</FirstSubmitted>
+		<LastSubmitted>2024-01-16T11:27:06</LastSubmitted>
+	</Header>
+	<Values>
+		<personOrtf>
+			<QueryID>58953</QueryID>
+			<Name>
+				<![CDATA[Personnummer eller tf-nummer?]]>
+			</Name>
+			<Value>Personnummer</Value>
+		</personOrtf>
+		<Besked>
+			<QueryID>58954</QueryID>
+			<Name>
+				<![CDATA[Besked]]>
+			</Name>
+			<Value>Eleven har rätt till elevresa med busskort till/från folkbokföringsadressen.
+			</Value>
+		</Besked>
+		<Kortnummer>
+			<QueryID>58957</QueryID>
+			<Name>
+				<![CDATA[Kortnummer]]>
+			</Name>
+			<Kortnummer>
+				<![CDATA[123456]]>
+			</Kortnummer>
+		</Kortnummer>
+		<BeslutetGallerForPerioden>
+			<QueryID>58958</QueryID>
+			<Name>
+				<![CDATA[Beslutet Gäller för perioden]]>
+			</Name>
+			<StartDate>2024-01-16</StartDate>
+			<EndDate>2026-06-12</EndDate>
+		</BeslutetGallerForPerioden>
+		<IntygarOmStuderarPaHeltid>
+			<QueryID>58959</QueryID>
+			<Name>
+				<![CDATA[Jag/mitt barn studerar heltid]]>
+			</Name>
+			<Value>JA</Value>
+		</IntygarOmStuderarPaHeltid>
+		<IntygarOmEjInackorderingstillagg>
+			<QueryID>58960</QueryID>
+			<Name>
+				<![CDATA[Jag/mitt barn har inackorderingstillägg]]>
+			</Name>
+			<Value>NEJ</Value>
+		</IntygarOmEjInackorderingstillagg>
+		<ValAvVemSoker>
+			<QueryID>58961</QueryID>
+			<Name>
+				<![CDATA[Jag ansöker om busskort för elevresa för]]>
+			</Name>
+			<Value>Mitt barn</Value>
+		</ValAvVemSoker>
+		<VemGallerArendet>
+			<QueryID>60089</QueryID>
+			<Name>
+				<![CDATA[Vem gäller ärendet?]]>
+			</Name>
+			<Value>Jag ansöker för en elev som jag är familjehem/god man/förmyndare för</Value>
+		</VemGallerArendet>
+		<UppgifterBarn>
+			<QueryID>58964</QueryID>
+			<Name>
+				<![CDATA[Uppgifter om elev]]>
+			</Name>
+			<CitizenIdentifier>20010101111</CitizenIdentifier>
+			<Firstname>Tjatte</Firstname>
+			<Lastname>Anka</Lastname>
+			<Address>Ankeborgsvägen 2 LGH 1001</Address>
+			<Zipcode>857 31</Zipcode>
+			<PostalAddress>ANKEBORG</PostalAddress>
+		</UppgifterBarn>
+		<UppgifterSokande>
+			<QueryID>58966</QueryID>
+			<Name>
+				<![CDATA[Uppgifter om sökande]]>
+			</Name>
+			<Firstname>
+				<![CDATA[KALLE ANKA]]>
+			</Firstname>
+			<Lastname>
+				<![CDATA[NUR]]>
+			</Lastname>
+			<Address>
+				<![CDATA[Ankeborgsvägen 2 LGH 1001]]>
+			</Address>
+			<ZipCode>
+				<![CDATA[857 31]]>
+			</ZipCode>
+			<PostalAddress>
+				<![CDATA[SUNDSVALL]]>
+			</PostalAddress>
+			<Email>
+				<![CDATA[kalle.anka@ankeborg.se]]>
+			</Email>
+			<MobilePhone>
+				<![CDATA[070123567]]>
+			</MobilePhone>
+			<SocialSecurityNumber>
+				<![CDATA[198001011111]]>
+			</SocialSecurityNumber>
+			<ContactBySMS>
+				<![CDATA[true]]>
+			</ContactBySMS>
+		</UppgifterSokande>
+		<VilkenAdressAnsakan>
+			<QueryID>58967</QueryID>
+			<Name>
+				<![CDATA[från vilken adress ansöker du om busskort för elevresa?]]>
+			</Name>
+			<Value>Elevens folkbokföringsadress vilket är densamma som min folkbokföringsadress.
+			</Value>
+		</VilkenAdressAnsakan>
+		<BefintligEllerNyAdress>
+			<QueryID>58968</QueryID>
+			<Name>
+				<![CDATA[Gäller ansökan från befintlig adress eller ny adress]]>
+			</Name>
+			<Value>Befintlig folkbokföringsadress</Value>
+		</BefintligEllerNyAdress>
+		<Arskurs>
+			<QueryID>58972</QueryID>
+			<Name>
+				<![CDATA[Ange vilken årskurs eleven går i från det datum du ansöker om elevresa]]>
+			</Name>
+			<Value>årskurs 1</Value>
+		</Arskurs>
+		<Skola>
+			<QueryID>58973</QueryID>
+			<Name>
+				<![CDATA[Vilken skola går du/eleven på?]]>
+			</Name>
+			<Value>Ankeborgs gymnasium</Value>
+		</Skola>
+		<Enhet>
+			<QueryID>58974</QueryID>
+			<Name>
+				<![CDATA[Vilken program går du/eleven på?]]>
+			</Name>
+			<Value>Ankprogrammet, Ankerborgska</Value>
+		</Enhet>
+		<DatumAnsokan>
+			<QueryID>58975</QueryID>
+			<Name>
+				<![CDATA[Från vilket datum gäller ansökan om elevresa?]]>
+			</Name>
+			<StartDate>2024-01-01</StartDate>
+		</DatumAnsokan>
+		<approval>
+			<QueryID>58976</QueryID>
+			<Name>
+				<![CDATA[Jag samtycker till att beslut om elevresa fattas automatiserat utan mänsklig inblandning]]>
+			</Name>
+			<Value>Ja</Value>
+		</approval>
+	</Values>
+</FlowInstance>

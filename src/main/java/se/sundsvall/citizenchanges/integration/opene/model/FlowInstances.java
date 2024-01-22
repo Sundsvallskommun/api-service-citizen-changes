@@ -1,0 +1,23 @@
+package se.sundsvall.citizenchanges.integration.opene.model;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class FlowInstances {
+
+	@JacksonXmlProperty(localName = "FlowInstance")
+	@JacksonXmlElementWrapper(useWrapping = false)
+	private List<FlowInstance> flowInstance;
+
+}

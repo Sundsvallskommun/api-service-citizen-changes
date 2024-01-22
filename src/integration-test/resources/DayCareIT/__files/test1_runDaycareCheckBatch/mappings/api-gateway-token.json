@@ -1,0 +1,19 @@
+{
+  "name": "api-gateway",
+  "request": {
+    "urlPath": "/api-gateway/token",
+    "method": "POST",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Bearer dhlLWNsaWVudC1pZDp0aGUtY2xpZW50LXNlY3JldA=="
+      }
+    }
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "status": 200,
+    "bodyFileName": "test1_runDaycareCheckBatch/responses/api-gateway-token-response.json"
+  }
+}
