@@ -104,7 +104,7 @@
 							<configOptions>
 								<useSpringBoot3>true</useSpringBoot3>
 								<sourceFolder>models</sourceFolder>
-								<dateLibrary>java8</dateLibrary>
+								<dateLibrary>java8-localdatetime</dateLibrary>
 								<apiPackage>generated</apiPackage>
 								<modelPackage>generated.se.sundsvall.citizen</modelPackage>
 								<openApiNullable>false</openApiNullable>

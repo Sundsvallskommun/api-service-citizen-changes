@@ -1,6 +1,7 @@
 package se.sundsvall.citizenchanges;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -72,7 +73,7 @@ public final class TestDataFactory {
 			.custodianFor(Collections.singletonList(new CustodyChildrenPupil().personnumber("somePersonnummer").typeOfSchool("someTypeOfSchool")))
 			.addresses(List.of(new CitizenAddress()
 				.status("Current")
-				.nrDate(OffsetDateTime.now())
+				.nrDate(LocalDateTime.now())
 				.address("someAddress")
 				.co("someCo")
 				.appartmentNumber("someApartmentNumber")
@@ -84,7 +85,7 @@ public final class TestDataFactory {
 				.xCoordLocal(12D)
 				.yCoordLocal(14D), new CitizenAddress()
 				.status("Previous")
-				.nrDate(OffsetDateTime.now())
+				.nrDate(LocalDateTime.now())
 				.address("someAddress")
 				.co("someCo")
 				.appartmentNumber("someApartmentNumber")
