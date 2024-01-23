@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildCitizen;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
@@ -68,7 +69,7 @@ class CitizenIntegrationTests {
 
 	private void assertAdress(final CitizenAddress addressItem) {
 		assertThat(addressItem.getStatus()).isEqualTo("Current");
-		assertThat(addressItem.getNrDate()).isCloseTo(OffsetDateTime.now(), within(3L, ChronoUnit.SECONDS));
+		assertThat(addressItem.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
 		assertThat(addressItem.getAddress()).isEqualTo("someAddress");
 		assertThat(addressItem.getCo()).isEqualTo("someCo");
 		assertThat(addressItem.getAppartmentNumber()).isEqualTo("someApartmentNumber");

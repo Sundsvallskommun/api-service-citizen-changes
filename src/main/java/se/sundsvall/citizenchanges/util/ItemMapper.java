@@ -1,5 +1,6 @@
 package se.sundsvall.citizenchanges.util;
 
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -67,7 +68,7 @@ public class ItemMapper {
 
 		return AddressItem.builder()
 			.withStatus(citizenAddress.getStatus())
-			.withNrDate(citizenAddress.getNrDate())
+			.withNrDate(citizenAddress.getNrDate().atOffset(OffsetDateTime.now().getOffset()))
 			.withAddress(citizenAddress.getAddress())
 			.withCo(citizenAddress.getCo())
 			.withApartmentNumber(citizenAddress.getAppartmentNumber())

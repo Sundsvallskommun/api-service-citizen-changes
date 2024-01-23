@@ -4,7 +4,7 @@
     "personNumber": "somePersonNumber",
     "classified": "someClassified",
     "unRegCode": "someUnRegCode",
-    "unRegDate": "2024-01-16T14:35:12.727Z",
+    "unRegDate": "2024-01-16T00:00:00",
     "gender": "someGender",
     "givenname": "someGivenname",
     "lastname": "someLastname",
@@ -14,13 +14,13 @@
         "personnumber": "somePersonnumber",
         "typeOfSchool": "someTypeOfSchool",
         "unRegCode": "someUnRegCode",
-        "unRegDate": "2024-01-16T14:35:12.727Z"
+        "unRegDate": "2024-01-16T00:00:00"
       }
     ],
     "addresses": [
       {
         "status": "someStatus",
-        "nrDate": "2024-01-16T14:35:12.727Z",
+        "nrDate": "2024-01-16T00:00:00",
         "realEstateDescription": "someRealEstateDescription",
         "co": "someCo",
         "address": "someAddress",
