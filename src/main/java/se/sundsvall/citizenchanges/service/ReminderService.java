@@ -37,7 +37,6 @@ import se.sundsvall.citizenchanges.util.Constants;
 import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.citizenchanges.util.MessageMapper;
 
-
 @Service
 public class ReminderService {
 

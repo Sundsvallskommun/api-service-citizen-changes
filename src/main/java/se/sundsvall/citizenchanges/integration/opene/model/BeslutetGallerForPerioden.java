@@ -8,8 +8,11 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BeslutetGallerForPerioden {
+
     @JacksonXmlProperty(localName = "StartDate")
     private String startDate;
+
     @JacksonXmlProperty(localName = "EndDate")
     private String endDate;
+
 }

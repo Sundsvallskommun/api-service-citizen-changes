@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import se.sundsvall.citizenchanges.CitizenChanges;
+import se.sundsvall.citizenchanges.Application;
 
-@SpringBootTest(classes = CitizenChanges.class)
+@SpringBootTest(classes = Application.class)
 @ActiveProfiles("junit")
 class MessageMapperPropertiesTest {
 

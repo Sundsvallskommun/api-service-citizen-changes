@@ -28,7 +28,6 @@ class ItemMapperTest {
 		assertThat(composeInvestigationItem).isNotNull().hasNoNullFieldsOrProperties();
 	}
 
-
 	@Test
 	void composeInvestigationItemWithMinorIdentifier() {
 		// Arrange

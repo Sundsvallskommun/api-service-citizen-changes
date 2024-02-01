@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class OepErrandQualificationReminderUtilTest {
 
-
 	@Test
 	void isOepErrandQualified() {
 		// Arrange

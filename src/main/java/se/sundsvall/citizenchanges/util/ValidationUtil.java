@@ -11,8 +11,7 @@ import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 
 public final class ValidationUtil {
 
-	private ValidationUtil() {
-	}
+	private ValidationUtil() {}
 
 	public static boolean validMSISDN(final String number) {
 		if (number == null) {
@@ -67,6 +66,5 @@ public final class ValidationUtil {
 			return true;
 		}
 	}
-
 
 }

@@ -23,7 +23,6 @@ class InvestigationItemTest {
 			hasValidBeanToString()));
 	}
 
-
 	@Test
 	void builder() {
 		// Arrange

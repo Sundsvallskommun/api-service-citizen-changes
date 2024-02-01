@@ -20,10 +20,10 @@ import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import se.sundsvall.citizenchanges.CitizenChanges;
+import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.citizenchanges.service.DaycareCheckService;
 
-@SpringBootTest(classes = CitizenChanges.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class DayCareCheckResourceTest {
 
@@ -54,7 +54,6 @@ class DayCareCheckResourceTest {
 		verify(daycareCheckService).runBatch(anyInt(), anyInt(), anyInt(), any());
 		verifyNoMoreInteractions(daycareCheckService);
 	}
-
 
 	@Test
 	void checkCachedFile() {

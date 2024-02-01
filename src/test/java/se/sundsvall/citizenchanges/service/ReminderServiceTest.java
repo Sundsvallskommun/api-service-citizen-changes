@@ -17,14 +17,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import generated.se.sundsvall.messaging.DeliveryResult;
+import generated.se.sundsvall.messaging.MessageResult;
+import generated.se.sundsvall.messaging.MessageStatus;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
 import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
 import se.sundsvall.citizenchanges.util.MessageMapper;
-
-import generated.se.sundsvall.messaging.DeliveryResult;
-import generated.se.sundsvall.messaging.MessageResult;
-import generated.se.sundsvall.messaging.MessageStatus;
 
 @ExtendWith(MockitoExtension.class)
 class ReminderServiceTest {
@@ -43,7 +42,6 @@ class ReminderServiceTest {
 
 	@InjectMocks
 	private ReminderService service;
-
 
 	@Test
 	void runBatch() {
@@ -220,6 +218,5 @@ class ReminderServiceTest {
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
 	}
-
 
 }

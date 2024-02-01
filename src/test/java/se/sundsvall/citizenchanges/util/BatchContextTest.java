@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 class BatchContextTest {
 
-
 	@Test
 	void testBean() {
 		MatcherAssert.assertThat(BatchContext.class, allOf(
@@ -86,6 +85,5 @@ class BatchContextTest {
 				}
 			);
 	}
-
 
 }

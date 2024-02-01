@@ -18,10 +18,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import se.sundsvall.citizenchanges.CitizenChanges;
+import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.citizenchanges.service.ReminderService;
 
-@SpringBootTest(classes = CitizenChanges.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class ReminderResourceTests {
 

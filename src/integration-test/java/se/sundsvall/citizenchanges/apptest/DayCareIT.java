@@ -8,13 +8,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import se.sundsvall.citizenchanges.CitizenChanges;
+import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 
 @WireMockAppTestSuite(
 	files = "classpath:/DayCareIT/",
-	classes = CitizenChanges.class
+	classes = Application.class
 )
 class DayCareIT extends AbstractAppTest {
 

@@ -11,13 +11,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.poiji.bind.Poiji;
-import com.poiji.option.PoijiOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
+
+import com.poiji.bind.Poiji;
+import com.poiji.option.PoijiOptions;
+import com.poiji.option.PoijiOptions.PoijiOptionsBuilder;
 
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
@@ -32,13 +34,16 @@ public class FileHandler {
 
 	private static final String BACKUP_FILE_PATH = "lastRun.xls";
 
-	private final PoijiOptions options = PoijiOptions.PoijiOptionsBuilder.settings()
-		.ignoreWhitespaces(true)
-		.addListDelimiter(";")
-		.build();
-
+	private final PoijiOptions options;
 
 	private List<ParsedRow> parsedRows;
+
+	public FileHandler() {
+		options = PoijiOptionsBuilder.settings()
+			.ignoreWhitespaces(true)
+			.addListDelimiter(";")
+			.build();
+	}
 
 	// Used for testing purposes
 	List<ParsedRow> getParsedRows() {

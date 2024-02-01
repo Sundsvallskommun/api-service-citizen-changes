@@ -19,6 +19,11 @@ scheduling:
 spring:
   main:
     banner-mode: 'off'
+  flyway:
+    enabled: true
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:mariadb:10.6.4:////
   security:
     oauth2:
       client:

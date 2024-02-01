@@ -5,16 +5,16 @@ import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumbe
 
 import java.util.regex.Pattern;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class NumberFormatterTest {
 
-	private Pattern pattern;
+	private static Pattern PATTERN;
 
-	@BeforeEach
-	void setup() {
-		pattern = Pattern.compile("^\\+[1-9]\\d{3,14}$");
+	@BeforeAll
+	static void setup() {
+		PATTERN = Pattern.compile("^\\+[1-9]\\d{3,14}$");
 	}
 
 	@Test
@@ -33,11 +33,11 @@ class NumberFormatterTest {
 		final var testResult5 = formatMobileNumber(null);
 
 		//Assert
-		assertThat(pattern.matcher(testResult1).matches()).isTrue();
-		assertThat(pattern.matcher(testResult2).matches()).isTrue();
-		assertThat(pattern.matcher(testResult3).matches()).isFalse();
-		assertThat(pattern.matcher(testResult4).matches()).isTrue();
-		assertThat(pattern.matcher(testResult5).matches()).isFalse();
+		assertThat(PATTERN.matcher(testResult1).matches()).isTrue();
+		assertThat(PATTERN.matcher(testResult2).matches()).isTrue();
+		assertThat(PATTERN.matcher(testResult3).matches()).isFalse();
+		assertThat(PATTERN.matcher(testResult4).matches()).isTrue();
+		assertThat(PATTERN.matcher(testResult5).matches()).isFalse();
 	}
 
 }

@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 class ContactInfoTest {
 
-
 	@Test
 	void testBean() {
 		MatcherAssert.assertThat(ContactInfo.class, allOf(
@@ -23,7 +22,6 @@ class ContactInfoTest {
 			hasValidBeanEquals(),
 			hasValidBeanToString()));
 	}
-
 
 	@Test
 	void testBuilderMethods() {

@@ -142,7 +142,6 @@ class RelocationCheckServiceTest {
 		verifyNoInteractions(itemMapperMock);
 	}
 
-
 	@Test
 	void runBatch_OepThrowsException() {
 
@@ -180,7 +179,6 @@ class RelocationCheckServiceTest {
 		verifyNoMoreInteractions(propertiesMock, mapperMock, citizenIntegrationMock, openEIntegrationMock, messagingClientMock);
 		verifyNoInteractions(itemMapperMock);
 	}
-
 
 	@Test
 	void runBatch_includeCitizenInfos() {

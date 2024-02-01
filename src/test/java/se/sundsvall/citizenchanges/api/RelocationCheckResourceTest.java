@@ -17,17 +17,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import se.sundsvall.citizenchanges.CitizenChanges;
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
+import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.citizenchanges.integration.citizen.CitizenIntegration;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 
-
-@SpringBootTest(classes = CitizenChanges.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class RelocationCheckResourceTest {
-
 
 	private static final String PATH = "/relocations/batchtrigger/relocations";
 

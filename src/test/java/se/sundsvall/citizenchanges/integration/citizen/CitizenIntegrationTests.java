@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildCitizen;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
@@ -22,7 +21,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.zalando.problem.Problem;
 
 import generated.se.sundsvall.citizen.CitizenAddress;
-
 
 @ExtendWith(MockitoExtension.class)
 class CitizenIntegrationTests {
@@ -55,31 +53,28 @@ class CitizenIntegrationTests {
 		assertThat(resultItem.getGivenname()).isEqualTo("someGivenName");
 		assertThat(resultItem.getPersonNumber()).isEqualTo("someApplicantIdentifier");
 		assertThat(resultItem.getCustodianFor().getFirst()).isNotNull();
-		assertThat(resultItem.getCustodianFor().getFirst().getPersonnumber()).isEqualTo(
-			"somePersonnummer");
-		assertThat(resultItem.getCustodianFor().getFirst().getTypeOfSchool()).isEqualTo(
-			"someTypeOfSchool");
-		assertThat(resultItem.getAddresses().getFirst()).isNotNull();
-		assertAdress(resultItem.getAddresses().getFirst());
+		assertThat(resultItem.getCustodianFor().getFirst().getPersonnumber()).isEqualTo("somePersonnummer");
+		assertThat(resultItem.getCustodianFor().getFirst().getTypeOfSchool()).isEqualTo("someTypeOfSchool");
+		assertThat(resultItem.getAddresses().getFirst()).isNotNull().satisfies(this::assertAddressValues);
 
 		// Verify
 		verify(mockCitizenClient, times(1)).getAddressChanges(any(String.class));
 		verifyNoMoreInteractions(mockCitizenClient);
 	}
 
-	private void assertAdress(final CitizenAddress addressItem) {
-		assertThat(addressItem.getStatus()).isEqualTo("Current");
-		assertThat(addressItem.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
-		assertThat(addressItem.getAddress()).isEqualTo("someAddress");
-		assertThat(addressItem.getCo()).isEqualTo("someCo");
-		assertThat(addressItem.getAppartmentNumber()).isEqualTo("someApartmentNumber");
-		assertThat(addressItem.getPostalCode()).isEqualTo("somePostalCode");
-		assertThat(addressItem.getCity()).isEqualTo("some");
-		assertThat(addressItem.getCounty()).isEqualTo("81");
-		assertThat(addressItem.getMunicipality()).isEqualTo("22");
-		assertThat(addressItem.getAddressType()).isEqualTo("someAddressType");
-		assertThat(addressItem.getxCoordLocal()).isEqualTo(12D);
-		assertThat(addressItem.getyCoordLocal()).isEqualTo(14D);
+	private void assertAddressValues(CitizenAddress a) {
+		assertThat(a.getStatus()).isEqualTo("Current");
+		assertThat(a.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
+		assertThat(a.getAddress()).isEqualTo("someAddress");
+		assertThat(a.getCo()).isEqualTo("someCo");
+		assertThat(a.getAppartmentNumber()).isEqualTo("someApartmentNumber");
+		assertThat(a.getPostalCode()).isEqualTo("somePostalCode");
+		assertThat(a.getCity()).isEqualTo("some");
+		assertThat(a.getCounty()).isEqualTo("81");
+		assertThat(a.getMunicipality()).isEqualTo("22");
+		assertThat(a.getAddressType()).isEqualTo("someAddressType");
+		assertThat(a.getxCoordLocal()).isEqualTo(12D);
+		assertThat(a.getyCoordLocal()).isEqualTo(14D);
 	}
 
 	@Test

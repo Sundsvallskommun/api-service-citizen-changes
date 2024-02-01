@@ -4,14 +4,13 @@ import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
-@Configuration
-@EnableScheduling
+@Component
 public class JobScheduler {
 
 	private static final Logger log = LoggerFactory.getLogger(JobScheduler.class);
@@ -23,6 +22,7 @@ public class JobScheduler {
 	}
 
 	@Scheduled(cron = "${scheduling.expression}")
+	@SchedulerLock(name = "relocation_check", lockAtMostFor = "${scheduling.lock-at-most-for}")
 	void startRelocationCheck() {
 
 		final LocalDateTime thisTime = LocalDateTime.now();
