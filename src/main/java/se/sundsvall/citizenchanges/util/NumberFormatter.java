@@ -4,8 +4,7 @@ public final class NumberFormatter {
 
 	private static final String COUNTRY_CODE = "+46";
 
-	private NumberFormatter() {
-	}
+	private NumberFormatter() {}
 
 	public static String formatMobileNumber(final String mobileNumber) {
 		if (mobileNumber == null) {
@@ -18,6 +17,5 @@ public final class NumberFormatter {
 		}
 		return mobileNumber;
 	}
-
 
 }

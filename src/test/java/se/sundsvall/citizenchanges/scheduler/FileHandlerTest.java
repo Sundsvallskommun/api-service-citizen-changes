@@ -72,7 +72,6 @@ class FileHandlerTest {
 		assertThat(result.getDaycarePlacement()).isEqualTo(daycarePlacement);
 	}
 
-
 	@Test
 	void getISTPlacementWithDayCare_Heltid() {
 
@@ -101,7 +100,6 @@ class FileHandlerTest {
 		assertThat(result).isNull();
 
 	}
-
 
 	@Test
 	void getISTPlacementWithNoMatch() {

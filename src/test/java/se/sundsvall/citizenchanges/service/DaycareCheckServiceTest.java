@@ -96,7 +96,6 @@ class DaycareCheckServiceTest {
 		Files.delete(Path.of("mockfile.xls"));
 	}
 
-
 	@Test
 	void runBatch_noOepErrands() throws IOException {
 

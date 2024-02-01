@@ -8,10 +8,14 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UppgifterSokande {
+
     @JacksonXmlProperty(localName = "Firstname")
     private String firstname;
+
     @JacksonXmlProperty(localName = "Lastname")
     private String lastname;
+
     @JacksonXmlProperty(localName = "SocialSecurityNumber")
     private String socialSecurityNumber;
+
 }

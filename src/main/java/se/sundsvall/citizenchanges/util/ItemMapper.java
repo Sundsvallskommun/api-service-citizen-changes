@@ -7,13 +7,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import generated.se.sundsvall.citizen.CitizenAddress;
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import se.sundsvall.citizenchanges.api.model.AddressItem;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
 import se.sundsvall.citizenchanges.api.model.InvestigationItem;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
-
-import generated.se.sundsvall.citizen.CitizenAddress;
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 
 @Component
 public class ItemMapper {
@@ -80,8 +79,6 @@ public class ItemMapper {
 			.withCoordinateX(citizenAddress.getxCoordLocal())
 			.withCoordinateY(citizenAddress.getyCoordLocal())
 			.build();
-
 	}
-
 
 }

@@ -5,17 +5,12 @@ import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumbe
 
 import java.util.regex.Pattern;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class NumberFormatterTest {
 
-	private Pattern pattern;
-
-	@BeforeEach
-	void setup() {
-		pattern = Pattern.compile("^\\+[1-9]\\d{3,14}$");
-	}
+	private static final String VALID_MOBILE_NUMBER_REG_EXP = "^\\+[1-9]\\d{3,14}$";
+	private static final Pattern VALID_MOBILE_NUMBER_PATTERN = Pattern.compile(VALID_MOBILE_NUMBER_REG_EXP);
 
 	@Test
 	void formatMobileNumberTest() {
@@ -33,11 +28,11 @@ class NumberFormatterTest {
 		final var testResult5 = formatMobileNumber(null);
 
 		//Assert
-		assertThat(pattern.matcher(testResult1).matches()).isTrue();
-		assertThat(pattern.matcher(testResult2).matches()).isTrue();
-		assertThat(pattern.matcher(testResult3).matches()).isFalse();
-		assertThat(pattern.matcher(testResult4).matches()).isTrue();
-		assertThat(pattern.matcher(testResult5).matches()).isFalse();
+		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult1).matches()).isTrue();
+		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult2).matches()).isTrue();
+		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult3).matches()).isFalse();
+		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult4).matches()).isTrue();
+		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult5).matches()).isFalse();
 	}
 
 }

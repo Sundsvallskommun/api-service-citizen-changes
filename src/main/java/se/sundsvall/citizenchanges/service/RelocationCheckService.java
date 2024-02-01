@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
@@ -33,9 +34,6 @@ import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.citizenchanges.util.ItemMapper;
 import se.sundsvall.citizenchanges.util.MessageConstants;
 import se.sundsvall.citizenchanges.util.MessageMapper;
-
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
-
 
 @Service
 public class RelocationCheckService {

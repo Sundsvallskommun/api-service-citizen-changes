@@ -34,7 +34,6 @@ class ValidationUtilTests {
 		assertThat(validMSISDN(null)).isFalse();
 	}
 
-
 	@Test
 	void shouldProcessErrand() {
 		// Arrange

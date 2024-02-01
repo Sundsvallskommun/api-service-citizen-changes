@@ -2,11 +2,13 @@ package se.sundsvall.citizenchanges;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import generated.se.sundsvall.citizen.CitizenAddress;
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
+import generated.se.sundsvall.citizen.CustodyChildrenPupil;
 import se.sundsvall.citizenchanges.api.model.AddressItem;
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.ContactInfo;
@@ -15,13 +17,7 @@ import se.sundsvall.citizenchanges.api.model.InvestigationItem;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 import se.sundsvall.citizenchanges.api.model.ReportMetaData;
 
-import generated.se.sundsvall.citizen.CitizenAddress;
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
-import generated.se.sundsvall.citizen.CustodyChildrenPupil;
-
-
 public final class TestDataFactory {
-
 
 	public static OepErrandItem buildOepErrandItem(final String daycarePlacement, final String applicantIdentifier, final String minorIdentifier) {
 

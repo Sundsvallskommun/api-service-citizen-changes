@@ -201,5 +201,4 @@ class MessageMapperTest {
 		verifyNoInteractions(messageMapperProperties);
 	}
 
-
 }
