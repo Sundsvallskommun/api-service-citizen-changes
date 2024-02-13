@@ -145,6 +145,7 @@ public class RelocationCheckService {
 						}
 					});
 			}
+			log.info("tempList size: {}", tempList.size());
 		} catch (final Exception e) {
 			log.error("Failed to get errand item from OeP (flowInstanceId " + flowInstanceId + ")", e);
 		}
