@@ -32,3 +32,9 @@ integration:
     read-timeout: 30
 scheduling: 
   lock-at-most-for: PT2M
+
+logbook:
+  body-filters:
+    jsonPath:
+      - key: '$..htmlMessage'
+        value: '[base64]'
