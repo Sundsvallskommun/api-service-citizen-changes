@@ -29,7 +29,7 @@ import org.springframework.test.context.ActiveProfiles;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
 @SpringBootTest(properties = {
-	"scheduling.expression=* * * * * *", // Setup to execute every second
+	"scheduling.expression=*/5 * * * * *", // Setup to execute every five seconds
 	"spring.flyway.enabled=true",
 	"integration.db.case-status.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver",
 	"integration.db.case-status.url=jdbc:tc:mariadb:10.6.4:////",
@@ -57,7 +57,7 @@ class JobSchedulerShedlockTest {
 	private LocalDateTime mockCalledTime;
 
 	@Test
-	void verifyShedLock() throws InterruptedException {
+	void verifyShedLock() {
 
 		// Let mock hang
 		doAnswer( invocation -> {
@@ -72,7 +72,7 @@ class JobSchedulerShedlockTest {
 
 		// Verify lock
 		await().atMost(5, SECONDS)
-			.untilAsserted(() -> assertThat(getLockedAt("relocation_check"))
+			.untilAsserted(() -> assertThat(getLockedAt())
 				.isCloseTo(LocalDateTime.now(systemUTC()), within(10, ChronoUnit.SECONDS)));
 
 		// Only one call should be made as long as runBatch() is locked and mock is waiting for first call to finish
@@ -80,10 +80,10 @@ class JobSchedulerShedlockTest {
 		verifyNoMoreInteractions(relocationCheckServiceMock);
 	}
 
-	private LocalDateTime getLockedAt(final String name) {
+	private LocalDateTime getLockedAt() {
 		return jdbcTemplate.query(
 			"SELECT locked_at FROM shedlock WHERE name = :name",
-			Map.of("name", name),
+			Map.of("name", "relocation_check"),
 			this::mapTimestamp);
 	}
 
