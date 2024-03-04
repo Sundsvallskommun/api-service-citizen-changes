@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import net.javacrumbs.shedlock.core.LockAssert;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
@@ -24,7 +25,6 @@ public class JobScheduler {
 	@Scheduled(cron = "${scheduling.expression}")
 	@SchedulerLock(name = "relocation_check", lockAtMostFor = "${scheduling.lock-at-most-for}")
 	void startRelocationCheck() {
-
 		final LocalDateTime thisTime = LocalDateTime.now();
 		log.info("Scheduler executed at {}. About to run batch job for relocation check...", thisTime);
 		final var result = relocationCheckService.runBatch();
