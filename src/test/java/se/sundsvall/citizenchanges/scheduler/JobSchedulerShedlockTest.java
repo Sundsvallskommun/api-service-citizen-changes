@@ -28,8 +28,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
+import net.javacrumbs.shedlock.core.LockAssert;
+
 @SpringBootTest(properties = {
-	"scheduling.expression=*/5 * * * * *", // Setup to execute every five seconds
+	"scheduling.expression=* * * * * *", // Setup to execute every second
 	"spring.flyway.enabled=true",
 	"integration.db.case-status.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver",
 	"integration.db.case-status.url=jdbc:tc:mariadb:10.6.4:////",
@@ -68,7 +70,8 @@ class JobSchedulerShedlockTest {
 		}).when(relocationCheckServiceMock).runBatch();
 
 		// Make sure scheduling occurs multiple times
-		await().until(() -> mockCalledTime != null && mockCalledTime.isBefore(mockCalledTime.plusSeconds(2)));
+		await().until(() -> mockCalledTime != null && LocalDateTime.now().isAfter(mockCalledTime.plusSeconds(2)));
+
 
 		// Verify lock
 		await().atMost(5, SECONDS)
