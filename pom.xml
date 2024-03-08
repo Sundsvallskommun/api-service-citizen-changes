@@ -16,7 +16,7 @@
 	<properties>
 
 		<!-- Memory Configuration -->
-		<app.jvm.xmx.mb>1024</app.jvm.xmx.mb>
+		<app.jvm.xmx.mb>2048</app.jvm.xmx.mb>
 		<!-- CI/CD properties start -->
 		<docker.image.name>ms-citizenchanges</docker.image.name>
 		<published.container.port.test>8724</published.container.port.test>
@@ -91,7 +91,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>${surefireArgLine} -Xmx1024m</argLine>
+					<argLine>${surefireArgLine} -Xmx2048m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>

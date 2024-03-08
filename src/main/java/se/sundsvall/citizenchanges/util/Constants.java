@@ -7,7 +7,7 @@ import se.sundsvall.citizenchanges.api.model.FamilyType;
 
 public final class Constants {
 
-	public static final int OEP_BACKTRACK_YEARS = 4; //Number of years back to search for errands in OeP
+	public static final int OEP_BACKTRACK_YEARS = 3; //Number of years back to search for errands in OeP
 
 	public static final int META_BACKTRACK_DAYS_DEFAULT = 7; //Number of days back to search for changed addresses in Metakatalogen
 

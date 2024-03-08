@@ -32,7 +32,7 @@ class DateUtilTest {
 		// Act
 		final var result = DateUtil.getFromDateOeP(LocalDate.now());
 		// Assert
-		assertThat(result).isEqualTo(LocalDate.now().withMonth(1).withDayOfMonth(1).minusYears(4));
+		assertThat(result).isEqualTo(LocalDate.now().withMonth(1).withDayOfMonth(1).minusYears(3));
 	}
 
 	@Test
