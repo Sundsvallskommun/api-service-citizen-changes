@@ -2,6 +2,8 @@ package se.sundsvall.citizenchanges.util;
 
 
 import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -57,6 +59,8 @@ public final class ValidationUtil {
 		final var decisionStart = item.getDecisionStart();
 		final var decisionEnd = item.getDecisionEnd();
 
+
+
 		if (Optional.ofNullable(item.getDecision()).orElse("").startsWith(Constants.OEP_ERRAND_SKOLSKJUTS_DENIED)
 			|| Optional.ofNullable(item.getDecision()).orElse("").startsWith(Constants.OEP_ERRAND_ELEVRESA_DENIED)) {
 			return false;
@@ -65,6 +69,10 @@ public final class ValidationUtil {
 		} else {
 			return true;
 		}
+	}
+
+	public static boolean isOEpErrandStatusValid(final String status) {
+		return OEP_ERRAND_STATUS_DECIDED.equalsIgnoreCase(status) || OEP_ERRAND_STATUS_READY.equalsIgnoreCase(status);
 	}
 
 }

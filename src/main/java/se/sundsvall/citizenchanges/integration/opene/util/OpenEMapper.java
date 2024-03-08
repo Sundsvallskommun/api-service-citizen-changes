@@ -190,4 +190,19 @@ public class OpenEMapper {
 			&& Optional.ofNullable(guardian.getLastname()).orElse("").equalsIgnoreCase(contact.getLastName());
 	}
 
+	 public String mapStatus(final byte[] errandStatus) {
+
+		 final var xmlString = new String(errandStatus);
+		 try {
+			 return new XmlMapper()
+					 .registerModule(new StringTrimModule())
+					 .readValue(xmlString, Status.class)
+				 .getName();
+		 } catch (final Exception e) {
+			 LOG.info("Something went wrong parsing flowInstances", e);
+			 return null;
+		 }
+
+	}
+
 }

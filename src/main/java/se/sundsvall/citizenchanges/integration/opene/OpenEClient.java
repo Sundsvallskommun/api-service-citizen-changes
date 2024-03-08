@@ -24,4 +24,7 @@ public interface OpenEClient {
 	@GetMapping(path = "/api/instanceapi/getinstance/{flowInstanceId}/xml", consumes = TEXT_XML_CHARSET_ISO_8859_1, produces = TEXT_XML_CHARSET_ISO_8859_1)
 	byte[] getErrand(@PathVariable(name = "flowInstanceId") String flowInstanceId);
 
+	@GetMapping(path = "/api/instanceapi/getstatus/{flowInstanceId}", consumes = TEXT_XML_CHARSET_ISO_8859_1, produces = TEXT_XML_CHARSET_ISO_8859_1)
+	byte[] getErrandStatus(@PathVariable(name = "flowInstanceId") String flowInstanceId);
+
 }

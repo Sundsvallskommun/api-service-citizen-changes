@@ -1,5 +1,7 @@
 package se.sundsvall.citizenchanges;
 
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;

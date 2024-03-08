@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
 
 import java.util.List;
 
@@ -96,6 +97,56 @@ class OpenEIntegrationTests {
 		// Assert & Verify
 		assertThat(result).isNotNull();
 		verify(client, times(1)).getErrand(any(String.class));
+		verifyNoMoreInteractions(client);
+		verifyNoInteractions(mapper);
+	}
+
+
+	@Test
+	void doErrandHaveValidStatus() {
+		// Arrange
+		when(client.getErrandStatus(any(String.class))).thenReturn(new byte[0]);
+		when(mapper.mapStatus(any())).thenReturn(OEP_ERRAND_STATUS_DECIDED);
+
+		// Act
+		final var result = openEIntegration.doErrandHaveValidStatus("any");
+
+		// Assert & Verify
+		assertThat(result).isTrue();
+		verify(client, times(1)).getErrandStatus(any(String.class));
+		verify(mapper, times(1)).mapStatus(any());
+		verifyNoMoreInteractions(client);
+		verifyNoMoreInteractions(mapper);
+	}
+
+	@Test
+	void doErrandHaveValidStatus_invalidStatus() {
+		// Arrange
+		when(client.getErrandStatus(any(String.class))).thenReturn(new byte[0]);
+		when(mapper.mapStatus(any())).thenReturn("SomeStatus");
+
+		// Act
+		final var result = openEIntegration.doErrandHaveValidStatus("any");
+
+		// Assert & Verify
+		assertThat(result).isFalse();
+		verify(client, times(1)).getErrandStatus(any(String.class));
+		verify(mapper, times(1)).mapStatus(any());
+		verifyNoMoreInteractions(client);
+		verifyNoMoreInteractions(mapper);
+	}
+
+	@Test
+	void doErrandHaveValidStatus_error() {
+		// Arrange
+		when(client.getErrandStatus(any(String.class))).thenThrow(Problem.builder().build());
+
+		// Act
+		final var result = openEIntegration.doErrandHaveValidStatus("any");
+
+		// Assert & Verify
+		assertThat(result).isFalse();
+		verify(client, times(1)).getErrandStatus(any(String.class));
 		verifyNoMoreInteractions(client);
 		verifyNoInteractions(mapper);
 	}

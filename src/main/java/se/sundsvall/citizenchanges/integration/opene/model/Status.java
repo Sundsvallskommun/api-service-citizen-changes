@@ -9,7 +9,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Status {
 
-	@JacksonXmlProperty(localName = "Name")
+	@JacksonXmlProperty(localName = "name")
 	private String name;
 
 }

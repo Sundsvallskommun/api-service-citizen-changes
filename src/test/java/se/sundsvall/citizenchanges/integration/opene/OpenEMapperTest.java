@@ -91,6 +91,7 @@ class OpenEMapperTest {
 		assertThat(result).isNotNull().hasNoNullFieldsOrPropertiesExcept("administratorName",
 			"contactInfo",
 			"emailStatus",
+			"status",
 			"smsStatus",
 			"daycarePlacement",
 			"daycarePlacementChanged",
@@ -108,7 +109,7 @@ class OpenEMapperTest {
 		final var result = mapper.mapFlowInstance(bytes, FamilyType.SKOLSKJUTS);
 
 		// Assert
-		assertThat(result).isNotNull().hasNoNullFieldsOrPropertiesExcept("schoolUnit", "emailStatus", "smsStatus");
+		assertThat(result).isNotNull().hasNoNullFieldsOrPropertiesExcept("schoolUnit", "emailStatus", "smsStatus", "status");
 	}
 
 	@Test
@@ -121,7 +122,7 @@ class OpenEMapperTest {
 		final var result = mapper.mapFlowInstance(bytes, FamilyType.SKOLSKJUTS);
 
 		// Assert
-		assertThat(result).isNotNull().hasNoNullFieldsOrPropertiesExcept("schoolUnit", "emailStatus", "smsStatus", "minorIdentifier", "minorName");
+		assertThat(result).isNotNull().hasNoNullFieldsOrPropertiesExcept("schoolUnit", "status", "emailStatus", "smsStatus", "minorIdentifier", "minorName");
 	}
 
 	@ParameterizedTest
@@ -138,6 +139,39 @@ class OpenEMapperTest {
 
 		// Assert
 		assertThat(result).isNotNull().hasAllNullFieldsOrProperties();
+	}
+
+
+	@Test
+	void mapStatus() {
+		// Arrange
+		final var status = """
+			<Status>
+			  <statusID>123</statusID>
+			  <name>Beslut som upphört att gälla</name>
+			  <newExternalMessagesDisallowed>false</newExternalMessagesDisallowed>
+			  <addExternalMessage>false</addExternalMessage>
+			  <addInternalMessage>false</addInternalMessage>
+			  <isRestrictedAdminDeletable>false</isRestrictedAdminDeletable>
+			  <contentType>ARCHIVED</contentType>
+			</Status>
+			""";
+		// Act
+		final var result = mapper.mapStatus(status.getBytes());
+
+		// Assert
+		assertThat(result).isEqualTo("Beslut som upphört att gälla");
+	}
+
+	@Test
+	void mapStatusWithNullValues() {
+		// Arrange
+		final var status = "";
+		// Act
+		final var result = mapper.mapStatus(status.getBytes());
+
+		// Assert
+		assertThat(result).isNull();
 	}
 
 }
