@@ -3,6 +3,8 @@ package se.sundsvall.citizenchanges.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_SKOLSKJUTS_DENIED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
 
@@ -267,6 +269,23 @@ class ValidationUtilTests {
 		final var result = ValidationUtil.isOepErrandQualifiedForRelocationCheck(oepErrandItem, LocalDate.now());
 		// Assert
 		assertThat(result).isTrue();
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {OEP_ERRAND_STATUS_DECIDED, OEP_ERRAND_STATUS_READY})
+	void isOEpErrandStatusValid(final String status){
+		// Act
+		final var result = ValidationUtil.isOEpErrandStatusValid(status);
+		// Assert
+		assertThat(result).isTrue();
+	}
+
+	@Test
+	void isOEpErrandStatusValid_invalid(){
+		// Act
+		final var result = ValidationUtil.isOEpErrandStatusValid("SomeStatus");
+		// Assert
+		assertThat(result).isFalse();
 	}
 
 }

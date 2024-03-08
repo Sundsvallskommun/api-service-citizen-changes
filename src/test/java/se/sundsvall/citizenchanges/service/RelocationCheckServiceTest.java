@@ -78,6 +78,7 @@ class RelocationCheckServiceTest {
 			.thenReturn(buildOepErrandItem("Ja", "P2", "M2"));
 		when(itemMapperMock.composeInvestigationItem(any(), any(), any(), any(), any(boolean.class)))
 			.thenReturn(InvestigationItem.builder().build());
+		when(openEIntegrationMock.doErrandHaveValidStatus(any())).thenReturn(true);
 
 		// Act
 		final var result = service.runBatch();
@@ -160,6 +161,7 @@ class RelocationCheckServiceTest {
 		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1"));
+		when(openEIntegrationMock.doErrandHaveValidStatus(any())).thenReturn(true);
 		when(openEIntegrationMock.getErrand(any(), any()))
 			.thenThrow(new RuntimeException("Some exception"));
 
@@ -202,6 +204,7 @@ class RelocationCheckServiceTest {
 			.thenReturn(buildOepErrandItem("Ja", "P2", "M2"));
 		when(itemMapperMock.composeInvestigationItem(any(), any(), any(), any(), any(boolean.class)))
 			.thenReturn(InvestigationItem.builder().build());
+		when(openEIntegrationMock.doErrandHaveValidStatus(any())).thenReturn(true );
 
 		// Act
 		final var result = service.runBatch(Optional.of(META_BACKTRACK_DAYS_DEFAULT), citizen);
@@ -209,6 +212,7 @@ class RelocationCheckServiceTest {
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock, times(2)).getErrandIds(any(), any(), any(), any());
 		verify(openEIntegrationMock, times(8)).getErrand(any(), any());
+		verify(openEIntegrationMock, times(8)).doErrandHaveValidStatus(any());
 		verify(messagingClientMock, times(2)).sendEmail(any());
 		verify(propertiesMock).familyId();
 		verify(mapperMock, times(2)).getEmailRecipients(any());

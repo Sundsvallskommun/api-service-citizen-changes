@@ -80,6 +80,7 @@ public class RelocationCheckService {
 		}
 		// Get information from OeP for defined familyId values
 		for (final String thisFamilyId : properties.familyId().split(",")) {
+
 			final var familyType = getFamilyType(thisFamilyId);
 			var thisStatus = Constants.OEP_ERRAND_STATUS_DECIDED.toLowerCase();
 			List<InvestigationItem> investigationItemList = new ArrayList<>();
@@ -88,8 +89,10 @@ public class RelocationCheckService {
 				thisStatus = Constants.OEP_ERRAND_STATUS_READY.toLowerCase();
 			}
 			// Get errands list from OeP and check if there are errands qualified for investigation
-			final var oepErrands = openEIntegration.getErrandIds(thisFamilyId, thisStatus, fromDateOeP, today.toString());
+			 var oepErrands = openEIntegration.getErrandIds(thisFamilyId, thisStatus, fromDateOeP, today.toString());
 			log.info("Found a total of {} errands", oepErrands.size());
+			 oepErrands = oepErrands.stream().filter(openEIntegration::doErrandHaveValidStatus).toList();
+			log.info("Found a total of {} errands with correct status", oepErrands.size());
 
 			if (!oepErrands.isEmpty()) {
 				for (final String flowInstanceId : oepErrands) {
@@ -114,6 +117,7 @@ public class RelocationCheckService {
 			final var item = openEIntegration.getErrand(flowInstanceId, familyType);
 
 			if (isOepErrandQualifiedForRelocationCheck(item, today)) {
+
 				final var minorIdentifier = item.getMinorIdentifier();
 				final var applicants = item.getApplicants();
 				final var applicantMoves = new ArrayList<CitizenWithChangedAddress>();

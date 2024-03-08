@@ -1,5 +1,7 @@
 package se.sundsvall.citizenchanges.integration.opene;
 
+import static se.sundsvall.citizenchanges.util.ValidationUtil.isOEpErrandStatusValid;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -33,7 +35,6 @@ public class OpenEIntegration {
 			LOG.info("Unable to get errandIds for familyId {}", familyId, e);
 			return List.of();
 		}
-
 	}
 
 	public OepErrandItem getErrand(final String flowInstanceId, final FamilyType familyType) {
@@ -44,6 +45,16 @@ public class OpenEIntegration {
 			return new OepErrandItem();
 		}
 
+	}
+
+	public boolean doErrandHaveValidStatus(final String flowInstanceId) {
+		try {
+			final var status = mapper.mapStatus(client.getErrandStatus(flowInstanceId));
+			return isOEpErrandStatusValid(status);
+		} catch (final Exception e) {
+			LOG.info("Unable to get status for errandId {}", flowInstanceId, e);
+			return false;
+		}
 	}
 
 }
