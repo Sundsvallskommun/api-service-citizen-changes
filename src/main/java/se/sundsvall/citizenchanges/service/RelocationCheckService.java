@@ -90,8 +90,7 @@ public class RelocationCheckService {
 				thisStatus = Constants.OEP_ERRAND_STATUS_READY.toLowerCase();
 			}
 			// Get errands list from OeP and check if there are errands qualified for investigation
-			final var oepErrands = new ArrayList<>(openEIntegration.getErrandIds(thisFamilyId, thisStatus, fromDateOeP, today.toString()));
-			oepErrands.removeIf(errand -> !openEIntegration.doErrandHaveValidStatus(errand));
+			final var oepErrands = openEIntegration.getErrandIds(thisFamilyId, thisStatus, fromDateOeP, today.toString());
 			log.info("Found a total of {} errands with correct status", oepErrands.size());
 
 			if (!oepErrands.isEmpty()) {

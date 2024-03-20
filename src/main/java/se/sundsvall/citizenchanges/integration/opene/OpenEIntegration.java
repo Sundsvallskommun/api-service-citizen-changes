@@ -47,14 +47,4 @@ public class OpenEIntegration {
 
 	}
 
-	public boolean doErrandHaveValidStatus(final String flowInstanceId) {
-		try {
-			final var status = mapper.mapStatus(client.getErrandStatus(flowInstanceId));
-			return isOEpErrandStatusValid(status);
-		} catch (final Exception e) {
-			LOG.info("Unable to get status for errandId {}", flowInstanceId, e);
-			return false;
-		}
-	}
-
 }

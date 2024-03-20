@@ -15,9 +15,9 @@ public interface OpenEClient {
 
 	String TEXT_XML_CHARSET_ISO_8859_1 = "text/xml; charset=ISO-8859-1";
 
-	@GetMapping(path = "/api/instanceapi/getinstances/family/{familyId}", consumes = TEXT_XML_CHARSET_ISO_8859_1, produces = TEXT_XML_CHARSET_ISO_8859_1)
+	@GetMapping(path = "/api/instanceapi/getinstances/family/{familyId}/{status}", consumes = TEXT_XML_CHARSET_ISO_8859_1, produces = TEXT_XML_CHARSET_ISO_8859_1)
 	byte[] getErrandIds(@PathVariable(name = "familyId") final String familyId,
-		@RequestParam(name = "status") final String status,
+		@PathVariable(name = "status") final String status,
 		@RequestParam(name = "fromDate") final String fromDate,
 		@RequestParam(name = "toDate") final String toDate);
 
