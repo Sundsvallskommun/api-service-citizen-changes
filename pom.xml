@@ -23,7 +23,7 @@
 		<published.container.port.production>8725</published.container.port.production>
 		<!-- CI/CD properties end -->
 		<poiji.version>4.4.0</poiji.version>
-		<shedlock.version>5.12.0</shedlock.version>
+		<shedlock.version>5.13.0</shedlock.version>
 		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
 	</properties>
 	<dependencies>
