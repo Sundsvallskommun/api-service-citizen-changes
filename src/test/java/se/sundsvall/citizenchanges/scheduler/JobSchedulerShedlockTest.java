@@ -1,21 +1,5 @@
 package se.sundsvall.citizenchanges.scheduler;
 
-import static java.time.Clock.systemUTC;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +9,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
-
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
-import net.javacrumbs.shedlock.core.LockAssert;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Map;
+
+import static java.time.Clock.systemUTC;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @SpringBootTest(properties = {
 	"scheduling.expression=* * * * * *", // Setup to execute every second
@@ -46,7 +43,18 @@ class JobSchedulerShedlockTest {
 		@Bean
 		@Primary
 		public RelocationCheckService createMock() {
-			return Mockito.mock(RelocationCheckService.class);
+
+			final var mockedBean = Mockito.mock(RelocationCheckService.class);
+
+			// Let mock hang forever for simulating long-running task
+			doAnswer( invocation -> {
+				mockCalledTime = LocalDateTime.now();
+				await().forever()
+					.until(() -> false);
+				return null;
+			}).when(mockedBean).runBatch();
+
+			return mockedBean;
 		}
 	}
 
@@ -56,22 +64,13 @@ class JobSchedulerShedlockTest {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	private LocalDateTime mockCalledTime;
+	private static LocalDateTime mockCalledTime;
 
 	@Test
 	void verifyShedLock() {
 
-		// Let mock hang
-		doAnswer( invocation -> {
-			mockCalledTime = LocalDateTime.now();
-			await().forever()
-				.until(() -> false);
-			return null;
-		}).when(relocationCheckServiceMock).runBatch();
-
 		// Make sure scheduling occurs multiple times
 		await().until(() -> mockCalledTime != null && LocalDateTime.now().isAfter(mockCalledTime.plusSeconds(2)));
-
 
 		// Verify lock
 		await().atMost(5, SECONDS)
