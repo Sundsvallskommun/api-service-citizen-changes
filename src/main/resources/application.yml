@@ -7,29 +7,19 @@ spring:
     name: api-citizenchanges
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: test
   flyway:
     baseline-on-migrate: true
     enabled: false
   security:
     oauth2:
       client:
-        provider:
-          citizen:
-            token-uri: abc.com
-          messaging:
-            token-uri: abc.com
         registration:
           citizen:
             authorization-grant-type: client_credentials
             provider: citizen
-            client-id: id
-            client-secret: secret
           messaging:
             authorization-grant-type: client_credentials
             provider: messaging
-            client-id: id
-            client-secret: secret
 integration:
   citizen:
     connect-timeout: 5
