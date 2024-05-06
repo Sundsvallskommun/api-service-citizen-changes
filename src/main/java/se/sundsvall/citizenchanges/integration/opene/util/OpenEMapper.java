@@ -2,11 +2,14 @@ package se.sundsvall.citizenchanges.integration.opene.util;
 
 import static java.util.Collections.emptyList;
 
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +27,6 @@ import se.sundsvall.citizenchanges.integration.opene.model.DatumAndradFritidspla
 import se.sundsvall.citizenchanges.integration.opene.model.Enhet;
 import se.sundsvall.citizenchanges.integration.opene.model.Flow;
 import se.sundsvall.citizenchanges.integration.opene.model.FlowInstance;
-import se.sundsvall.citizenchanges.integration.opene.model.FlowInstances;
 import se.sundsvall.citizenchanges.integration.opene.model.Guardian;
 import se.sundsvall.citizenchanges.integration.opene.model.Guardians;
 import se.sundsvall.citizenchanges.integration.opene.model.Handlaggare;
@@ -45,19 +47,16 @@ import se.sundsvall.citizenchanges.integration.opene.model.VemGallerArendet;
 public class OpenEMapper {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OpenEMapper.class);
+	private final SAXParserFactory factory = SAXParserFactory.newInstance();
 
-	public List<String> mapFlowIds(final byte[] errands) {
-
-		final var xmlString = new String(errands);
+	public List<String> mapFlowIds(final InputStream errands) {
 		try {
-			return Optional.ofNullable(new XmlMapper()
-					.registerModule(new StringTrimModule())
-					.readValue(xmlString, FlowInstances.class)
-					.getFlowInstance()).orElse(emptyList())
-				.stream()
-				.map(FlowInstance::getFlowInstanceID)
-				.toList();
-		} catch (final JsonProcessingException e) {
+			SAXParser saxParser = factory.newSAXParser();
+			FlowInstanceIDHandler handler = new FlowInstanceIDHandler();
+			saxParser.parse(errands, handler);
+
+			return handler.getFlowInstanceIDs();
+		} catch (final Exception e) {
 			LOG.info("Something went wrong parsing flowInstances", e);
 			return emptyList();
 		}
@@ -190,18 +189,18 @@ public class OpenEMapper {
 			&& Optional.ofNullable(guardian.getLastname()).orElse("").equalsIgnoreCase(contact.getLastName());
 	}
 
-	 public String mapStatus(final byte[] errandStatus) {
+	public String mapStatus(final byte[] errandStatus) {
 
-		 final var xmlString = new String(errandStatus);
-		 try {
-			 return new XmlMapper()
-					 .registerModule(new StringTrimModule())
-					 .readValue(xmlString, Status.class)
-				 .getName();
-		 } catch (final Exception e) {
-			 LOG.info("Something went wrong parsing flowInstances", e);
-			 return null;
-		 }
+		final var xmlString = new String(errandStatus);
+		try {
+			return new XmlMapper()
+				.registerModule(new StringTrimModule())
+				.readValue(xmlString, Status.class)
+				.getName();
+		} catch (final Exception e) {
+			LOG.info("Something went wrong parsing flowInstances", e);
+			return null;
+		}
 
 	}
 

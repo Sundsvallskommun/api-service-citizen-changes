@@ -18,7 +18,6 @@ import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 )
 class DayCareIT extends AbstractAppTest {
 
-
 	@Test
 	void test1_runDaycareCheckBatch() throws FileNotFoundException {
 

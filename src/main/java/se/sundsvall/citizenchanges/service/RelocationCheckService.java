@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -21,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
@@ -35,6 +33,8 @@ import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.citizenchanges.util.ItemMapper;
 import se.sundsvall.citizenchanges.util.MessageConstants;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 
 @Service
 public class RelocationCheckService {
@@ -155,8 +155,8 @@ public class RelocationCheckService {
 		return tempList;
 	}
 
-	private void composeEmail(final FamilyType familyType, final List<InvestigationItem> investigationItemList
-		, final Map<String, CitizenWithChangedAddress> moves, final String fromDateOeP, final String fromDateMeta) {
+	private void composeEmail(final FamilyType familyType, final List<InvestigationItem> investigationItemList,
+		final Map<String, CitizenWithChangedAddress> moves, final String fromDateOeP, final String fromDateMeta) {
 
 		final var metaData = ReportMetaData.builder()
 			.withReportType(familyType.toString())

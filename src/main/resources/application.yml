@@ -30,11 +30,13 @@ integration:
   open-e:
     connect-timeout: 5
     read-timeout: 30
-scheduling: 
+scheduling:
   lock-at-most-for: PT2M
-
 logbook:
   body-filters:
     jsonPath:
       - key: '$..htmlMessage'
+        value: '[base64]'
+    x-path:
+      - key: '//EncodedData[string-length(text()) > 0]'
         value: '[base64]'
