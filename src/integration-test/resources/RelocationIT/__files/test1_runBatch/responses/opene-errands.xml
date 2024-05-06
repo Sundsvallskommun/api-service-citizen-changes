@@ -1,21 +1,97 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <FlowInstances>
-	<FlowInstance>
-		<flowInstanceID>1234</flowInstanceID>
-	</FlowInstance>
-	<FlowInstance>
-		<flowInstanceID>1235</flowInstanceID>
-	</FlowInstance>
-	<FlowInstance>
-		<flowInstanceID>1236</flowInstanceID>
-	</FlowInstance>
-	<FlowInstance>
-		<flowInstanceID>1237</flowInstanceID>
-	</FlowInstance>
-	<FlowInstance>
-		<flowInstanceID>1238</flowInstanceID>
-	</FlowInstance>
-	<FlowInstance>
-		<flowInstanceID>1239</flowInstanceID>
-	</FlowInstance>
+    <FlowInstance>
+        <flowInstanceID>172698</flowInstanceID>
+        <added>2024-03-17 17:38</added>
+        <updated>2024-04-17 14:41</updated>
+        <firstSubmitted>2024-03-17 17:38</firstSubmitted>
+        <fullyPopulated>true</fullyPopulated>
+        <stepID>5493</stepID>
+        <lastStatusChange>2024-04-17 14:42</lastStatusChange>
+        <lastEventAdded>2024-04-22 13:00</lastEventAdded>
+        <profileID>1</profileID>
+        <managerDescription>Test</managerDescription>
+        <remote>false</remote>
+        <addedInMilliseconds>1710693505000</addedInMilliseconds>
+        <updatedInMilliseconds>1713357719000</updatedInMilliseconds>
+        <firstSubmittedInMilliseconds>1710693505000</firstSubmittedInMilliseconds>
+        <lastStatusChangeInMilliseconds>1713357742000</lastStatusChangeInMilliseconds>
+        <poster>
+            <user>
+                <userID>59980</userID>
+                <firstname>Test</firstname>
+                <lastname>Testersson</lastname>
+                <email>test.testersson@test.se</email>
+                <admin>false</admin>
+                <enabled>true</enabled>
+                <lastLogin>2024-03-18 11:45</lastLogin>
+                <lastLoginInMilliseconds>1710758712000</lastLoginInMilliseconds>
+                <added>2021-07-31 22:01</added>
+                <isMutable>true</isMutable>
+                <hasFormProvider>true</hasFormProvider>
+            </user>
+        </poster>
+        <editor>
+            <user>
+                <userID>57201</userID>
+                <firstname>Test</firstname>
+                <lastname>Testersson</lastname>
+                <email>test.testersson@test.se</email>
+                <admin>false</admin>
+                <enabled>true</enabled>
+                <lastLogin>2024-05-02 08:56</lastLogin>
+                <lastLoginInMilliseconds>1714632992000</lastLoginInMilliseconds>
+                <added>2015-04-20 14:16</added>
+                <isMutable>true</isMutable>
+                <hasFormProvider>true</hasFormProvider>
+            </user>
+        </editor>
+    </FlowInstance>
+    <FlowInstance>
+        <flowInstanceID>172529</flowInstanceID>
+        <added>2024-03-15 14:40</added>
+        <updated>2024-03-18 09:52</updated>
+        <firstSubmitted>2024-03-15 14:44</firstSubmitted>
+        <fullyPopulated>true</fullyPopulated>
+        <stepID>5493</stepID>
+        <lastStatusChange>2024-03-18 09:53</lastStatusChange>
+        <lastEventAdded>2024-03-18 13:00</lastEventAdded>
+        <profileID>1</profileID>
+        <managerDescription>Test School</managerDescription>
+        <remote>false</remote>
+        <addedInMilliseconds>1710510056000</addedInMilliseconds>
+        <updatedInMilliseconds>1710751974000</updatedInMilliseconds>
+        <firstSubmittedInMilliseconds>1710510298000</firstSubmittedInMilliseconds>
+        <lastStatusChangeInMilliseconds>1710751998000</lastStatusChangeInMilliseconds>
+        <poster>
+            <user>
+                <userID>13210</userID>
+                <firstname>Test</firstname>
+                <lastname>Testersson</lastname>
+                <email>test.testersson@test.se</email>
+                <admin>false</admin>
+                <enabled>true</enabled>
+                <lastLogin>2024-04-29 13:36</lastLogin>
+                <lastLoginInMilliseconds>1714390588000</lastLoginInMilliseconds>
+                <added>2016-09-28 23:32</added>
+                <isMutable>true</isMutable>
+                <hasFormProvider>true</hasFormProvider>
+            </user>
+        </poster>
+        <editor>
+            <user>
+                <userID>29809</userID>
+                <firstname>Test</firstname>
+                <lastname>Testersson</lastname>
+                <email>test.testersson@test.se</email>
+                <admin>false</admin>
+                <enabled>true</enabled>
+                <lastLogin>2024-05-03 12:57</lastLogin>
+                <lastLoginInMilliseconds>1714733836000</lastLoginInMilliseconds>
+                <added>2017-02-09 01:02</added>
+                <isMutable>true</isMutable>
+                <hasFormProvider>true</hasFormProvider>
+            </user>
+        </editor>
+    </FlowInstance>
 </FlowInstances>

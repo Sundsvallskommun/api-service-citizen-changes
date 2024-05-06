@@ -7,15 +7,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
 
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.io.InputStreamResource;
 import org.zalando.problem.Problem;
 
 import se.sundsvall.citizenchanges.api.model.FamilyType;
@@ -36,21 +37,35 @@ class OpenEIntegrationTests {
 
 	@Test
 	void getErrandIds() {
+		final var inputStream =
+			IOUtils.toInputStream("""
+				<FlowInstances>
+				    <FlowInstance>
+				        <flowInstanceID>172698</flowInstanceID>
+				    </FlowInstance>
+				    <FlowInstance>
+				        <flowInstanceID>172529</flowInstanceID>
+				    </FlowInstance>
+				    <FlowInstance>
+				        <flowInstanceID>145263</flowInstanceID>
+				    </FlowInstance>
+				</FlowInstances>
+				""", "UTF-8");
 		// Arrange
-		when(client.getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class))).thenReturn(new byte[0]);
-		when(mapper.mapFlowIds(any())).thenReturn(List.of("SomeFlowId1", "SomeFlowId2"));
+
+		when(client.getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class))).thenReturn(new InputStreamResource(inputStream));
+		when(mapper.mapFlowIds(any())).thenReturn(List.of("172529", "145263", "172698"));
 
 		// Act
 		final var result = openEIntegration.getErrandIds("any", "any", "any", "any");
 
 		// Assert
-		assertThat(result).hasSize(2);
-		assertThat(result.getFirst()).isEqualTo("SomeFlowId1");
+		assertThat(result).hasSize(3).containsExactlyInAnyOrder("172529", "145263", "172698");
+
 		// Verify
-		verify(client, times(1)).getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class));
-		verify(mapper, times(1)).mapFlowIds(any());
-		verifyNoMoreInteractions(client);
-		verifyNoMoreInteractions(mapper);
+		verify(client).getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class));
+		verify(mapper).mapFlowIds(any());
+		verifyNoMoreInteractions(client, mapper);
 	}
 
 	@Test
