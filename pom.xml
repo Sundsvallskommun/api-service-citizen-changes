@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>se.sundsvall.dept44</groupId>
 		<artifactId>dept44-service-parent</artifactId>
-		<version>5.0.0</version>
+		<version>5.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.sundsvall</groupId>
@@ -18,9 +18,6 @@
 		<!-- Memory Configuration -->
 		<app.jvm.xmx.mb>2048</app.jvm.xmx.mb>
 		<!-- CI/CD properties start -->
-		<docker.image.name>ms-citizenchanges</docker.image.name>
-		<published.container.port.test>8724</published.container.port.test>
-		<published.container.port.production>8725</published.container.port.production>
 		<!-- CI/CD properties end -->
 		<poiji.version>4.5.0</poiji.version>
 		<shedlock.version>5.13.0</shedlock.version>
