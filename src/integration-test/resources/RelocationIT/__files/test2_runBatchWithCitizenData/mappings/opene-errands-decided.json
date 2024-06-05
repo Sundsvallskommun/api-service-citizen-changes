@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/opene/api/instanceapi/getinstances/family/344/beslutad"
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "status": 200,
+    "bodyFileName": "test2_runBatchWithCitizenData/responses/opene-errands-decided.xml"
+  }
+}
