@@ -1,6 +1,5 @@
 package se.sundsvall.citizenchanges.apptest;
 
-
 import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
@@ -12,10 +11,7 @@ import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 
-@WireMockAppTestSuite(
-	files = "classpath:/DayCareIT/",
-	classes = Application.class
-)
+@WireMockAppTestSuite(files = "classpath:/DayCareIT/", classes = Application.class)
 class DayCareIT extends AbstractAppTest {
 
 	@Test

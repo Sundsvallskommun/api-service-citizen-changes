@@ -86,7 +86,7 @@ class DaycareCheckServiceTest {
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 
-		verify(propertiesMock, times(2)).familyId();
+		verify(propertiesMock).familyId();
 		verify(mapperMock).getEmailRecipients(any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());

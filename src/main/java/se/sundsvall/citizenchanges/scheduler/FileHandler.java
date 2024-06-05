@@ -102,8 +102,7 @@ public class FileHandler {
 
 	private boolean checkForIncrease(final String actualPlacement, final String applicationPlacement) {
 		return switch (applicationPlacement) {
-			case "Nej" ->
-				"Fritidshem heltid".equals(actualPlacement) || "Fritidshem deltid".equals(actualPlacement);
+			case "Nej" -> "Fritidshem heltid".equals(actualPlacement) || "Fritidshem deltid".equals(actualPlacement);
 			case "Ja, deltid" -> "Fritidshem heltid".equals(actualPlacement);
 			default -> false;
 		};

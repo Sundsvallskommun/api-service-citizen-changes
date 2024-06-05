@@ -8,10 +8,7 @@ import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 
-@WireMockAppTestSuite(
-	files = "classpath:/RelocationIT/",
-	classes = Application.class
-)
+@WireMockAppTestSuite(files = "classpath:/RelocationIT/", classes = Application.class)
 class RelocationIT extends AbstractAppTest {
 
 	@Test

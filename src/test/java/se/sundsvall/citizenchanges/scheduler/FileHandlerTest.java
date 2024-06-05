@@ -33,7 +33,7 @@ class FileHandlerTest {
 	private FileHandler fileHandler;
 
 	@ParameterizedTest
-	@ValueSource(strings = {"Nej", "Ja, deltid"})
+	@ValueSource(strings = { "Nej", "Ja, deltid" })
 	void getISTPlacement_nej_ja_deltid(final String daycarePlacement) {
 		// Arrange
 		final var parsedRows = new ArrayList<ParsedRow>();
@@ -55,9 +55,8 @@ class FileHandlerTest {
 
 		// Act
 		final var result = fileHandler.getISTPlacement(item);
+
 		// Assert
-
-
 		assertThat(result).isNotNull();
 		assertThat(result.getIstPlacement()).isEqualTo("Fritidshem heltid");
 		assertThat(result.getIstPlacementName()).isEqualTo("someUnit");
@@ -151,7 +150,6 @@ class FileHandlerTest {
 
 	@AfterEach
 	void cleanup() throws IOException {
-
 		final var lastRunPath = Path.of("lastRun.xls");
 		final var mockFilePath = "src/test/resources/mockfiles/mockfile.xls";
 		if (new File(mockFilePath).createNewFile()) {
@@ -166,5 +164,4 @@ class FileHandlerTest {
 			}
 		}
 	}
-
 }

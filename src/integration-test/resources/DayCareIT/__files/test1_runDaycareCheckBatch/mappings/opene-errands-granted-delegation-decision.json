@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/opene/api/instanceapi/getinstances/family/SKOLSKJUTS/beviljat%20delegationsbeslut"
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "status": 200,
+    "bodyFileName": "test1_runDaycareCheckBatch/responses/opene-errands-granted-delegation-decision.xml"
+  }
+}

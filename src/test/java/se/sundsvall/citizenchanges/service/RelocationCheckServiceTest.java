@@ -2,6 +2,7 @@ package se.sundsvall.citizenchanges.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -10,6 +11,12 @@ import static org.mockito.Mockito.when;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildCitizen;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 import static se.sundsvall.citizenchanges.util.Constants.META_BACKTRACK_DAYS_DEFAULT;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
 
 import java.util.Collections;
 import java.util.List;
@@ -70,7 +77,7 @@ class RelocationCheckServiceTest {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1", "2", "3", "4"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -84,7 +91,13 @@ class RelocationCheckServiceTest {
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(citizenIntegrationMock).getAddressChanges(any());
-		verify(openEIntegrationMock, times(2)).getErrandIds(any(), any(), any(), any());
+
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(openEIntegrationMock, times(8)).getErrand(any(), any());
 		verify(messagingClientMock, times(2)).sendEmail(any());
 		verify(propertiesMock).familyId();
@@ -124,7 +137,7 @@ class RelocationCheckServiceTest {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
 
 		// Act
 		final var result = service.runBatch();
@@ -132,7 +145,12 @@ class RelocationCheckServiceTest {
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(citizenIntegrationMock).getAddressChanges(any());
-		verify(openEIntegrationMock, times(2)).getErrandIds(any(), any(), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(messagingClientMock, times(2)).sendEmail(any());
 		verify(propertiesMock).familyId();
 		verify(mapperMock, times(2)).getEmailRecipients(any());
@@ -157,7 +175,7 @@ class RelocationCheckServiceTest {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -169,7 +187,12 @@ class RelocationCheckServiceTest {
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(citizenIntegrationMock).getAddressChanges(any());
-		verify(openEIntegrationMock, times(2)).getErrandIds(any(), any(), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(openEIntegrationMock, times(2)).getErrand(any(), any());
 		verify(messagingClientMock, times(2)).sendEmail(any());
 		verify(propertiesMock).familyId();
@@ -194,7 +217,7 @@ class RelocationCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1", "2", "3", "4"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -203,12 +226,16 @@ class RelocationCheckServiceTest {
 		when(itemMapperMock.composeInvestigationItem(any(), any(), any(), any(), any(boolean.class)))
 			.thenReturn(InvestigationItem.builder().build());
 
-
 		// Act
 		final var result = service.runBatch(Optional.of(META_BACKTRACK_DAYS_DEFAULT), citizen);
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
-		verify(openEIntegrationMock, times(2)).getErrandIds(any(), any(), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(openEIntegrationMock, times(8)).getErrand(any(), any());
 		verify(messagingClientMock, times(2)).sendEmail(any());
 		verify(propertiesMock).familyId();
