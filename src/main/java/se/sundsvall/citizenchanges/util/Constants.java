@@ -1,21 +1,30 @@
 package se.sundsvall.citizenchanges.util;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import se.sundsvall.citizenchanges.api.model.FamilyType;
 
 public final class Constants {
 
-	public static final int OEP_BACKTRACK_YEARS = 3; //Number of years back to search for errands in OeP
+	public static final int OEP_BACKTRACK_YEARS = 3; // Number of years back to search for errands in OeP
 
-	public static final int META_BACKTRACK_DAYS_DEFAULT = 7; //Number of days back to search for changed addresses in Metakatalogen
+	public static final int META_BACKTRACK_DAYS_DEFAULT = 7; // Number of days back to search for changed addresses in Metakatalogen
 
-	public static final int META_BACKTRACK_DAYS_MAX = 30; //Maximum number of days back to search for changed addresses in Metakatalogen (This is a restriction in Metakatalogen)
+	public static final int META_BACKTRACK_DAYS_MAX = 30; // Maximum number of days back to search for changed addresses in Metakatalogen (This is a restriction in Metakatalogen)
 
-	public static final int IST_BACKTRACK_DAYS_DEFAULT = 7; //Number of days back to search for changed daycare scope in EduCloud/IST
+	public static final int IST_BACKTRACK_DAYS_DEFAULT = 7; // Number of days back to search for changed daycare scope in EduCloud/IST
+
+	public static final String OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED = "Automatiskt beviljat";
+
+	public static final String OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION = "Automatiskt beviljat delegationsbeslut";
 
 	public static final String OEP_ERRAND_STATUS_DECIDED = "beslutad";
+
+	public static final String OEP_ERRAND_STATUS_GRANTED = "Beviljat";
+
+	public static final String OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION = "Beviljat delegationsbeslut";
 
 	public static final String OEP_ERRAND_STATUS_READY = "Klart";
 
@@ -29,7 +38,6 @@ public final class Constants {
 
 	public static final String STATUS_UTFLYTTAD = "Utflyttad";
 
-
 	public static final String STATUS_YES = "Ja";
 
 	public static final String STATUS_NO = "Nej";
@@ -40,7 +48,6 @@ public final class Constants {
 
 	public static final String STATUS_FAILED = "Fel";
 
-
 	public static final String GUARDIAN_NOTATION = "VH";
 
 	public static final String MINOR_NOTATION = "Elev";
@@ -49,14 +56,13 @@ public final class Constants {
 
 	public static final String APPLICANT_CAPACITY_GUARDIAN = "Jag ansöker för ett barn som jag är vårdnadshavare för";
 
-
 	public static final String PROTECTED_IDENTITY_INDICATOR = "Skyddad";
 
 	public static final int REMINDER_MAX_AGE = 16;
 
-	public static final String REMINDER_DATE_LIMIT_PATTERN_SPRING = "-08-31"; //The current year is prepended to this string (2022-08-31 etc.) to form the date limit.
+	public static final String REMINDER_DATE_LIMIT_PATTERN_SPRING = "-08-31"; // The current year is prepended to this string (2022-08-31 etc.) to form the date limit.
 
-	public static final String REMINDER_DATE_LIMIT_PATTERN_AUTUMN = "-01-31"; //The next year is prepended to this string (2024-01-31 etc.) to form the date limit.
+	public static final String REMINDER_DATE_LIMIT_PATTERN_AUTUMN = "-01-31"; // The next year is prepended to this string (2024-01-31 etc.) to form the date limit.
 
 	public static final String REMINDER_LAST_DAY_SPRING = "30 april";
 
@@ -65,6 +71,16 @@ public final class Constants {
 	public static final String REMINDER_TARGET_SEMESTER_SPRING = "höstterminen";
 
 	public static final String REMINDER_TARGET_SEMESTER_AUTUMN = "vårterminen";
+
+	private static final List<String> PROCESSABLE_SKOLSKJUTS_STATUSES = List.of(
+		OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED,
+		OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION,
+		OEP_ERRAND_STATUS_DECIDED,
+		OEP_ERRAND_STATUS_GRANTED,
+		OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION)
+		.stream()
+		.map(String::toLowerCase)
+		.toList();
 
 	/*
 	 * Email parameters
@@ -411,4 +427,7 @@ public final class Constants {
 		return familyType.get(familyId);
 	}
 
+	public static List<String> getProcessableSkolskjutsStatuses() {
+		return PROCESSABLE_SKOLSKJUTS_STATUSES;
+	}
 }

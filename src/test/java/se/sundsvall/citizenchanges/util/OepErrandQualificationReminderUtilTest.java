@@ -10,13 +10,33 @@ import org.junit.jupiter.api.Test;
 class OepErrandQualificationReminderUtilTest {
 
 	@Test
-	void isOepErrandQualified() {
+	void isOepErrandQualifiedWhenEndDateOfDecisionIsBeforeAutumStartOfSchoolDate() {
 		// Arrange
-		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
+		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(30));
 		// Act
 		final var result = OepErrandQualificationReminderUtil.isOepErrandQualified(errand, LocalDate.now());
 		// Assert
 		assertThat(result).isTrue();
+	}
+
+	@Test
+	void isOepErrandQualifiedWhenEndDateOfDecisionIsEqualToAutumStartOfSchoolDate() {
+		// Arrange
+		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(31));
+		// Act
+		final var result = OepErrandQualificationReminderUtil.isOepErrandQualified(errand, LocalDate.now());
+		// Assert
+		assertThat(result).isTrue();
+	}
+
+	@Test
+	void isOepErrandQualifiedWhenEndDateOfDecisionIsAfterAutumStartOfSchoolDate() {
+		// Arrange
+		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(9).withDayOfMonth(1));
+		// Act
+		final var result = OepErrandQualificationReminderUtil.isOepErrandQualified(errand, LocalDate.now());
+		// Assert
+		assertThat(result).isFalse();
 	}
 
 	@Test

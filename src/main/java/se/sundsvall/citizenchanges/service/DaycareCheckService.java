@@ -1,5 +1,6 @@
 package se.sundsvall.citizenchanges.service;
 
+import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
 import static se.sundsvall.citizenchanges.util.DateUtil.getFromDate;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.shouldProcessErrand;
@@ -70,7 +71,7 @@ public class DaycareCheckService {
 
 	}
 
-	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays) {
+	private BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays) {
 		final var today = LocalDate.now();
 		final var istThresholdDate = getFromDate(today, backtrackDays);
 		final var startPoint = (backtrackDays == 0) ? Constants.DAYCARE_REPORT_START_POINT : istThresholdDate.toString();
@@ -80,9 +81,8 @@ public class DaycareCheckService {
 			.map(this::getFamilyType)
 			.filter(FamilyType.SKOLSKJUTS::equals)
 			.forEach(familyType -> {
-				final var thisStatus = Constants.OEP_ERRAND_STATUS_DECIDED.toLowerCase();
 				final var errandItemList = new ArrayList<DaycareInvestigationItem>();
-				final var updatedOepErrands = getErrandsFromOeP(oepErrands, familyType.toString(), thisStatus, fromDateOeP, today);
+				final var updatedOepErrands = getErrandsFromOeP(oepErrands, familyType.toString(), fromDateOeP, today);
 				processErrands(updatedOepErrands, errandItemList, firstErrand, numOfErrands, today);
 				buildReport(familyType, errandItemList, fromDateOeP, startPoint);
 			});
@@ -90,9 +90,13 @@ public class DaycareCheckService {
 		return BatchStatus.DONE;
 	}
 
-	private List<String> getErrandsFromOeP(List<String> oepErrands, final String thisFamilyId, final String thisStatus, final String fromDateOeP, final LocalDate today) {
+	private List<String> getErrandsFromOeP(List<String> oepErrands, final String familyId, final String fromDateOeP, final LocalDate today) {
 		if (oepErrands == null) {
-			oepErrands = openEIntegration.getErrandIds(thisFamilyId, thisStatus, fromDateOeP, today.toString());
+			oepErrands = getProcessableSkolskjutsStatuses().stream()
+				.map(status -> openEIntegration.getErrandIds(familyId, status, fromDateOeP, today.toString()))
+				.flatMap(List::stream)
+				.distinct()
+				.toList();
 		}
 		return oepErrands;
 	}
@@ -123,7 +127,6 @@ public class DaycareCheckService {
 	}
 
 	private void processErrands(final List<String> oepErrands, final List<DaycareInvestigationItem> errandItemList, final int firstErrand, final int numOfErrands, final LocalDate today) {
-
 		final var qualifiedItems = new AtomicInteger(0);
 
 		oepErrands.stream()
@@ -145,15 +148,11 @@ public class DaycareCheckService {
 		return Constants.getFamilyType(familyId);
 	}
 
-
 	public void deleteCachedFile() {
-
 		fileHandler.deleteCachedFile();
 	}
 
 	public boolean checkCachedFile() {
-
 		return fileHandler.checkCachedFile();
 	}
-
 }
