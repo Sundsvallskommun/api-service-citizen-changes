@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateUtil {
 
-	static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+	private static final int JULY = 7;
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 	public static String format(final LocalDateTime localDateTime) {
-		return localDateTime.format(formatter);
+		return localDateTime.format(FORMATTER);
 	}
 
 	public static LocalDate getFromDateMeta(final LocalDate today, int backtrackDays) {
@@ -23,10 +24,10 @@ public final class DateUtil {
 	}
 
 	public static LocalDate getFromDateOeP(final LocalDate today) {
-		//Always check from X years back.
-		final int yearSpan = Constants.OEP_BACKTRACK_YEARS;
-		final int thisYear = today.getYear();
-		final int startYear = thisYear - yearSpan;
+		// Always check from X years back.
+		final var yearSpan = Constants.OEP_BACKTRACK_YEARS;
+		final var thisYear = today.getYear();
+		final var startYear = thisYear - yearSpan;
 		return LocalDate.parse(startYear + "-01-01");
 	}
 
@@ -35,4 +36,15 @@ public final class DateUtil {
 		return today.minusDays(backtrackDays);
 	}
 
+	public static boolean isSpring() {
+		return LocalDate.now().getMonthValue() < JULY;
+	}
+
+	public static int getCurrentYear() {
+		return LocalDate.now().getYear();
+	}
+
+	public static int getNextYear() {
+		return LocalDate.now().plusYears(1).getYear();
+	}
 }

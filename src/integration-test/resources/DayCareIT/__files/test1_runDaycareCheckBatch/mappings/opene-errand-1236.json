@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/opene/api/instanceapi/getinstance/1236/xml"
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "status": 200,
+    "bodyFileName": "test1_runDaycareCheckBatch/responses/opene-errand.xml"
+  }
+}

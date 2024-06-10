@@ -1,5 +1,7 @@
 package se.sundsvall.citizenchanges.util;
 
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_SPRING;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -26,7 +28,7 @@ public final class OepErrandQualificationReminderUtil {
 		final var nextYear = today.plusYears(1).getYear();
 		final var thisMonth = today.getMonthValue();
 		final var isSpring = thisMonth < 7;
-		final var limitDate = isSpring ? thisYear + Constants.REMINDER_DATE_LIMIT_PATTERN_SPRING : nextYear + Constants.REMINDER_DATE_LIMIT_PATTERN_AUTUMN;
+		final var limitDate = REMINDER_DATE_LIMIT_PATTERN_SPRING.formatted(isSpring ? thisYear : nextYear);
 		final var lastDayOfAugust = LocalDate.parse(limitDate);
 		final var minorName = Optional.ofNullable(item.getMinorName()).orElse("").toLowerCase();
 		final var contactName = Optional.ofNullable(Optional.ofNullable(item.getContactInfo()).orElse(ContactInfo.builder().build()).getDisplayName()).orElse("").toLowerCase();
@@ -41,18 +43,17 @@ public final class OepErrandQualificationReminderUtil {
 			|| (item.getMinorIdentifier().trim().isEmpty())
 			|| minorName.isEmpty()) {
 			return false;
-		} else if ((decisionEnd != null) && (!decisionEnd.isEmpty()) && (decisionStart != null) && (!decisionStart.isEmpty())) {
-			final boolean valid = ((!today.isAfter(LocalDate.parse(decisionEnd))) && (!today.isBefore(LocalDate.parse(decisionStart))));
-			if (!valid) {
+		}
+		if ((decisionEnd != null) && (!decisionEnd.isEmpty()) && (decisionStart != null) && (!decisionStart.isEmpty())) {
+			final var valid = ((!today.isAfter(LocalDate.parse(decisionEnd))) && (!today.isBefore(LocalDate.parse(decisionStart))));
+			if (!valid || lastDayOfAugust.isBefore(LocalDate.parse(decisionEnd))) {
 				return false;
-			} else if (!lastDayOfAugust.isBefore(LocalDate.parse(decisionEnd))) {
+			} else {
 				var minorIdentifier = Optional.of(item.getMinorIdentifier()).orElse("");
 				minorIdentifier = !minorIdentifier.isEmpty() ? minorIdentifier : String.valueOf(thisYear);
-				final int birthYear = Integer.parseInt(minorIdentifier.substring(0, 4));
-				final int age = thisYear - birthYear;
+				final var birthYear = Integer.parseInt(minorIdentifier.substring(0, 4));
+				final var age = thisYear - birthYear;
 				return age < Constants.REMINDER_MAX_AGE;
-			} else {
-				return false;
 			}
 		} else {
 			return false;

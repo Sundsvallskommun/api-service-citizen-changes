@@ -3,6 +3,7 @@ package se.sundsvall.citizenchanges.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,6 +11,11 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -67,7 +73,7 @@ class DaycareCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("someErrandId", "someErrandId2"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -80,9 +86,13 @@ class DaycareCheckServiceTest {
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 
-		verify(propertiesMock, times(2)).familyId();
+		verify(propertiesMock).familyId();
 		verify(mapperMock).getEmailRecipients(any());
-		verify(openEIntegrationMock).getErrandIds(any(), any(), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(fileHandlerMock).getISTPlacement(any());
 		verify(fileHandlerMock).parse(any());
@@ -109,7 +119,7 @@ class DaycareCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
 
 		// Act
 		final var result = service.runBatch(0, 1, 1, file);
@@ -119,7 +129,11 @@ class DaycareCheckServiceTest {
 
 		verify(propertiesMock, times(1)).familyId();
 		verify(mapperMock).getEmailRecipients(any());
-		verify(openEIntegrationMock).getErrandIds(any(), any(), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
+		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(fileHandlerMock).parse(any());
 		verify(messagingIntegrationMock).sendEmail(any());
 		verify(mapperMock).composeDaycareReportHtmlContent(any(), any());

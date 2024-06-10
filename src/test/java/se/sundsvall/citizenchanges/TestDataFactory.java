@@ -1,7 +1,5 @@
 package se.sundsvall.citizenchanges;
 
-import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -20,6 +18,12 @@ import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 import se.sundsvall.citizenchanges.api.model.ReportMetaData;
 
 public final class TestDataFactory {
+
+	public static OepErrandItem buildOepErrandItem(final String daycarePlacement, final String applicantIdentifier, final String minorIdentifier, LocalDate decisionEnd) {
+		final var errand = buildOepErrandItem(daycarePlacement, applicantIdentifier, minorIdentifier);
+		errand.setDecisionEnd(decisionEnd == null ? null : decisionEnd.toString());
+		return errand;
+	}
 
 	public static OepErrandItem buildOepErrandItem(final String daycarePlacement, final String applicantIdentifier, final String minorIdentifier) {
 
@@ -82,18 +86,18 @@ public final class TestDataFactory {
 				.addressType("someAddressType")
 				.xCoordLocal(12D)
 				.yCoordLocal(14D), new CitizenAddress()
-				.status("Previous")
-				.nrDate(LocalDateTime.now())
-				.address("someAddress")
-				.co("someCo")
-				.appartmentNumber("someApartmentNumber")
-				.postalCode("somePostalCode")
-				.city("some")
-				.county("81")
-				.municipality("22")
-				.addressType("someAddressType")
-				.xCoordLocal(1D)
-				.yCoordLocal(123D)));
+					.status("Previous")
+					.nrDate(LocalDateTime.now())
+					.address("someAddress")
+					.co("someCo")
+					.appartmentNumber("someApartmentNumber")
+					.postalCode("somePostalCode")
+					.city("some")
+					.county("81")
+					.municipality("22")
+					.addressType("someAddressType")
+					.xCoordLocal(1D)
+					.yCoordLocal(123D)));
 	}
 
 	public static DaycareInvestigationItem buildDaycareInvestigationItem() {

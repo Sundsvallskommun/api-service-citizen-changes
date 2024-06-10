@@ -1,13 +1,13 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/opene/api/instanceapi/getinstance/.*"
+    "urlPath": "/opene/api/instanceapi/getinstance/1236/xml"
   },
   "response": {
     "headers": {
       "Content-Type": "application/xml"
     },
     "status": 200,
-    "bodyFileName": "test1_runDaycareCheckBatch/responses/opene-errand.xml"
+    "bodyFileName": "test2_runBatchWithCitizenData/responses/opene-errand.xml"
   }
 }

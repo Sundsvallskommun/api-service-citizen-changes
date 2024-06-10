@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/opene/api/instanceapi/getinstance/.*",
+    "urlPath": "/opene/api/instanceapi/getinstance/172529/xml",
     "headers": {
       "Authorization": {
         "equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="

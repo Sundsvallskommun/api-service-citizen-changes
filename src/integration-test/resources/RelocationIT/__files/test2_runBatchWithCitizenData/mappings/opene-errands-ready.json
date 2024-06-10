@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/opene/api/instanceapi/getinstance/.*",
+    "urlPath": "/opene/api/instanceapi/getinstances/family/349/klart",
     "headers": {
       "Authorization": {
         "equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="
@@ -13,6 +13,6 @@
       "Content-Type": "application/xml"
     },
     "status": 200,
-    "bodyFileName": "test1_runBatch/responses/opene-errand.xml"
+    "bodyFileName": "test2_runBatchWithCitizenData/responses/opene-errands-ready.xml"
   }
 }

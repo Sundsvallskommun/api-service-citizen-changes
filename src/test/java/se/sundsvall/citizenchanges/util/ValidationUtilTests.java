@@ -3,8 +3,6 @@ package se.sundsvall.citizenchanges.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_SKOLSKJUTS_DENIED;
-import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECIDED;
-import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
 
@@ -17,14 +15,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 class ValidationUtilTests {
 
 	@ParameterizedTest
-	@ValueSource(strings = {"+46701234567", "+4513245"})
+	@ValueSource(strings = { "+46701234567", "+4513245" })
 	void validMSISDNTest(final String number) {
 		// Act & Assert
 		assertThat(validMSISDN(number)).isTrue();
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"0761234567", "070-123 45 67", ""})
+	@ValueSource(strings = { "0761234567", "070-123 45 67", "" })
 	void invalidMSISDNTest(final String number) {
 		// Act & Assert
 		assertThat(validMSISDN(number)).isFalse();
@@ -270,22 +268,4 @@ class ValidationUtilTests {
 		// Assert
 		assertThat(result).isTrue();
 	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {OEP_ERRAND_STATUS_DECIDED, OEP_ERRAND_STATUS_READY})
-	void isOEpErrandStatusValid(final String status){
-		// Act
-		final var result = ValidationUtil.isOEpErrandStatusValid(status);
-		// Assert
-		assertThat(result).isTrue();
-	}
-
-	@Test
-	void isOEpErrandStatusValid_invalid(){
-		// Act
-		final var result = ValidationUtil.isOEpErrandStatusValid("SomeStatus");
-		// Assert
-		assertThat(result).isFalse();
-	}
-
 }

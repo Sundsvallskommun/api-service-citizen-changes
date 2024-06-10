@@ -1,5 +1,9 @@
 package se.sundsvall.citizenchanges.service;
 
+import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_EMAIL_SUBJECT;
+import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_START_POINT;
+import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
+import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
 import static se.sundsvall.citizenchanges.util.DateUtil.getFromDate;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.shouldProcessErrand;
@@ -34,11 +38,7 @@ import se.sundsvall.citizenchanges.util.MessageMapper;
 @Service
 public class DaycareCheckService {
 
-	private static final Logger log = LoggerFactory.getLogger(DaycareCheckService.class);
-
-	private static final String REPORT_EMAIL_SENDER = Constants.EMAIL_SENDER_NAME;
-
-	private static final String REPORT_EMAIL_SUBJECT = Constants.DAYCARE_REPORT_EMAIL_SUBJECT;
+	private static final Logger LOG = LoggerFactory.getLogger(DaycareCheckService.class);
 
 	private final OpenEIntegration openEIntegration;
 
@@ -64,35 +64,36 @@ public class DaycareCheckService {
 	}
 
 	private void handleFileTransferAndParsing(final MultipartFile file) throws IOException {
-
 		file.transferTo(Path.of(Objects.requireNonNull(file.getOriginalFilename())));
 		fileHandler.parse(new File(file.getOriginalFilename()));
-
 	}
 
-	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays) {
+	private BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays) {
 		final var today = LocalDate.now();
 		final var istThresholdDate = getFromDate(today, backtrackDays);
-		final var startPoint = (backtrackDays == 0) ? Constants.DAYCARE_REPORT_START_POINT : istThresholdDate.toString();
+		final var startPoint = (backtrackDays == 0) ? DAYCARE_REPORT_START_POINT : istThresholdDate.toString();
 		final var fromDateOeP = DateUtil.getFromDateOeP(today).toString();
 
 		Arrays.stream(properties.familyId().split(","))
-			.map(this::getFamilyType)
+			.map(Constants::getFamilyType)
 			.filter(FamilyType.SKOLSKJUTS::equals)
 			.forEach(familyType -> {
-				final var thisStatus = Constants.OEP_ERRAND_STATUS_DECIDED.toLowerCase();
 				final var errandItemList = new ArrayList<DaycareInvestigationItem>();
-				final var updatedOepErrands = getErrandsFromOeP(oepErrands, familyType.toString(), thisStatus, fromDateOeP, today);
-				processErrands(updatedOepErrands, errandItemList, firstErrand, numOfErrands, today);
+				final var updatedOepErrands = getErrandsFromOeP(oepErrands, familyType.toString(), fromDateOeP, today);
+				processErrands(familyType, updatedOepErrands, errandItemList, firstErrand, numOfErrands, today);
 				buildReport(familyType, errandItemList, fromDateOeP, startPoint);
 			});
 
 		return BatchStatus.DONE;
 	}
 
-	private List<String> getErrandsFromOeP(List<String> oepErrands, final String thisFamilyId, final String thisStatus, final String fromDateOeP, final LocalDate today) {
+	private List<String> getErrandsFromOeP(List<String> oepErrands, final String familyId, final String fromDateOeP, final LocalDate today) {
 		if (oepErrands == null) {
-			oepErrands = openEIntegration.getErrandIds(thisFamilyId, thisStatus, fromDateOeP, today.toString());
+			oepErrands = getProcessableSkolskjutsStatuses().stream()
+				.map(status -> openEIntegration.getErrandIds(familyId, status, fromDateOeP, today.toString()))
+				.flatMap(List::stream)
+				.distinct()
+				.toList();
 		}
 		return oepErrands;
 	}
@@ -109,25 +110,25 @@ public class DaycareCheckService {
 			.build();
 
 		// Compose and send report
-		final var reportSubject = REPORT_EMAIL_SUBJECT + " (" + metaData.getReportTimestamp() + ")";
+		final var reportSubject = DAYCARE_REPORT_EMAIL_SUBJECT + " (" + metaData.getReportTimestamp() + ")";
 		final var htmlPayload = mapper.composeDaycareReportHtmlContent(errandItemList, metaData);
 		final var emailRecipientsArray = mapper.getEmailRecipients(familyType);
 
 		Arrays.stream(emailRecipientsArray).forEach(thisRecipient -> {
-			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, REPORT_EMAIL_SENDER, reportSubject);
-			log.info("Sending daycare scope report to Messaging service for \" {} \" for {} ...", thisRecipient, familyType);
+			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, reportSubject);
+
+			LOG.info("Sending daycare scope report to Messaging service for \" {} \" for {} ...", thisRecipient, familyType);
 			final var messageResponse = messagingClient.sendEmail(request);
-			log.info("Response: {}", messageResponse);
+			LOG.info("Response: {}", messageResponse);
 		});
 
 	}
 
-	private void processErrands(final List<String> oepErrands, final List<DaycareInvestigationItem> errandItemList, final int firstErrand, final int numOfErrands, final LocalDate today) {
-
+	private void processErrands(final FamilyType familyType, final List<String> oepErrands, final List<DaycareInvestigationItem> errandItemList, final int firstErrand, final int numOfErrands, final LocalDate today) {
 		final var qualifiedItems = new AtomicInteger(0);
 
 		oepErrands.stream()
-			.map(flowInstanceId -> openEIntegration.getErrand(flowInstanceId, getFamilyType(properties.familyId())))
+			.map(flowInstanceId -> openEIntegration.getErrand(flowInstanceId, familyType))
 			.filter(item -> isOepErrandQualifiedForDayCareCheck(item, today))
 			.filter(item -> shouldProcessErrand(qualifiedItems.get(), errandItemList.size(), firstErrand, numOfErrands))
 			.map(fileHandler::getISTPlacement)
@@ -138,22 +139,14 @@ public class DaycareCheckService {
 				errandItemList.add(e);
 			});
 
-		log.info("Processed {} qualified errands from OeP.", errandItemList.size());
+		LOG.info("Processed {} qualified errands from OeP.", errandItemList.size());
 	}
-
-	private FamilyType getFamilyType(final String familyId) {
-		return Constants.getFamilyType(familyId);
-	}
-
 
 	public void deleteCachedFile() {
-
 		fileHandler.deleteCachedFile();
 	}
 
 	public boolean checkCachedFile() {
-
 		return fileHandler.checkCachedFile();
 	}
-
 }
