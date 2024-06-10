@@ -13,7 +13,7 @@ import se.sundsvall.citizenchanges.service.RelocationCheckService;
 @Component
 public class JobScheduler {
 
-	private static final Logger log = LoggerFactory.getLogger(JobScheduler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(JobScheduler.class);
 
 	private final RelocationCheckService relocationCheckService;
 
@@ -25,9 +25,9 @@ public class JobScheduler {
 	@SchedulerLock(name = "relocation_check", lockAtMostFor = "${scheduling.lock-at-most-for}")
 	void startRelocationCheck() {
 		final var thisTime = LocalDateTime.now();
-		log.info("Scheduler executed at {}. About to run batch job for relocation check...", thisTime);
+		LOG.info("Scheduler executed at {}. About to run batch job for relocation check...", thisTime);
 		final var result = relocationCheckService.runBatch();
-		log.info("Batch job is done. {}", result);
+		LOG.info("Batch job is done. {}", result);
 	}
 
 }

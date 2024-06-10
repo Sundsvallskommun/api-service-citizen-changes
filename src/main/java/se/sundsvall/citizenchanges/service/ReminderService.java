@@ -11,6 +11,9 @@ import static se.sundsvall.citizenchanges.util.Constants.STATUS_FAILED;
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_NOT_SENT;
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_SENT;
 import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
+import static se.sundsvall.citizenchanges.util.DateUtil.getNextYear;
+import static se.sundsvall.citizenchanges.util.DateUtil.getCurrentYear;
+import static se.sundsvall.citizenchanges.util.DateUtil.isSpring;
 import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
 import static se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil.isOepErrandQualified;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
@@ -40,7 +43,7 @@ import se.sundsvall.citizenchanges.util.MessageMapper;
 @Service
 public class ReminderService {
 
-	private static final Logger log = LoggerFactory.getLogger(ReminderService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ReminderService.class);
 
 	private final OpenEIntegration openEIntegration;
 
@@ -67,7 +70,7 @@ public class ReminderService {
 	}
 
 	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final boolean sendMessage, final List<String> oepErrands, final String sms, final String email) {
-		log.info("Batch job to send reminders is running...");
+		LOG.info("Batch job to send reminders is running...");
 
 		final var batchContext = BatchContext.builder()
 			.withFirstErrand(firstErrand)
@@ -141,13 +144,13 @@ public class ReminderService {
 
 			}
 		} catch (final Exception e) {
-			log.error("Failed to get errand item from OeP (flowInstanceId {})", flowInstanceId, e);
+			LOG.error("Failed to get errand item from OeP (flowInstanceId {})", flowInstanceId, e);
 		}
 	}
 
 	private boolean hasReachedMaxErrands(final BatchContext batchContext, final List<OepErrandItem> errandItemList) {
 		if ((batchContext.getNumberOfErrands() > 0) && (errandItemList.size() >= batchContext.getNumberOfErrands())) {
-			log.info("Reached maximum number of errands: {} (as defined by request parameter batchContext.getNumberOfErrands()). Looping of errands is interrupted.", batchContext.getNumberOfErrands());
+			LOG.info("Reached maximum number of errands: {} (as defined by request parameter batchContext.getNumberOfErrands()). Looping of errands is interrupted.", batchContext.getNumberOfErrands());
 			return true;
 		}
 		return false;
@@ -159,7 +162,7 @@ public class ReminderService {
 
 	private void sendSmsIfRequired(final BatchContext batchContext, final OepErrandItem item, final String flowInstanceId) {
 		if (item.getContactInfo().isContactBySMS()) {
-			sendSMS(batchContext.isSendMessages(), batchContext.getSms(), item, LocalDate.now().getMonthValue() < 7, flowInstanceId);
+			sendSMS(batchContext.isSendMessages(), batchContext.getSms(), item, flowInstanceId);
 		}
 	}
 
@@ -167,15 +170,15 @@ public class ReminderService {
 		final var recipient = Optional.ofNullable(email)
 			.orElseGet(() -> item.getContactInfo().getEmailAddress());
 
-		final var reminderEmailSubject = LocalDate.now().getMonthValue() < 7 ? REMINDER_EMAIL_SUBJECT_SPRING + LocalDate.now().getYear() : REMINDER_EMAIL_SUBJECT_AUTUMN + LocalDate.now().plusYears(1).getYear();
+		final var reminderEmailSubject = isSpring() ? REMINDER_EMAIL_SUBJECT_SPRING.formatted(getCurrentYear()) : REMINDER_EMAIL_SUBJECT_AUTUMN.formatted(getNextYear());
 
 		if (sendMessage) {
-			log.info("Sending reminder email to Messaging service for {}", recipient);
+			LOG.info("Sending reminder email to Messaging service for {}", recipient);
 			try {
 				final var reminderPayloadEmail = mapper.composeReminderContentEmail(item);
 				final var emailRequest = mapper.composeEmailRequest(reminderPayloadEmail, recipient, REMINDER_EMAIL_SENDER, reminderEmailSubject);
 				final var messageResult = messagingClient.sendEmail(emailRequest);
-				log.info("Message response: {}", messageResult);
+				LOG.info("Message response: {}", messageResult);
 				if ((messageResult != null) && messageResult.getDeliveries().stream().allMatch(d -> SENT.equals(d.getStatus()))) {
 					item.setEmailStatus(STATUS_SENT);
 				} else {
@@ -183,40 +186,40 @@ public class ReminderService {
 				}
 			} catch (final Exception e) {
 				item.setEmailStatus(STATUS_FAILED);
-				log.error("Failed to send email to \"{}\" (flowInstanceId {}). {}", recipient, flowInstanceId, e.getLocalizedMessage());
+				LOG.error("Failed to send email to \"{}\" (flowInstanceId {}). {}", recipient, flowInstanceId, e.getLocalizedMessage());
 			}
 		} else {
-			log.info("Simulating reminder email to {}", recipient);
+			LOG.info("Simulating reminder email to {}", recipient);
 			item.setEmailStatus(STATUS_SENT);
 		}
 	}
 
-	private void sendSMS(final boolean sendMessage, final String sms, final OepErrandItem item, final boolean isSpring, final String flowInstanceId) {
+	private void sendSMS(final boolean sendMessage, final String sms, final OepErrandItem item, final String flowInstanceId) {
 		final var mobileNumber = Optional.ofNullable(sms)
 			.orElseGet(() -> item.getContactInfo().getPhoneNumber());
 
 		final var formattedMobileNumber = formatMobileNumber(mobileNumber);
 
 		if (validMSISDN(formattedMobileNumber)) {
-			final var targetYear = isSpring ? String.valueOf(LocalDate.now().getYear()) : String.valueOf(LocalDate.now().plusYears(1).getYear());
+			final var targetYear = isSpring() ? String.valueOf(LocalDate.now().getYear()) : String.valueOf(LocalDate.now().plusYears(1).getYear());
 			if (sendMessage) {
-				log.info("Sending reminder SMS to Messaging service for {}", formattedMobileNumber);
+				LOG.info("Sending reminder SMS to Messaging service for {}", formattedMobileNumber);
 				try {
 					final var reminderPayloadSMS = mapper.composeReminderContentSMS(item, targetYear);
 					final var smsRequest = mapper.composeSmsRequest(reminderPayloadSMS, formattedMobileNumber);
 					final var messageResponse = messagingClient.sendSms(smsRequest);
-					log.info("Response: {}", messageResponse);
+					LOG.info("Response: {}", messageResponse);
 					item.setSmsStatus(STATUS_SENT);
 				} catch (final Exception e) {
 					item.setSmsStatus(STATUS_FAILED);
-					log.error("Failed to send SMS to \"{}\" (flowInstanceId {}). {}", formattedMobileNumber, flowInstanceId, e.getLocalizedMessage());
+					LOG.error("Failed to send SMS to \"{}\" (flowInstanceId {}). {}", formattedMobileNumber, flowInstanceId, e.getLocalizedMessage());
 				}
 			} else {
-				log.info("Simulating reminder SMS to \"{}\"...", formattedMobileNumber);
+				LOG.info("Simulating reminder SMS to \"{}\"...", formattedMobileNumber);
 				item.setSmsStatus(STATUS_SENT);
 			}
 		} else {
-			log.info("SMS not sent to {}, bad format.", formattedMobileNumber);
+			LOG.info("SMS not sent to {}, bad format.", formattedMobileNumber);
 			item.setSmsStatus(STATUS_NOT_SENT);
 		}
 	}
@@ -231,9 +234,9 @@ public class ReminderService {
 
 		Arrays.stream(mapper.getEmailRecipients(familyType)).forEach(recipient -> {
 			final var request = mapper.composeEmailRequest(htmlPayload, recipient, EMAIL_SENDER_NAME, reportSubject);
-			log.info("Sending reminder report to Messaging service for \" {} \" for  {} ...", recipient, familyType);
+			LOG.info("Sending reminder report to Messaging service for \" {} \" for  {} ...", recipient, familyType);
 			final var messageResult = messagingClient.sendEmail(request);
-			log.info("Response: {}", messageResult);
+			LOG.info("Response: {}", messageResult);
 		});
 	}
 

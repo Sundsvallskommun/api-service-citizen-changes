@@ -38,7 +38,7 @@ import se.sundsvall.citizenchanges.util.MessageMapper;
 @Service
 public class DaycareCheckService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DaycareCheckService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DaycareCheckService.class);
 
 	private final OpenEIntegration openEIntegration;
 
@@ -117,9 +117,9 @@ public class DaycareCheckService {
 		Arrays.stream(emailRecipientsArray).forEach(thisRecipient -> {
 			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, reportSubject);
 
-			LOGGER.info("Sending daycare scope report to Messaging service for \" {} \" for {} ...", thisRecipient, familyType);
+			LOG.info("Sending daycare scope report to Messaging service for \" {} \" for {} ...", thisRecipient, familyType);
 			final var messageResponse = messagingClient.sendEmail(request);
-			LOGGER.info("Response: {}", messageResponse);
+			LOG.info("Response: {}", messageResponse);
 		});
 
 	}
@@ -139,7 +139,7 @@ public class DaycareCheckService {
 				errandItemList.add(e);
 			});
 
-		LOGGER.info("Processed {} qualified errands from OeP.", errandItemList.size());
+		LOG.info("Processed {} qualified errands from OeP.", errandItemList.size());
 	}
 
 	public void deleteCachedFile() {

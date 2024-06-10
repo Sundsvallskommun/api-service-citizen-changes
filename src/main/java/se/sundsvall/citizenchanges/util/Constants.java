@@ -60,9 +60,7 @@ public final class Constants {
 
 	public static final int REMINDER_MAX_AGE = 16;
 
-	public static final String REMINDER_DATE_LIMIT_PATTERN_SPRING = "-08-31"; // The current year is prepended to this string (2022-08-31 etc.) to form the date limit.
-
-	public static final String REMINDER_DATE_LIMIT_PATTERN_AUTUMN = "-01-31"; // The next year is prepended to this string (2024-01-31 etc.) to form the date limit.
+	public static final String REMINDER_DATE_LIMIT_PATTERN_SPRING = "%s-08-31"; // The current year is prepended to this string (2022-08-31 etc.) to form the date limit.
 
 	public static final String REMINDER_LAST_DAY_SPRING = "30 april";
 
@@ -93,9 +91,9 @@ public final class Constants {
 
 	public static final String REMINDER_REPORT_EMAIL_SUBJECT_AUTUMN = "Rapport för påminnelser om skolskjuts inför VT ";
 
-	public static final String REMINDER_EMAIL_SUBJECT_SPRING = "Påminnelse om att ansöka om skolskjuts inför höstterminens start ";
+	public static final String REMINDER_EMAIL_SUBJECT_SPRING = "Påminnelse om att ansöka om skolskjuts inför höstterminens start %s";
 
-	public static final String REMINDER_EMAIL_SUBJECT_AUTUMN = "Påminnelse om att ansöka om skolskjuts inför vårterminens start ";
+	public static final String REMINDER_EMAIL_SUBJECT_AUTUMN = "Påminnelse om att ansöka om skolskjuts inför vårterminens start %s";
 
 	public static final String REMINDER_EMAIL_SENDER = "Sundsvalls kommun";
 

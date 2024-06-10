@@ -41,7 +41,7 @@ import se.sundsvall.citizenchanges.util.MessageMapper;
 @Service
 public class RelocationCheckService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RelocationCheckService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RelocationCheckService.class);
 
 	private final CitizenIntegration citizenIntegration;
 
@@ -71,7 +71,7 @@ public class RelocationCheckService {
 	}
 
 	public BatchStatus runBatch(final Optional<Integer> backtrackDays, final Set<CitizenWithChangedAddress> citizens) {
-		LOGGER.info("Batch job running...");
+		LOG.info("Batch job running...");
 
 		final var today = LocalDate.now();
 		final var fromDateMeta = DateUtil.getFromDateMeta(today, backtrackDays.orElse(META_BACKTRACK_DAYS_DEFAULT)).toString();
@@ -90,7 +90,7 @@ public class RelocationCheckService {
 
 			// Get errands list from OeP and check if there are errands qualified for investigation
 			final var oepErrands = getErrandsFromOeP(statuses, thisFamilyId, fromDateOeP, today);
-			LOGGER.info("Found a total of {} errands with correct status", oepErrands.size());
+			LOG.info("Found a total of {} errands with correct status", oepErrands.size());
 
 			List<InvestigationItem> investigationItemList = new ArrayList<>();
 			if (!oepErrands.isEmpty()) {
@@ -98,7 +98,7 @@ public class RelocationCheckService {
 					investigationItemList.addAll(mapFlowInstance(flowInstanceId, familyType, today, moves));
 				}
 			} else {
-				LOGGER.info("No errands could be retrieved from OeP for {} ({}).", familyType, thisFamilyId);
+				LOG.info("No errands could be retrieved from OeP for {} ({}).", familyType, thisFamilyId);
 			}
 
 			// Remove duplicates from list and sort it properly
@@ -125,7 +125,7 @@ public class RelocationCheckService {
 	}
 
 	private List<InvestigationItem> mapFlowInstance(final String flowInstanceId, final FamilyType familyType, final LocalDate today, final Map<String, CitizenWithChangedAddress> moves) {
-		final var tempList = new ArrayList<InvestigationItem>();
+		final var qualifiedErrands = new ArrayList<InvestigationItem>();
 		try {
 			final var item = openEIntegration.getErrand(flowInstanceId, familyType);
 
@@ -145,9 +145,9 @@ public class RelocationCheckService {
 						applicantMoves.add(parentMove);
 						final boolean sameAddress = Optional.ofNullable(minorIdentifier)
 							.map(moves::get)
-							.map(minorM -> gotSameAddress(parentMove, minorM))
+							.map(minorMove -> gotSameAddress(parentMove, minorMove))
 							.orElse(false);
-						tempList.add(itemMapper.composeInvestigationItem(parentMove, item, familyType, parentMove.getPersonNumber(), sameAddress));
+						qualifiedErrands.add(itemMapper.composeInvestigationItem(parentMove, item, familyType, parentMove.getPersonNumber(), sameAddress));
 					});
 
 				Optional.ofNullable(minorIdentifier)
@@ -156,17 +156,17 @@ public class RelocationCheckService {
 						final var sameAddress = applicantMoves.stream()
 							.anyMatch(applicantMove -> gotSameAddress(thisMove, applicantMove));
 						if (sameAddress) {
-							LOGGER.info("Errand {} : The minor has moved to the same address as a guardian. Skip separate investigation item.", item.getFlowInstanceId());
+							LOG.info("Errand {} : The minor has moved to the same address as a guardian. Skip separate investigation item.", item.getFlowInstanceId());
 						} else {
-							tempList.add(itemMapper.composeInvestigationItem(thisMove, item, familyType, minorIdentifier, false));
+							qualifiedErrands.add(itemMapper.composeInvestigationItem(thisMove, item, familyType, minorIdentifier, false));
 						}
 					});
 			}
-			LOGGER.info("tempList size: {}", tempList.size());
+			LOG.info("Errands qualified for relocation check: {}", qualifiedErrands.size());
 		} catch (final Exception e) {
-			LOGGER.error("Failed to get errand item from OeP (flowInstanceId " + flowInstanceId + ")", e);
+			LOG.error("Failed to get errand item from OeP (flowInstanceId " + flowInstanceId + ")", e);
 		}
-		return tempList;
+		return qualifiedErrands;
 	}
 
 	private void composeEmail(final FamilyType familyType, final List<InvestigationItem> investigationItemList,
@@ -187,9 +187,9 @@ public class RelocationCheckService {
 
 		for (final String thisRecipient : emailRecipientsArray) {
 			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, subject);
-			LOGGER.info("Sending message request to Messaging service for \"{}\" for {} report... ", thisRecipient, familyType);
+			LOG.info("Sending message request to Messaging service for \"{}\" for {} report... ", thisRecipient, familyType);
 			final var messageResponse = messagingClient.sendEmail(request);
-			LOGGER.info("Response: {}", messageResponse);
+			LOG.info("Response: {}", messageResponse);
 		}
 	}
 
@@ -217,14 +217,14 @@ public class RelocationCheckService {
 	}
 
 	private Map<String, CitizenWithChangedAddress> getMoves(final String fromDate, final Set<CitizenWithChangedAddress> citizens) {
-		LOGGER.info("Retrieving changed addresses from Metakatalogen (changedDateFrom: {})...", fromDate);
+		LOG.info("Retrieving changed addresses from Metakatalogen (changedDateFrom: {})...", fromDate);
 		final Set<CitizenWithChangedAddress> moves;
 		if (citizens != null && !citizens.isEmpty()) {
 			moves = citizens;
 		} else {
 			moves = citizenIntegration.getAddressChanges(fromDate);
 		}
-		LOGGER.info("Got {} changed addresses from Metakatalogen.", moves.size());
+		LOG.info("Got {} changed addresses from Metakatalogen.", moves.size());
 		return moves.stream().collect(Collectors.toMap(CitizenWithChangedAddress::getPersonNumber, Function.identity()));
 	}
 

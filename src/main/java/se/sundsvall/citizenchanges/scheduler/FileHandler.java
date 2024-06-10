@@ -30,7 +30,7 @@ import se.sundsvall.dept44.util.jacoco.ExcludeFromJacocoGeneratedCoverageReport;
 @ExcludeFromJacocoGeneratedCoverageReport
 public class FileHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(FileHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FileHandler.class);
 
 	private static final String BACKUP_FILE_PATH = "lastRun.xls";
 
@@ -53,7 +53,7 @@ public class FileHandler {
 	public DaycareInvestigationItem getISTPlacement(final OepErrandItem item) {
 		return findRow(item.getMinorIdentifier(), item.getDaycarePlacement(), item)
 			.map(result -> {
-				log.info("Row found for flowInstance: {}", item.getFlowInstanceId());
+				LOG.info("Row found for flowInstance: {}", item.getFlowInstanceId());
 				return composeInvestigationItem(item, DaycareInvestigationItem.builder()
 					.withIstChangeStartDate(result.getChangeStart())
 					.withIstPlacement(result.getTaxCategory())
@@ -122,7 +122,7 @@ public class FileHandler {
 				.filter(e -> !lastRunsRows.contains(e.toString()))
 				.toList();
 		}
-		log.info("Totalt parsed rows: {}", parsedRows.size());
+		LOG.info("Totalt parsed rows: {}", parsedRows.size());
 		storeFileForNextRun(newFile);
 	}
 
