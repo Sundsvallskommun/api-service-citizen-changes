@@ -20,7 +20,7 @@
 		<!-- CI/CD properties start -->
 		<!-- CI/CD properties end -->
 		<poiji.version>4.5.0</poiji.version>
-		<shedlock.version>5.13.0</shedlock.version>
+		<shedlock.version>5.14.0</shedlock.version>
 		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
 	</properties>
 	<dependencies>
