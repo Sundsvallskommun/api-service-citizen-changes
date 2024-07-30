@@ -34,7 +34,7 @@ class OepErrandQualificationReminderUtilTest {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(9).withDayOfMonth(1));
 		// Act
-		final var result = OepErrandQualificationReminderUtil.isOepErrandQualified(errand, LocalDate.now());
+		final var result = OepErrandQualificationReminderUtil.isOepErrandQualified(errand, LocalDate.now().withMonth(5));
 		// Assert
 		assertThat(result).isFalse();
 	}
