@@ -21,6 +21,7 @@ public interface MessagingClient {
 	/**
 	 * Send a single e-mail
 	 *
+	 * @param municipalityId the municipality ID
 	 * @param request containing email information
 	 * @return response containing id and delivery results for sent message
 	 */
@@ -32,6 +33,7 @@ public interface MessagingClient {
 	/**
 	 * Send a single sms
 	 *
+	 * @param municipalityId the municipality ID
 	 * @param request containing sms information
 	 * @return response containing id and delivery results for sent message
 	 */

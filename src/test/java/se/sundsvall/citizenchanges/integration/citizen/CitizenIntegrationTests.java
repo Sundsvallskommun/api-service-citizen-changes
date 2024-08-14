@@ -62,19 +62,19 @@ class CitizenIntegrationTests {
 		verifyNoMoreInteractions(mockCitizenClient);
 	}
 
-	private void assertAddressValues(final CitizenAddress adress) {
-		assertThat(adress.getStatus()).isEqualTo("Current");
-		assertThat(adress.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
-		assertThat(adress.getAddress()).isEqualTo("someAddress");
-		assertThat(adress.getCo()).isEqualTo("someCo");
-		assertThat(adress.getAppartmentNumber()).isEqualTo("someApartmentNumber");
-		assertThat(adress.getPostalCode()).isEqualTo("somePostalCode");
-		assertThat(adress.getCity()).isEqualTo("some");
-		assertThat(adress.getCounty()).isEqualTo("81");
-		assertThat(adress.getMunicipality()).isEqualTo("22");
-		assertThat(adress.getAddressType()).isEqualTo("someAddressType");
-		assertThat(adress.getxCoordLocal()).isEqualTo(12D);
-		assertThat(adress.getyCoordLocal()).isEqualTo(14D);
+	private void assertAddressValues(final CitizenAddress address) {
+		assertThat(address.getStatus()).isEqualTo("Current");
+		assertThat(address.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
+		assertThat(address.getAddress()).isEqualTo("someAddress");
+		assertThat(address.getCo()).isEqualTo("someCo");
+		assertThat(address.getAppartmentNumber()).isEqualTo("someApartmentNumber");
+		assertThat(address.getPostalCode()).isEqualTo("somePostalCode");
+		assertThat(address.getCity()).isEqualTo("some");
+		assertThat(address.getCounty()).isEqualTo("81");
+		assertThat(address.getMunicipality()).isEqualTo("22");
+		assertThat(address.getAddressType()).isEqualTo("someAddressType");
+		assertThat(address.getxCoordLocal()).isEqualTo(12D);
+		assertThat(address.getyCoordLocal()).isEqualTo(14D);
 	}
 
 	@Test
