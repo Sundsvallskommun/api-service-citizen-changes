@@ -11,12 +11,18 @@ import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 @WireMockAppTestSuite(files = "classpath:/RelocationIT/", classes = Application.class)
 class RelocationIT extends AbstractAppTest {
 
+	private static final String MUNICIPALITY_ID = "2281";
+
+	private static final String PATH = "/" + MUNICIPALITY_ID + "/relocations/batchtrigger/relocations?backtrackDays=1";
+
+	private static final String PATH_RECENT_MOVES = "/" + MUNICIPALITY_ID + "/relocations/meta/recentmoves?backtrackDays=1";
+
 	@Test
 	void test1_runBatch() {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
-			.withServicePath("/relocations/batchtrigger/relocations?backtrackDays=1")
+			.withServicePath(PATH)
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
@@ -27,7 +33,7 @@ class RelocationIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.POST)
-			.withServicePath("/relocations/batchtrigger/relocations?backtrackDays=1")
+			.withServicePath(PATH)
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withRequest("request.json")
 			.withExpectedResponse("DONE")
@@ -39,7 +45,7 @@ class RelocationIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
-			.withServicePath("/relocations/meta/recentmoves?backtrackDays=1")
+			.withServicePath(PATH_RECENT_MOVES)
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("response.json")
 			.sendRequestAndVerifyResponse();

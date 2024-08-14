@@ -75,9 +75,9 @@ class RelocationCheckServiceTest {
 		final var citizen = Set.of(parent, buildCitizen("P2"), minor, buildCitizen("M1"));
 
 		// Mock
-		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(citizen);
+		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1", "2", "3", "4"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -87,10 +87,10 @@ class RelocationCheckServiceTest {
 			.thenReturn(InvestigationItem.builder().build());
 
 		// Act
-		final var result = service.runBatch();
+		final var result = service.runBatch("2281");
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
-		verify(citizenIntegrationMock).getAddressChanges(any());
+		verify(citizenIntegrationMock).getAddressChanges(any(String.class), any());
 
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
@@ -99,7 +99,7 @@ class RelocationCheckServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(openEIntegrationMock, times(8)).getErrand(any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(String.class), any());
 		verify(propertiesMock).familyId();
 		verify(mapperMock, times(2)).getEmailRecipients(any());
 		verify(mapperMock, times(2)).composeHtmlContent(any(), any(), any());
@@ -112,12 +112,12 @@ class RelocationCheckServiceTest {
 	@Test
 	void runBatch_noMoves() {
 		// Mock
-		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(Collections.emptySet());
+		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(Collections.emptySet());
 		// Act
-		final var result = service.runBatch();
+		final var result = service.runBatch("2281");
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.ERROR);
-		verify(citizenIntegrationMock).getAddressChanges(any());
+		verify(citizenIntegrationMock).getAddressChanges(any(String.class), any());
 		verifyNoMoreInteractions(citizenIntegrationMock);
 		verifyNoInteractions(propertiesMock, itemMapperMock, mapperMock, openEIntegrationMock, messagingClientMock);
 	}
@@ -135,23 +135,23 @@ class RelocationCheckServiceTest {
 		final var citizen = Set.of(parent, buildCitizen("P2"), minor, buildCitizen("M1"));
 
 		// Mock
-		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(citizen);
+		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 
 		// Act
-		final var result = service.runBatch();
+		final var result = service.runBatch("2281");
 
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
-		verify(citizenIntegrationMock).getAddressChanges(any());
+		verify(citizenIntegrationMock).getAddressChanges(any(String.class), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(String.class), any());
 		verify(propertiesMock).familyId();
 		verify(mapperMock, times(2)).getEmailRecipients(any());
 		verify(mapperMock, times(2)).composeHtmlContent(any(), any(), any());
@@ -173,20 +173,20 @@ class RelocationCheckServiceTest {
 		final var citizen = Set.of(parent, buildCitizen("P2"), minor, buildCitizen("M1"));
 
 		// Mock
-		when(citizenIntegrationMock.getAddressChanges(any(String.class))).thenReturn(citizen);
+		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1"));
 		when(openEIntegrationMock.getErrand(any(), any()))
 			.thenThrow(new RuntimeException("Some exception"));
 
 		// Act
-		final var result = service.runBatch();
+		final var result = service.runBatch("2281");
 
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
-		verify(citizenIntegrationMock).getAddressChanges(any());
+		verify(citizenIntegrationMock).getAddressChanges(any(String.class), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
@@ -194,7 +194,7 @@ class RelocationCheckServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(openEIntegrationMock, times(2)).getErrand(any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(String.class), any());
 		verify(propertiesMock).familyId();
 		verify(mapperMock, times(2)).getEmailRecipients(any());
 		verify(mapperMock, times(2)).composeHtmlContent(any(), any(), any());
@@ -217,7 +217,7 @@ class RelocationCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1", "2", "3", "4"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -227,7 +227,7 @@ class RelocationCheckServiceTest {
 			.thenReturn(InvestigationItem.builder().build());
 
 		// Act
-		final var result = service.runBatch(Optional.of(META_BACKTRACK_DAYS_DEFAULT), citizen);
+		final var result = service.runBatch(Optional.of(META_BACKTRACK_DAYS_DEFAULT), citizen, "2281");
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
@@ -237,7 +237,7 @@ class RelocationCheckServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_READY.toLowerCase()), any(), any());
 		verify(openEIntegrationMock, times(8)).getErrand(any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(String.class), any());
 		verify(propertiesMock).familyId();
 		verify(mapperMock, times(2)).getEmailRecipients(any());
 		verify(mapperMock, times(2)).composeHtmlContent(any(), any(), any());

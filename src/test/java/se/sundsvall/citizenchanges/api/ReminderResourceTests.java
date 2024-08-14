@@ -25,7 +25,9 @@ import se.sundsvall.citizenchanges.service.ReminderService;
 @ActiveProfiles("junit")
 class ReminderResourceTests {
 
-	private static final String PATH = "/reminder/batchtrigger/reminder/endofterm";
+	private static final String MUNICIPALITY_ID = "2281";
+
+	private static final String PATH = "/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm";
 
 	@MockBean
 	private ReminderService reminderService;
@@ -41,7 +43,7 @@ class ReminderResourceTests {
 			.expectStatus()
 			.isOk();
 
-		verify(reminderService).runBatch(anyInt(), anyInt(), anyBoolean());
+		verify(reminderService).runBatch(anyInt(), anyInt(), anyBoolean(), anyString());
 		verifyNoMoreInteractions(reminderService);
 	}
 
@@ -54,7 +56,7 @@ class ReminderResourceTests {
 			.expectStatus()
 			.isOk();
 
-		verify(reminderService).runBatch(anyInt(), anyInt(), anyBoolean(), anyList(), isNull(), isNull());
+		verify(reminderService).runBatch(anyInt(), anyInt(), anyBoolean(), anyList(), isNull(), isNull(), anyString());
 		verifyNoMoreInteractions(reminderService);
 	}
 
@@ -66,7 +68,7 @@ class ReminderResourceTests {
 			.expectStatus()
 			.isOk();
 
-		verify(reminderService).runBatch(anyInt(), anyInt(), anyString(), anyString());
+		verify(reminderService).runBatch(anyInt(), anyInt(), anyString(), anyString(), anyString());
 		verifyNoMoreInteractions(reminderService);
 	}
 

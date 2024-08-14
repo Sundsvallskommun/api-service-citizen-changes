@@ -24,11 +24,11 @@ class JobSchedulerTest {
 	@Test
 	void startRelocationCheck() {
 		// Mock
-		when(relocationCheckService.runBatch()).thenReturn(BatchStatus.DONE);
+		when(relocationCheckService.runBatch("2281")).thenReturn(BatchStatus.DONE);
 		// Act
 		jobScheduler.startRelocationCheck();
 		// Verify
-		verify(relocationCheckService).runBatch();
+		verify(relocationCheckService).runBatch("2281");
 	}
 
 }

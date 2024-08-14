@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "url": "/messaging/email",
+    "url": "/messaging/2281/email",
     "headers": {
       "Authorization": {
         "equalTo": "Bearer MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3"
