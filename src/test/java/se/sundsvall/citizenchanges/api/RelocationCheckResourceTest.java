@@ -17,17 +17,22 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.citizenchanges.integration.citizen.CitizenIntegration;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
+
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 
 
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class RelocationCheckResourceTest {
 
-	private static final String PATH = "/relocations/batchtrigger/relocations";
+	private static final String MUNICIPALITY_ID = "2281";
+
+	private static final String PATH = "/" + MUNICIPALITY_ID + "/relocations/batchtrigger/relocations";
+
+	private static final String PATH_RECENT_MOVES = "/" + MUNICIPALITY_ID + "/relocations/meta/recentmoves?backtrackDays%s";
 
 	@Autowired
 	private WebTestClient webTestClient;
@@ -48,7 +53,7 @@ class RelocationCheckResourceTest {
 			.expectStatus()
 			.isOk();
 
-		verify(relocationCheckService).runBatch(any(), isNull());
+		verify(relocationCheckService).runBatch(any(), isNull(), any());
 	}
 
 	@Test
@@ -76,7 +81,7 @@ class RelocationCheckResourceTest {
 			.expectStatus()
 			.isOk();
 
-		verify(relocationCheckService).runBatch(any(), anySet());
+		verify(relocationCheckService).runBatch(any(), anySet(), any());
 	}
 
 	@Test
@@ -113,19 +118,19 @@ class RelocationCheckResourceTest {
 	void getRecentMoves() {
 		webTestClient
 			.get()
-			.uri("/relocations/meta/recentmoves?backtrackDays=1")
+			.uri(PATH_RECENT_MOVES.formatted("=1"))
 			.exchange()
 			.expectStatus()
 			.isOk();
 
-		verify(citizenIntegration).getAddressChanges(any());
+		verify(citizenIntegration).getAddressChanges(any(), any());
 	}
 
 	@Test
 	void getRecentMovesWithInvalidDate() {
 		webTestClient
 			.get()
-			.uri("/relocations/meta/recentmoves?backtrackDays=a")
+			.uri(PATH_RECENT_MOVES.formatted("=a"))
 			.exchange()
 			.expectStatus()
 			.isBadRequest();

@@ -40,7 +40,7 @@ class CitizenIntegrationTests {
 		when(mockCitizenClient.getAddressChanges(any(String.class))).thenReturn(Set.of(citizen));
 
 		// Act
-		final var result = citizenIntegration.getAddressChanges("someDate");
+		final var result = citizenIntegration.getAddressChanges("2281", "someDate");
 
 		// Assert
 		assertThat(result).isNotNull().isNotEmpty();
@@ -62,19 +62,19 @@ class CitizenIntegrationTests {
 		verifyNoMoreInteractions(mockCitizenClient);
 	}
 
-	private void assertAddressValues(CitizenAddress a) {
-		assertThat(a.getStatus()).isEqualTo("Current");
-		assertThat(a.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
-		assertThat(a.getAddress()).isEqualTo("someAddress");
-		assertThat(a.getCo()).isEqualTo("someCo");
-		assertThat(a.getAppartmentNumber()).isEqualTo("someApartmentNumber");
-		assertThat(a.getPostalCode()).isEqualTo("somePostalCode");
-		assertThat(a.getCity()).isEqualTo("some");
-		assertThat(a.getCounty()).isEqualTo("81");
-		assertThat(a.getMunicipality()).isEqualTo("22");
-		assertThat(a.getAddressType()).isEqualTo("someAddressType");
-		assertThat(a.getxCoordLocal()).isEqualTo(12D);
-		assertThat(a.getyCoordLocal()).isEqualTo(14D);
+	private void assertAddressValues(final CitizenAddress address) {
+		assertThat(address.getStatus()).isEqualTo("Current");
+		assertThat(address.getNrDate()).isCloseTo(LocalDateTime.now(), within(3L, ChronoUnit.SECONDS));
+		assertThat(address.getAddress()).isEqualTo("someAddress");
+		assertThat(address.getCo()).isEqualTo("someCo");
+		assertThat(address.getAppartmentNumber()).isEqualTo("someApartmentNumber");
+		assertThat(address.getPostalCode()).isEqualTo("somePostalCode");
+		assertThat(address.getCity()).isEqualTo("some");
+		assertThat(address.getCounty()).isEqualTo("81");
+		assertThat(address.getMunicipality()).isEqualTo("22");
+		assertThat(address.getAddressType()).isEqualTo("someAddressType");
+		assertThat(address.getxCoordLocal()).isEqualTo(12D);
+		assertThat(address.getyCoordLocal()).isEqualTo(14D);
 	}
 
 	@Test
@@ -84,7 +84,7 @@ class CitizenIntegrationTests {
 		when(mockCitizenClient.getAddressChanges(any(String.class)))
 			.thenThrow(Problem.builder().build());
 		// Act
-		final var result = citizenIntegration.getAddressChanges("someDate");
+		final var result = citizenIntegration.getAddressChanges("2281", "someDate");
 		// Assert
 		assertThat(result).isEqualTo(Set.of());
 		// Verify

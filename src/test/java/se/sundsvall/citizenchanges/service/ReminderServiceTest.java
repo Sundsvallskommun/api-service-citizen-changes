@@ -24,13 +24,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import generated.se.sundsvall.messaging.DeliveryResult;
-import generated.se.sundsvall.messaging.MessageResult;
-import generated.se.sundsvall.messaging.MessageStatus;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
 import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+
+import generated.se.sundsvall.messaging.DeliveryResult;
+import generated.se.sundsvall.messaging.MessageResult;
+import generated.se.sundsvall.messaging.MessageStatus;
 
 @ExtendWith(MockitoExtension.class)
 class ReminderServiceTest {
@@ -60,11 +61,11 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
-		when(messagingClientMock.sendSms(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
+		when(messagingClientMock.sendSms(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		// Act
-		final var result = service.runBatch(0, 1, true);
+		final var result = service.runBatch(0, 1, true, "2281");
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
@@ -72,11 +73,11 @@ class ReminderServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(mapperMock, times(2)).composeEmailRequest(any(), any(), any(), any());
 		verify(mapperMock).composeReminderContentEmail(any());
-		verify(messagingClientMock).sendSms(any());
+		verify(messagingClientMock).sendSms(any(), any());
 		verify(mapperMock).composeReminderContentSMS(any(), any());
 		verify(mapperMock).composeSmsRequest(any(), any());
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
@@ -90,10 +91,10 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(buildOepErrandItem("Ja", "P1", "202301011234"));
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		// Act
-		final var result = service.runBatch(0, 1, false);
+		final var result = service.runBatch(0, 1, false, "2281");
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
@@ -102,7 +103,7 @@ class ReminderServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
-		verify(messagingClientMock).sendEmail(any());
+		verify(messagingClientMock).sendEmail(any(), any());
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
@@ -119,10 +120,10 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		// Act
-		final var result = service.runBatch(0, 1, "076-1234567", "email");
+		final var result = service.runBatch(0, 1, "076-1234567", "email", "2281");
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
@@ -130,10 +131,10 @@ class ReminderServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(mapperMock).composeSmsRequest(any(), any());
-		verify(messagingClientMock).sendSms(any());
+		verify(messagingClientMock).sendSms(any(), any());
 		verify(mapperMock).composeReminderContentSMS(any(), any());
 		verify(mapperMock, times(2)).composeEmailRequest(any(), any(), any(), any());
 		verify(mapperMock).composeReminderContentEmail(any());
@@ -152,11 +153,11 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.FAILED))));
-		when(messagingClientMock.sendSms(any())).thenThrow(new RuntimeException("Some exception"));
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.FAILED))));
+		when(messagingClientMock.sendSms(any(), any())).thenThrow(new RuntimeException("Some exception"));
 		// Act
-		final var result = service.runBatch(0, 1, true);
+		final var result = service.runBatch(0, 1, true, "2281");
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
@@ -164,11 +165,11 @@ class ReminderServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(mapperMock, times(2)).composeEmailRequest(any(), any(), any(), any());
 		verify(mapperMock).composeReminderContentEmail(any());
-		verify(messagingClientMock).sendSms(any());
+		verify(messagingClientMock).sendSms(any(), any());
 		verify(mapperMock).composeReminderContentSMS(any(), any());
 		verify(mapperMock).composeSmsRequest(any(), any());
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
@@ -186,13 +187,13 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any()))
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any()))
 			.thenThrow(new RuntimeException("Some exception"))
 			.thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 
 		// Act
-		final var result = service.runBatch(0, 1, true);
+		final var result = service.runBatch(0, 1, true, "2281");
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
@@ -200,7 +201,7 @@ class ReminderServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
-		verify(messagingClientMock, times(2)).sendEmail(any());
+		verify(messagingClientMock, times(2)).sendEmail(any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(mapperMock, times(2)).composeEmailRequest(any(), any(), any(), any());
 		verify(mapperMock).composeReminderContentEmail(any());
@@ -215,11 +216,11 @@ class ReminderServiceTest {
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any())).thenReturn(List.of("1"));
 		when(openEIntegrationMock.getErrand(any(), any())).thenThrow(new RuntimeException("Some exception"));
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 
 		// Act
-		final var result = service.runBatch(0, 1, true);
+		final var result = service.runBatch(0, 1, true, "2281");
 
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
@@ -231,7 +232,7 @@ class ReminderServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(mapperMock).getEmailRecipients(any());
-		verify(messagingClientMock).sendEmail(any());
+		verify(messagingClientMock).sendEmail(any(), any());
 		verify(mapperMock).composeReminderReportHtmlContent(any(), any());
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
@@ -241,17 +242,17 @@ class ReminderServiceTest {
 	void runBatch_noOepErrandsFound() {
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
-		when(messagingClientMock.sendEmail(any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 
 		// Act
-		final var result = service.runBatch(0, 1, true);
+		final var result = service.runBatch(0, 1, true, "2281");
 
 		// Assert & Verify
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
 		verify(propertiesMock).familyId();
 		verify(mapperMock).getEmailRecipients(any());
-		verify(messagingClientMock).sendEmail(any());
+		verify(messagingClientMock).sendEmail(any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_DECIDED.toLowerCase()), any(), any());

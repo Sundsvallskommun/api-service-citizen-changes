@@ -65,19 +65,19 @@ public class RelocationCheckService {
 		this.properties = properties;
 	}
 
-	public BatchStatus runBatch() {
+	public BatchStatus runBatch(final String municipalityId) {
 		// Mocked. Backtrack value should be fetched from DB, based on last successful execution.
-		return runBatch(Optional.of(META_BACKTRACK_DAYS_DEFAULT), null);
+		return runBatch(Optional.of(META_BACKTRACK_DAYS_DEFAULT), null, municipalityId);
 	}
 
-	public BatchStatus runBatch(final Optional<Integer> backtrackDays, final Set<CitizenWithChangedAddress> citizens) {
+	public BatchStatus runBatch(final Optional<Integer> backtrackDays, final Set<CitizenWithChangedAddress> citizens, final String municipalityId) {
 		LOG.info("Batch job running...");
 
 		final var today = LocalDate.now();
 		final var fromDateMeta = DateUtil.getFromDateMeta(today, backtrackDays.orElse(META_BACKTRACK_DAYS_DEFAULT)).toString();
 		final var fromDateOeP = DateUtil.getFromDateOeP(today).toString();
 		// Get information from Metakatalogen about registered moves
-		final var moves = getMoves(fromDateMeta, citizens);
+		final var moves = getMoves(fromDateMeta, citizens, municipalityId);
 
 		if (moves.isEmpty()) {
 			return BatchStatus.ERROR;
@@ -103,13 +103,13 @@ public class RelocationCheckService {
 
 			// Remove duplicates from list and sort it properly
 			investigationItemList = cleanAndSort(investigationItemList);
-			composeEmail(familyType, investigationItemList, moves, fromDateOeP, fromDateMeta);
+			composeEmail(familyType, investigationItemList, moves, fromDateOeP, fromDateMeta,municipalityId);
 
 		}
 		return BatchStatus.DONE;
 	}
 
-	private List<String> getStatusesToProcess(FamilyType familyType) {
+	private List<String> getStatusesToProcess(final FamilyType familyType) {
 		if (familyType.equals(FamilyType.ELEVRESA)) {
 			return List.of(OEP_ERRAND_STATUS_READY.toLowerCase());
 		}
@@ -164,13 +164,13 @@ public class RelocationCheckService {
 			}
 			LOG.info("Errands qualified for relocation check: {}", qualifiedErrands.size());
 		} catch (final Exception e) {
-			LOG.error("Failed to get errand item from OeP (flowInstanceId " + flowInstanceId + ")", e);
+			LOG.error("Failed to get errand item from OeP (flowInstanceId: {})", flowInstanceId, e);
 		}
 		return qualifiedErrands;
 	}
 
 	private void composeEmail(final FamilyType familyType, final List<InvestigationItem> investigationItemList,
-		final Map<String, CitizenWithChangedAddress> moves, final String fromDateOeP, final String fromDateMeta) {
+		final Map<String, CitizenWithChangedAddress> moves, final String fromDateOeP, final String fromDateMeta, final String municipalityId) {
 
 		final var metaData = ReportMetaData.builder()
 			.withReportType(familyType.toString())
@@ -188,7 +188,7 @@ public class RelocationCheckService {
 		for (final String thisRecipient : emailRecipientsArray) {
 			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, subject);
 			LOG.info("Sending message request to Messaging service for \"{}\" for {} report... ", thisRecipient, familyType);
-			final var messageResponse = messagingClient.sendEmail(request);
+			final var messageResponse = messagingClient.sendEmail(municipalityId,request);
 			LOG.info("Response: {}", messageResponse);
 		}
 	}
@@ -216,13 +216,13 @@ public class RelocationCheckService {
 		return false;
 	}
 
-	private Map<String, CitizenWithChangedAddress> getMoves(final String fromDate, final Set<CitizenWithChangedAddress> citizens) {
+	private Map<String, CitizenWithChangedAddress> getMoves(final String fromDate, final Set<CitizenWithChangedAddress> citizens, final String municipalityId) {
 		LOG.info("Retrieving changed addresses from Metakatalogen (changedDateFrom: {})...", fromDate);
 		final Set<CitizenWithChangedAddress> moves;
 		if (citizens != null && !citizens.isEmpty()) {
 			moves = citizens;
 		} else {
-			moves = citizenIntegration.getAddressChanges(fromDate);
+			moves = citizenIntegration.getAddressChanges(municipalityId,fromDate);
 		}
 		LOG.info("Got {} changed addresses from Metakatalogen.", moves.size());
 		return moves.stream().collect(Collectors.toMap(CitizenWithChangedAddress::getPersonNumber, Function.identity()));

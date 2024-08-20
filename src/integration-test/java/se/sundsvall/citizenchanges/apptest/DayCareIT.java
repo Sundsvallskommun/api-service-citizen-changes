@@ -14,12 +14,18 @@ import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 @WireMockAppTestSuite(files = "classpath:/DayCareIT/", classes = Application.class)
 class DayCareIT extends AbstractAppTest {
 
+	private static final String MUNICIPALITY_ID = "2281";
+
+	private static final String PATH = "/" + MUNICIPALITY_ID + "/daycare/batchtrigger/daycarechecker?firstErrand=1&numOfErrands=1&backtrackDays=1";
+
+	private static final String CACHED_FILE = "/" + MUNICIPALITY_ID + "/daycare/cachedFile";
+
 	@Test
 	void test1_runDaycareCheckBatch() throws FileNotFoundException {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.POST)
-			.withServicePath("/daycare/batchtrigger/daycarechecker?firstErrand=1&numOfErrands=1&backtrackDays=1")
+			.withServicePath(PATH)
 			.withContentType(MediaType.valueOf("multipart/form-data"))
 			.withRequestFile("file", "mockfile.xls")
 			.withExpectedResponseStatus(HttpStatus.OK)
@@ -32,7 +38,7 @@ class DayCareIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
-			.withServicePath("/daycare/cachedFile")
+			.withServicePath(CACHED_FILE)
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("true")
 			.sendRequestAndVerifyResponse();
@@ -43,7 +49,7 @@ class DayCareIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.DELETE)
-			.withServicePath("/daycare/cachedFile")
+			.withServicePath(CACHED_FILE)
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.sendRequestAndVerifyResponse();
 	}

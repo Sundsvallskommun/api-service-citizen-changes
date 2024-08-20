@@ -14,12 +14,17 @@ import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 )
 class ReminderIT extends AbstractAppTest {
 
+	private static final String MUNICIPALITY_ID = "2281";
+
+
+	private static final String PATH = "/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm?firstErrand=1&numOfErrands=1&sendMessage=true";
+
 	@Test
 	void test1_runReminderBatch() {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
-			.withServicePath("/reminder/batchtrigger/reminder/endofterm?firstErrand=1&numOfErrands=1&sendMessage=true")
+			.withServicePath(PATH)
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
@@ -31,7 +36,7 @@ class ReminderIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.POST)
-			.withServicePath("/reminder/batchtrigger/reminder/endofterm?firstErrand=1&numOfErrands=1&sendMessage=true")
+			.withServicePath(PATH)
 			.withRequest("request.json")
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("DONE")
@@ -45,7 +50,7 @@ class ReminderIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
-			.withServicePath("/reminder/batchtrigger/reminder/endofterm/dryrun?firstErrand=1&numOfErrands=1&email=mail%40example.com&sms=0701234567")
+			.withServicePath("/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm/dryrun?firstErrand=1&numOfErrands=1&email=mail%40example.com&sms=0701234567")
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();

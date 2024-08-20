@@ -58,9 +58,9 @@ public class DaycareCheckService {
 		this.properties = properties;
 	}
 
-	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final int backtrackDays, final MultipartFile file) throws IOException {
+	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final int backtrackDays, final MultipartFile file, final String municipalityId) throws IOException {
 		handleFileTransferAndParsing(file);
-		return runBatch(firstErrand, numOfErrands, null, backtrackDays);
+		return runBatch(firstErrand, numOfErrands, null, backtrackDays, municipalityId);
 	}
 
 	private void handleFileTransferAndParsing(final MultipartFile file) throws IOException {
@@ -68,7 +68,7 @@ public class DaycareCheckService {
 		fileHandler.parse(new File(file.getOriginalFilename()));
 	}
 
-	private BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays) {
+	private BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays, final String municipalityId) {
 		final var today = LocalDate.now();
 		final var istThresholdDate = getFromDate(today, backtrackDays);
 		final var startPoint = (backtrackDays == 0) ? DAYCARE_REPORT_START_POINT : istThresholdDate.toString();
@@ -81,7 +81,7 @@ public class DaycareCheckService {
 				final var errandItemList = new ArrayList<DaycareInvestigationItem>();
 				final var updatedOepErrands = getErrandsFromOeP(oepErrands, familyType.toString(), fromDateOeP, today);
 				processErrands(familyType, updatedOepErrands, errandItemList, firstErrand, numOfErrands, today);
-				buildReport(familyType, errandItemList, fromDateOeP, startPoint);
+				buildReport(familyType, errandItemList, fromDateOeP, startPoint,municipalityId);
 			});
 
 		return BatchStatus.DONE;
@@ -99,7 +99,7 @@ public class DaycareCheckService {
 	}
 
 	private void buildReport(final FamilyType familyType, final List<DaycareInvestigationItem> errandItemList,
-		final String fromDateOeP, final String startPoint) {
+		final String fromDateOeP, final String startPoint, final String municipalityId) {
 
 		final var metaData = ReportMetaData.builder()
 			.withReportType(familyType.toString())
@@ -118,7 +118,7 @@ public class DaycareCheckService {
 			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, reportSubject);
 
 			LOG.info("Sending daycare scope report to Messaging service for \" {} \" for {} ...", thisRecipient, familyType);
-			final var messageResponse = messagingClient.sendEmail(request);
+			final var messageResponse = messagingClient.sendEmail(municipalityId,request);
 			LOG.info("Response: {}", messageResponse);
 		});
 

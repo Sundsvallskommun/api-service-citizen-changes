@@ -2,6 +2,7 @@ package se.sundsvall.citizenchanges.api;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -27,7 +28,9 @@ import se.sundsvall.citizenchanges.service.DaycareCheckService;
 @ActiveProfiles("junit")
 class DayCareCheckResourceTest {
 
-	private static final String PATH = "/daycare/batchtrigger/daycarechecker";
+	private static final String MUNICIPALITY_ID = "2281";
+
+	private static final String PATH = "/" + MUNICIPALITY_ID + "/daycare/batchtrigger/daycarechecker";
 
 	@Autowired
 	private WebTestClient webTestClient;
@@ -51,7 +54,7 @@ class DayCareCheckResourceTest {
 			.expectStatus()
 			.isOk();
 
-		verify(daycareCheckService).runBatch(anyInt(), anyInt(), anyInt(), any());
+		verify(daycareCheckService).runBatch(anyInt(), anyInt(), anyInt(), any(), anyString());
 		verifyNoMoreInteractions(daycareCheckService);
 	}
 
@@ -59,7 +62,7 @@ class DayCareCheckResourceTest {
 	void checkCachedFile() {
 
 		webTestClient.get()
-			.uri("/daycare/cachedFile")
+			.uri("/" + MUNICIPALITY_ID + "/daycare/cachedFile")
 			.exchange()
 			.expectStatus()
 			.isOk();
@@ -72,7 +75,7 @@ class DayCareCheckResourceTest {
 	void deleteCachedFile() {
 
 		webTestClient.delete()
-			.uri("/daycare/cachedFile")
+			.uri("/" + MUNICIPALITY_ID + "/daycare/cachedFile")
 			.exchange()
 			.expectStatus()
 			.isOk();

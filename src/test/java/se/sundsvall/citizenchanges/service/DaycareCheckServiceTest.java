@@ -73,7 +73,7 @@ class DaycareCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("someErrandId", "someErrandId2"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -81,7 +81,7 @@ class DaycareCheckServiceTest {
 		when(fileHandlerMock.getISTPlacement(any())).thenReturn(DaycareInvestigationItem.builder().build());
 
 		// Act
-		final var result = service.runBatch(0, 1, 1, file);
+		final var result = service.runBatch(0, 1, 1, file, "2281");
 
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
@@ -96,7 +96,7 @@ class DaycareCheckServiceTest {
 		verify(openEIntegrationMock).getErrand(any(), any());
 		verify(fileHandlerMock).getISTPlacement(any());
 		verify(fileHandlerMock).parse(any());
-		verify(messagingIntegrationMock).sendEmail(any());
+		verify(messagingIntegrationMock).sendEmail(any(String.class), any());
 		verify(mapperMock).composeDaycareReportHtmlContent(any(), any());
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 
@@ -119,10 +119,10 @@ class DaycareCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] { "someemail@test.se" });
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
 
 		// Act
-		final var result = service.runBatch(0, 1, 1, file);
+		final var result = service.runBatch(0, 1, 1, file, "2281");
 
 		// Assert
 		assertThat(result).isNotNull().isEqualTo(BatchStatus.DONE);
@@ -135,7 +135,7 @@ class DaycareCheckServiceTest {
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED.toLowerCase()), any(), any());
 		verify(openEIntegrationMock).getErrandIds(any(), eq(OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION.toLowerCase()), any(), any());
 		verify(fileHandlerMock).parse(any());
-		verify(messagingIntegrationMock).sendEmail(any());
+		verify(messagingIntegrationMock).sendEmail(any(String.class), any());
 		verify(mapperMock).composeDaycareReportHtmlContent(any(), any());
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 
