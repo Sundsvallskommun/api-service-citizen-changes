@@ -14,13 +14,11 @@
 	<artifactId>citizenchanges</artifactId>
 	<version>3.0</version>
 	<properties>
-
 		<!-- Memory Configuration -->
 		<app.jvm.xmx.mb>2048</app.jvm.xmx.mb>
-		<!-- CI/CD properties start -->
-		<!-- CI/CD properties end -->
+		<!-- Versions -->
 		<poiji.version>4.5.0</poiji.version>
-		<shedlock.version>5.14.0</shedlock.version>
+		<shedlock.version>5.15.0</shedlock.version>
 		<generated-sources-path>${project.build.directory}/generated-sources
 		</generated-sources-path>
 	</properties>
