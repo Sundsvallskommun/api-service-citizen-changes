@@ -3,6 +3,7 @@ package se.sundsvall.citizenchanges.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -18,16 +19,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
 import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+import se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil;
 
 import generated.se.sundsvall.messaging.DeliveryResult;
 import generated.se.sundsvall.messaging.MessageResult;
@@ -50,6 +55,20 @@ class ReminderServiceTest {
 
 	@InjectMocks
 	private ReminderService service;
+
+	private MockedStatic<OepErrandQualificationReminderUtil> mockedUtil;
+
+	@BeforeEach
+	void setUp() {
+		mockedUtil = mockStatic(OepErrandQualificationReminderUtil.class);
+		mockedUtil.when(() -> OepErrandQualificationReminderUtil.isOepErrandQualified(any(), any())).thenReturn(true);
+	}
+
+	@AfterEach
+	void tearDown() {
+		mockedUtil.close();
+	}
+
 
 	@Test
 	void runBatch() {

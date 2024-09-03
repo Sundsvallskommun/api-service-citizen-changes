@@ -11,8 +11,8 @@ import static se.sundsvall.citizenchanges.util.Constants.STATUS_FAILED;
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_NOT_SENT;
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_SENT;
 import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
-import static se.sundsvall.citizenchanges.util.DateUtil.getNextYear;
 import static se.sundsvall.citizenchanges.util.DateUtil.getCurrentYear;
+import static se.sundsvall.citizenchanges.util.DateUtil.getNextYear;
 import static se.sundsvall.citizenchanges.util.DateUtil.isSpring;
 import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
 import static se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil.isOepErrandQualified;
@@ -61,15 +61,15 @@ public class ReminderService {
 		this.properties = properties;
 	}
 
-	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final boolean sendMessage,final String municipalityId) {
-		return runBatch(firstErrand, numOfErrands, sendMessage, null, null, null,municipalityId);
+	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final boolean sendMessage, final String municipalityId) {
+		return runBatch(firstErrand, numOfErrands, sendMessage, null, null, null, municipalityId);
 	}
 
-	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final String sms, final String email,final String municipalityId) {
-		return runBatch(firstErrand, numOfErrands, true, null, sms, email,municipalityId);
+	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final String sms, final String email, final String municipalityId) {
+		return runBatch(firstErrand, numOfErrands, true, null, sms, email, municipalityId);
 	}
 
-	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final boolean sendMessage, final List<String> oepErrands, final String sms, final String email,final String municipalityId) {
+	public BatchStatus runBatch(final int firstErrand, final int numOfErrands, final boolean sendMessage, final List<String> oepErrands, final String sms, final String email, final String municipalityId) {
 		LOG.info("Batch job to send reminders is running...");
 
 		final var batchContext = BatchContext.builder()
@@ -82,7 +82,7 @@ public class ReminderService {
 			.build();
 
 		for (final var familyId : getFamilyIdArray()) {
-			processFamilyId(familyId, batchContext,municipalityId);
+			processFamilyId(familyId, batchContext, municipalityId);
 		}
 		return BatchStatus.DONE;
 	}
@@ -91,7 +91,7 @@ public class ReminderService {
 		return properties.familyId().split(",");
 	}
 
-	private void processFamilyId(final String familyId, final BatchContext batchContext,final String municipalityId) {
+	private void processFamilyId(final String familyId, final BatchContext batchContext, final String municipalityId) {
 		final var familyType = getFamilyType(familyId);
 
 		if (FamilyType.SKOLSKJUTS.equals(familyType)) {
@@ -101,7 +101,7 @@ public class ReminderService {
 				.withInspectErrandsCount(errandItemList.size())
 				.withOepStartDate(DateUtil.getFromDateOeP(LocalDate.now()).toString())
 				.withReportTimestamp(DateUtil.format(LocalDateTime.now())).build();
-			composeAndSendReport(metaData, errandItemList, familyType,municipalityId);
+			composeAndSendReport(metaData, errandItemList, familyType, municipalityId);
 		}
 	}
 
@@ -139,7 +139,7 @@ public class ReminderService {
 					((errandItemList.size() <= batchContext.getNumberOfErrands())
 						|| (batchContext.getNumberOfErrands() == 0)))) {
 				sendEmailIfRequired(batchContext, item, flowInstanceId, municipalityId);
-				sendSmsIfRequired(batchContext, item, flowInstanceId,municipalityId);
+				sendSmsIfRequired(batchContext, item, flowInstanceId, municipalityId);
 				errandItemList.add(item);
 
 			}
@@ -156,13 +156,13 @@ public class ReminderService {
 		return false;
 	}
 
-	private void sendEmailIfRequired(final BatchContext batchContext, final OepErrandItem item, final String flowInstanceId,final String municipalityId) {
+	private void sendEmailIfRequired(final BatchContext batchContext, final OepErrandItem item, final String flowInstanceId, final String municipalityId) {
 		sendEmail(batchContext.isSendMessages(), batchContext.getEmail(), item, flowInstanceId, municipalityId);
 	}
 
 	private void sendSmsIfRequired(final BatchContext batchContext, final OepErrandItem item, final String flowInstanceId, final String municipalityId) {
 		if (item.getContactInfo().isContactBySMS()) {
-			sendSMS(batchContext.isSendMessages(), batchContext.getSms(), item, flowInstanceId,municipalityId);
+			sendSMS(batchContext.isSendMessages(), batchContext.getSms(), item, flowInstanceId, municipalityId);
 		}
 	}
 
@@ -177,7 +177,7 @@ public class ReminderService {
 			try {
 				final var reminderPayloadEmail = mapper.composeReminderContentEmail(item);
 				final var emailRequest = mapper.composeEmailRequest(reminderPayloadEmail, recipient, REMINDER_EMAIL_SENDER, reminderEmailSubject);
-				final var messageResult = messagingClient.sendEmail(municipalityId,emailRequest);
+				final var messageResult = messagingClient.sendEmail(municipalityId, emailRequest);
 				LOG.info("Message response: {}", messageResult);
 				if ((messageResult != null) && messageResult.getDeliveries().stream().allMatch(d -> SENT.equals(d.getStatus()))) {
 					item.setEmailStatus(STATUS_SENT);
@@ -207,7 +207,7 @@ public class ReminderService {
 				try {
 					final var reminderPayloadSMS = mapper.composeReminderContentSMS(item, targetYear);
 					final var smsRequest = mapper.composeSmsRequest(reminderPayloadSMS, formattedMobileNumber);
-					final var messageResponse = messagingClient.sendSms(municipalityId,smsRequest);
+					final var messageResponse = messagingClient.sendSms(municipalityId, smsRequest);
 					LOG.info("SmsResponse: {}", messageResponse);
 					item.setSmsStatus(STATUS_SENT);
 				} catch (final Exception e) {
@@ -224,7 +224,7 @@ public class ReminderService {
 		}
 	}
 
-	private void composeAndSendReport(final ReportMetaData metaData, final List<OepErrandItem> errandItemList, final FamilyType familyType,final String municipalityId) {
+	private void composeAndSendReport(final ReportMetaData metaData, final List<OepErrandItem> errandItemList, final FamilyType familyType, final String municipalityId) {
 		// Compose and send report
 		final var reminderReportEmailSubject = LocalDate.now().getMonthValue() < 7 ? REMINDER_REPORT_EMAIL_SUBJECT_SPRING + LocalDate.now().getYear() : REMINDER_REPORT_EMAIL_SUBJECT_AUTUMN + LocalDate.now().plusYears(1).getYear();
 		final var reportSubject = reminderReportEmailSubject + " (" + metaData.getReportTimestamp() + ")";
@@ -235,7 +235,7 @@ public class ReminderService {
 		Arrays.stream(mapper.getEmailRecipients(familyType)).forEach(recipient -> {
 			final var request = mapper.composeEmailRequest(htmlPayload, recipient, EMAIL_SENDER_NAME, reportSubject);
 			LOG.info("Sending reminder report to Messaging service for \" {} \" for  {} ...", recipient, familyType);
-			final var messageResult = messagingClient.sendEmail(municipalityId,request);
+			final var messageResult = messagingClient.sendEmail(municipalityId, request);
 			LOG.info("EmailResponse: {}", messageResult);
 		});
 	}
@@ -243,4 +243,5 @@ public class ReminderService {
 	private FamilyType getFamilyType(final String familyId) {
 		return Constants.getFamilyType(familyId);
 	}
+
 }
