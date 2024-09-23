@@ -103,7 +103,7 @@ class DaycareCheckServiceTest {
 		verifyNoMoreInteractions(openEIntegrationMock, messagingIntegrationMock, mapperMock, fileHandlerMock, propertiesMock);
 
 		// Cleanup
-		Files.delete(Path.of("mockfile.xls"));
+		Files.delete(Path.of("tempfile.xls"));
 	}
 
 	@Test
@@ -142,7 +142,7 @@ class DaycareCheckServiceTest {
 		verifyNoMoreInteractions(openEIntegrationMock, messagingIntegrationMock, mapperMock, fileHandlerMock, propertiesMock);
 
 		// Cleanup
-		Files.delete(Path.of("mockfile.xls"));
+		Files.delete(Path.of("tempfile.xls"));
 
 	}
 

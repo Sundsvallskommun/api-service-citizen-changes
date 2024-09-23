@@ -40,6 +40,8 @@ public class DaycareCheckService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DaycareCheckService.class);
 
+	private static final String FILE_NAME = "tempFile.xls";
+
 	private final OpenEIntegration openEIntegration;
 
 	private final MessagingClient messagingClient;
@@ -64,8 +66,8 @@ public class DaycareCheckService {
 	}
 
 	private void handleFileTransferAndParsing(final MultipartFile file) throws IOException {
-		file.transferTo(Path.of(Objects.requireNonNull(file.getOriginalFilename())));
-		fileHandler.parse(new File(file.getOriginalFilename()));
+		file.transferTo(Path.of(FILE_NAME));
+		fileHandler.parse(new File("tempFile"));
 	}
 
 	private BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays, final String municipalityId) {
@@ -81,7 +83,7 @@ public class DaycareCheckService {
 				final var errandItemList = new ArrayList<DaycareInvestigationItem>();
 				final var updatedOepErrands = getErrandsFromOeP(oepErrands, familyType.toString(), fromDateOeP, today);
 				processErrands(familyType, updatedOepErrands, errandItemList, firstErrand, numOfErrands, today);
-				buildReport(familyType, errandItemList, fromDateOeP, startPoint,municipalityId);
+				buildReport(familyType, errandItemList, fromDateOeP, startPoint, municipalityId);
 			});
 
 		return BatchStatus.DONE;
@@ -118,7 +120,7 @@ public class DaycareCheckService {
 			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, reportSubject);
 
 			LOG.info("Sending daycare scope report to Messaging service for \" {} \" for {} ...", thisRecipient, familyType);
-			final var messageResponse = messagingClient.sendEmail(municipalityId,request);
+			final var messageResponse = messagingClient.sendEmail(municipalityId, request);
 			LOG.info("Response: {}", messageResponse);
 		});
 
@@ -149,4 +151,5 @@ public class DaycareCheckService {
 	public boolean checkCachedFile() {
 		return fileHandler.checkCachedFile();
 	}
+
 }

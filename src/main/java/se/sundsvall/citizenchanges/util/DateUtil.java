@@ -4,14 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateUtil {
 
 	private static final int JULY = 7;
+
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+	private DateUtil() {
+		// Intentionally left empty
+	}
 
 	public static String format(final LocalDateTime localDateTime) {
 		return localDateTime.format(FORMATTER);
@@ -47,4 +48,5 @@ public final class DateUtil {
 	public static int getNextYear() {
 		return LocalDate.now().plusYears(1).getYear();
 	}
+
 }
