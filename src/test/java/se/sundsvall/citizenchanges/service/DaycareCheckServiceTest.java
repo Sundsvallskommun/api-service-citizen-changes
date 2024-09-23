@@ -19,7 +19,6 @@ import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANT
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -101,9 +100,6 @@ class DaycareCheckServiceTest {
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 
 		verifyNoMoreInteractions(openEIntegrationMock, messagingIntegrationMock, mapperMock, fileHandlerMock, propertiesMock);
-
-		// Cleanup
-		Files.delete(Path.of("mockfile.xls"));
 	}
 
 	@Test
@@ -140,10 +136,6 @@ class DaycareCheckServiceTest {
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 
 		verifyNoMoreInteractions(openEIntegrationMock, messagingIntegrationMock, mapperMock, fileHandlerMock, propertiesMock);
-
-		// Cleanup
-		Files.delete(Path.of("mockfile.xls"));
-
 	}
 
 	@Test
