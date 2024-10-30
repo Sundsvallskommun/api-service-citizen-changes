@@ -1,43 +1,37 @@
-[
-  {
-    "personId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "personNumber": "string",
-    "classified": "string",
-    "unRegCode": "string",
-    "unRegDate": "2024-01-16T14:35:12.727Z",
-    "gender": "string",
-    "givenname": "string",
-    "lastname": "string",
-    "typeOfSchool": "string",
-    "custodianFor": [
-      {
-        "personnumber": "string",
-        "typeOfSchool": "string",
-        "unRegCode": "string",
-        "unRegDate": "2024-01-16T14:35:12.727Z"
-      }
-    ],
-    "addresses": [
-      {
-        "status": "string",
-        "nrDate": "2024-01-16T14:35:12.727Z",
-        "realEstateDescription": "string",
-        "co": "string",
-        "address": "string",
-        "addressArea": "string",
-        "addressNumber": "string",
-        "addressLetter": "string",
-        "appartmentNumber": "string",
-        "postalCode": "string",
-        "city": "string",
-        "county": "string",
-        "municipality": "string",
-        "country": "string",
-        "emigrated": true,
-        "addressType": "string",
-        "xCoordLocal": 0,
-        "yCoordLocal": 0
-      }
-    ]
-  }
-]
+[{
+	"typeOfSchool": "string",
+	"addresses": [{
+		"country": "string",
+		"yCoordLocal": 0,
+		"address": "string",
+		"city": "string",
+		"addressType": "string",
+		"xCoordLocal": 0,
+		"addressLetter": "string",
+		"postalCode": "string",
+		"county": "string",
+		"municipality": "string",
+		"nrDate": "2024-01-16T14:35:12.727Z",
+		"co": "string",
+		"appartmentNumber": "string",
+		"realEstateDescription": "string",
+		"addressNumber": "string",
+		"emigrated": true,
+		"addressArea": "string",
+		"status": "string"
+	}],
+	"unRegCode": "string",
+	"gender": "string",
+	"unRegDate": "2024-01-16T14:35:12.727Z",
+	"givenname": "string",
+	"personId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+	"classified": "string",
+	"custodianFor": [{
+		"typeOfSchool": "string",
+		"personnumber": "string",
+		"unRegCode": "string",
+		"unRegDate": "2024-01-16T14:35:12.727Z"
+	}],
+	"personNumber": "string",
+	"lastname": "string"
+}]

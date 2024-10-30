@@ -1,12 +1,11 @@
-<?xml version="1.0"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>se.sundsvall.dept44</groupId>
 		<artifactId>dept44-service-parent</artifactId>
-		<version>6.0.2</version>
-		<relativePath/>
+		<version>6.0.3</version>
+		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.sundsvall</groupId>
@@ -18,8 +17,7 @@
 		<!-- Versions -->
 		<poiji.version>4.6.0</poiji.version>
 		<shedlock.version>5.16.0</shedlock.version>
-		<generated-sources-path>${project.build.directory}/generated-sources
-		</generated-sources-path>
+		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
 	</properties>
 	<dependencies>
 		<!-- Dept44 Framework-->
@@ -103,8 +101,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/generated/api-service-messaging.yaml
-							</inputSpec>
+							<inputSpec>${project.basedir}/src/generated/api-service-messaging.yaml</inputSpec>
 							<output>${generated-sources-path}</output>
 							<generatorName>spring</generatorName>
 							<generateApis>false</generateApis>
@@ -129,8 +126,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/generated/citizen-api.yml
-							</inputSpec>
+							<inputSpec>${project.basedir}/src/generated/citizen-api.yml</inputSpec>
 							<output>${generated-sources-path}</output>
 							<generatorName>spring</generatorName>
 							<generateApis>false</generateApis>
@@ -157,14 +153,13 @@
 				<executions>
 					<execution>
 						<id>add-generated-source</id>
-						<phase>initialize</phase>
 						<goals>
 							<goal>add-source</goal>
 						</goals>
+						<phase>initialize</phase>
 						<configuration>
 							<sources>
-								<source>${generated-sources-path}/models
-								</source>
+								<source>${generated-sources-path}/models</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -187,9 +182,8 @@
 						<!-- API model classes -->
 						<exclude>**/generated/**</exclude>
 						<!-- OpenE model classes since openAPI specification
-						 is not available they had to be manually made -->
-						<exclude>**/se/sundsvall/citizenchanges/integration/opene/model/**
-						</exclude>
+						is not available they had to be manually made -->
+						<exclude>**/se/sundsvall/citizenchanges/integration/opene/model/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

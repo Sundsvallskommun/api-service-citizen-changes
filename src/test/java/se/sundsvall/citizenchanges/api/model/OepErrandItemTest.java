@@ -27,7 +27,7 @@ class OepErrandItemTest {
 
 	@Test
 	void builder() {
-		
+
 		// Arrange
 		final var contactInfo = ContactInfo.builder().build();
 		final var flowInstanceId = "someFlowInstanceId";

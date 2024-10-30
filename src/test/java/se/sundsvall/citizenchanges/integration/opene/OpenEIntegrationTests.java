@@ -37,20 +37,19 @@ class OpenEIntegrationTests {
 
 	@Test
 	void getErrandIds() {
-		final var inputStream =
-			IOUtils.toInputStream("""
-				<FlowInstances>
-				    <FlowInstance>
-				        <flowInstanceID>172698</flowInstanceID>
-				    </FlowInstance>
-				    <FlowInstance>
-				        <flowInstanceID>172529</flowInstanceID>
-				    </FlowInstance>
-				    <FlowInstance>
-				        <flowInstanceID>145263</flowInstanceID>
-				    </FlowInstance>
-				</FlowInstances>
-				""", "UTF-8");
+		final var inputStream = IOUtils.toInputStream("""
+			<FlowInstances>
+				<FlowInstance>
+					<flowInstanceID>172698</flowInstanceID>
+				</FlowInstance>
+				<FlowInstance>
+					<flowInstanceID>172529</flowInstanceID>
+				</FlowInstance>
+				<FlowInstance>
+					<flowInstanceID>145263</flowInstanceID>
+				</FlowInstance>
+			</FlowInstances>
+			""", "UTF-8");
 		// Arrange
 
 		when(client.getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class))).thenReturn(new InputStreamResource(inputStream));

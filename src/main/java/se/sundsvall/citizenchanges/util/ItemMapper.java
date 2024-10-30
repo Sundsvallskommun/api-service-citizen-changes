@@ -22,8 +22,7 @@ public class ItemMapper {
 	public InvestigationItem composeInvestigationItem(final CitizenWithChangedAddress thisMove, final OepErrandItem item,
 		final FamilyType familyType, final String moverIdentifier, final boolean sameAddress) {
 
-		final var addressMap =
-			thisMove.getAddresses().stream().collect(Collectors.toMap(CitizenAddress::getStatus, Function.identity()));
+		final var addressMap = thisMove.getAddresses().stream().collect(Collectors.toMap(CitizenAddress::getStatus, Function.identity()));
 		final var county = addressMap.get(CURRENT_ADDRESS).getCounty();
 		final var municipality = addressMap.get(CURRENT_ADDRESS).getMunicipality();
 

@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record MessageMapperProperties(
 	String recipientsSkolskjuts,
 	String recipientsElevresa,
-	String linkTemplate
-) {
+	String linkTemplate) {
 
 }

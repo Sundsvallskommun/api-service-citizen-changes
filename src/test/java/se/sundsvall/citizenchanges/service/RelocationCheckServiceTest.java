@@ -77,7 +77,9 @@ class RelocationCheckServiceTest {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1", "2", "3", "4"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -137,7 +139,9 @@ class RelocationCheckServiceTest {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 
 		// Act
 		final var result = service.runBatch("2281");
@@ -175,7 +179,9 @@ class RelocationCheckServiceTest {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(citizen);
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -217,7 +223,9 @@ class RelocationCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("P1", "2", "3", "4"));
 		when(openEIntegrationMock.getErrand(any(), any()))

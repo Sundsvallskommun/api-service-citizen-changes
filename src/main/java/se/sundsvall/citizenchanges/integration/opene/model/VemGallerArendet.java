@@ -9,7 +9,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VemGallerArendet {
 
-    @JacksonXmlProperty(localName = "Value")
-    private String value;
+	@JacksonXmlProperty(localName = "Value")
+	private String value;
 
 }

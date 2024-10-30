@@ -1,18 +1,12 @@
 {
-  "request": {
-    "method": "GET",
-    "urlPattern": "/opene/api/instanceapi/getinstances/family/.*",
-    "headers": {
-      "Authorization": {
-        "equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="
-      }
-    }
-  },
-  "response": {
-    "headers": {
-      "Content-Type": "application/xml"
-    },
-    "status": 200,
-    "bodyFileName": "test3_runReminderBatchDryrun/responses/opene-errands.xml"
-  }
+	"request": {
+		"headers": {"Authorization": {"equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="}},
+		"method": "GET",
+		"urlPattern": "/opene/api/instanceapi/getinstances/family/.*"
+	},
+	"response": {
+		"headers": {"Content-Type": "application/xml"},
+		"bodyFileName": "test3_runReminderBatchDryrun/responses/opene-errands.xml",
+		"status": 200
+	}
 }

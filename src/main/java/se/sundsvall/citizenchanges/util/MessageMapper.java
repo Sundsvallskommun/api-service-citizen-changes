@@ -136,11 +136,12 @@ public class MessageMapper {
 		if (!items.isEmpty()) {
 			for (final InvestigationItem thisItem : items) {
 
-
 				final String tempSchool;
 				String extraColumns = "";
 				if (isSkolskjuts) {
-					final String[] names = {thisItem.getNameGuardian(), thisItem.getNameMinor()};
+					final String[] names = {
+						thisItem.getNameGuardian(), thisItem.getNameMinor()
+					};
 					final String joinedNames = Stream.of(names).filter(s -> (s != null) && !s.isEmpty()).collect(Collectors.joining("<br>")); // join with linebreaks, but only for tokens having content
 					final String[] types = thisItem.getMoverList().split(",");
 					final String joinedTypes = Stream.of(types).filter(s -> (s != null) && !s.isEmpty()).collect(Collectors.joining(" + "));
@@ -172,7 +173,7 @@ public class MessageMapper {
 				final var oldAddressStr = parseAddressString(oldAddress);
 
 				final var thisLink = Constants.HTML_TEMPLATE_LINK.replace(LINK, properties.linkTemplate()).replace("%%flowinstanceid" +
-						"%%",
+					"%%",
 					Optional.ofNullable(thisItem.getFlowInstanceId()).orElse(""));
 
 				final String tempRow = listingRow.replace(LINK, thisLink)
@@ -210,7 +211,7 @@ public class MessageMapper {
 		payload.append(mainStart);
 
 		var tempHeader = listingHeader.replace("%%headline%%", MessageConstants.valueOf(
-				"HEADLINE_" + familyType.toString().toUpperCase()).getText())
+			"HEADLINE_" + familyType.toString().toUpperCase()).getText())
 			.replace("%%leadText%%", MessageConstants.valueOf("LEAD_TEXT_" + familyType.toString().toUpperCase()).getText());
 
 		var extraHeaders = "";
@@ -231,12 +232,11 @@ public class MessageMapper {
 
 	private String parseAddressString(final AddressItem addressItem) {
 		return String.join("",
-				Optional.ofNullable(addressItem.getAddress()).map(s -> s + " ").orElse(""),
-				Optional.ofNullable(addressItem.getApartmentNumber()).map(s -> s + "<br>").orElse(""),
-				Optional.ofNullable(addressItem.getCo()).filter(s -> !s.trim().isEmpty()).map(s -> s + "<br>").orElse(""),
-				Optional.ofNullable(addressItem.getPostalCode()).map(s -> s + " ").orElse(""),
-				Optional.ofNullable(addressItem.getCity()).orElse("")
-			)
+			Optional.ofNullable(addressItem.getAddress()).map(s -> s + " ").orElse(""),
+			Optional.ofNullable(addressItem.getApartmentNumber()).map(s -> s + "<br>").orElse(""),
+			Optional.ofNullable(addressItem.getCo()).filter(s -> !s.trim().isEmpty()).map(s -> s + "<br>").orElse(""),
+			Optional.ofNullable(addressItem.getPostalCode()).map(s -> s + " ").orElse(""),
+			Optional.ofNullable(addressItem.getCity()).orElse(""))
 			.replaceAll("\\s", "&nbsp;")
 			.trim();
 	}

@@ -33,7 +33,9 @@ class FileHandlerTest {
 	private FileHandler fileHandler;
 
 	@ParameterizedTest
-	@ValueSource(strings = {"Nej", "Ja, deltid"})
+	@ValueSource(strings = {
+		"Nej", "Ja, deltid"
+	})
 	void getISTPlacement_nej_ja_deltid(final String daycarePlacement) {
 		// Arrange
 		final var parsedRows = new ArrayList<ParsedRow>();
@@ -70,7 +72,6 @@ class FileHandlerTest {
 		assertThat(result.getSchoolUnit()).isEqualTo("someSchoolUnit");
 		assertThat(result.getDaycarePlacement()).isEqualTo(daycarePlacement);
 	}
-
 
 	@Test
 	void getISTPlacementWithDayCare_Heltid() {
