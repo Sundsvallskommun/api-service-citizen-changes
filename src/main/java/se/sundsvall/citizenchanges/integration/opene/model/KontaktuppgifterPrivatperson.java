@@ -9,19 +9,19 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KontaktuppgifterPrivatperson {
 
-    @JacksonXmlProperty(localName = "Firstname")
-    private String firstname;
+	@JacksonXmlProperty(localName = "Firstname")
+	private String firstname;
 
-    @JacksonXmlProperty(localName = "Lastname")
-    private String lastname;
+	@JacksonXmlProperty(localName = "Lastname")
+	private String lastname;
 
-    @JacksonXmlProperty(localName = "Email")
-    private String email;
+	@JacksonXmlProperty(localName = "Email")
+	private String email;
 
-    @JacksonXmlProperty(localName = "MobilePhone")
-    private String mobilePhone;
+	@JacksonXmlProperty(localName = "MobilePhone")
+	private String mobilePhone;
 
-    @JacksonXmlProperty(localName = "ContactBySMS")
-    private boolean contactBySMS;
+	@JacksonXmlProperty(localName = "ContactBySMS")
+	private boolean contactBySMS;
 
 }

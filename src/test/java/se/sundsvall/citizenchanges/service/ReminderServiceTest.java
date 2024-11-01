@@ -69,7 +69,6 @@ class ReminderServiceTest {
 		mockedUtil.close();
 	}
 
-
 	@Test
 	void runBatch() {
 		// Arrange
@@ -80,7 +79,9 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		when(messagingClientMock.sendSms(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		// Act
@@ -110,7 +111,9 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(buildOepErrandItem("Ja", "P1", "202301011234"));
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		// Act
 		final var result = service.runBatch(0, 1, false, "2281");
@@ -139,7 +142,9 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 		// Act
 		final var result = service.runBatch(0, 1, "076-1234567", "email", "2281");
@@ -172,7 +177,9 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.FAILED))));
 		when(messagingClientMock.sendSms(any(), any())).thenThrow(new RuntimeException("Some exception"));
 		// Act
@@ -206,7 +213,9 @@ class ReminderServiceTest {
 		when(openEIntegrationMock.getErrand(any(), any())).thenReturn(errand);
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.composeReminderReportHtmlContent(any(), any())).thenReturn("html");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any()))
 			.thenThrow(new RuntimeException("Some exception"))
 			.thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
@@ -235,7 +244,9 @@ class ReminderServiceTest {
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any())).thenReturn(List.of("1"));
 		when(openEIntegrationMock.getErrand(any(), any())).thenThrow(new RuntimeException("Some exception"));
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 
 		// Act
@@ -261,7 +272,9 @@ class ReminderServiceTest {
 	void runBatch_noOepErrandsFound() {
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(messagingClientMock.sendEmail(any(), any())).thenReturn(new MessageResult().messageId(UUID.randomUUID()).deliveries(List.of(new DeliveryResult().status(MessageStatus.SENT))));
 
 		// Act

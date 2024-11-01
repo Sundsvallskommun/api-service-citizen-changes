@@ -20,7 +20,6 @@ public class JobScheduler {
 
 	private final RelocationCheckService relocationCheckService;
 
-
 	public JobScheduler(final RelocationCheckService relocationCheckService) {
 		this.relocationCheckService = relocationCheckService;
 	}

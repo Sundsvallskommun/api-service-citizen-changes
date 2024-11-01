@@ -15,14 +15,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 class ValidationUtilTests {
 
 	@ParameterizedTest
-	@ValueSource(strings = { "+46701234567", "+4513245" })
+	@ValueSource(strings = {
+		"+46701234567", "+4513245"
+	})
 	void validMSISDNTest(final String number) {
 		// Act & Assert
 		assertThat(validMSISDN(number)).isTrue();
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "0761234567", "070-123 45 67", "" })
+	@ValueSource(strings = {
+		"0761234567", "070-123 45 67", ""
+	})
 	void invalidMSISDNTest(final String number) {
 		// Act & Assert
 		assertThat(validMSISDN(number)).isFalse();

@@ -20,14 +20,14 @@ class NumberFormatterTest {
 		final var testNumber3 = "abc123_ -";
 		final var testNumber4 = "060-123 123";
 
-		//Act
+		// Act
 		final var testResult1 = formatMobileNumber(testNumber1);
 		final var testResult2 = formatMobileNumber(testNumber2);
 		final var testResult3 = formatMobileNumber(testNumber3);
 		final var testResult4 = formatMobileNumber(testNumber4);
 		final var testResult5 = formatMobileNumber(null);
 
-		//Assert
+		// Assert
 		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult1).matches()).isTrue();
 		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult2).matches()).isTrue();
 		assertThat(VALID_MOBILE_NUMBER_PATTERN.matcher(testResult3).matches()).isFalse();

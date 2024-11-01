@@ -1,13 +1,11 @@
 {
-  "request": {
-    "method": "GET",
-    "urlPath": "/opene/api/instanceapi/getinstances/family/SKOLSKJUTS/automatiskt%20beviljat%20delegationsbeslut"
-  },
-  "response": {
-    "headers": {
-      "Content-Type": "application/xml"
-    },
-    "status": 200,
-    "bodyFileName": "test1_runDaycareCheckBatch/responses/opene-errands-automatically-granted-delegation-decision.xml"
-  }
+	"request": {
+		"method": "GET",
+		"urlPath": "/opene/api/instanceapi/getinstances/family/SKOLSKJUTS/automatiskt%20beviljat%20delegationsbeslut"
+	},
+	"response": {
+		"headers": {"Content-Type": "application/xml"},
+		"bodyFileName": "test1_runDaycareCheckBatch/responses/opene-errands-automatically-granted-delegation-decision.xml",
+		"status": 200
+	}
 }

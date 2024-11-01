@@ -103,7 +103,7 @@ public class RelocationCheckService {
 
 			// Remove duplicates from list and sort it properly
 			investigationItemList = cleanAndSort(investigationItemList);
-			composeEmail(familyType, investigationItemList, moves, fromDateOeP, fromDateMeta,municipalityId);
+			composeEmail(familyType, investigationItemList, moves, fromDateOeP, fromDateMeta, municipalityId);
 
 		}
 		return BatchStatus.DONE;
@@ -188,7 +188,7 @@ public class RelocationCheckService {
 		for (final String thisRecipient : emailRecipientsArray) {
 			final var request = mapper.composeEmailRequest(htmlPayload, thisRecipient, EMAIL_SENDER_NAME, subject);
 			LOG.info("Sending message request to Messaging service for \"{}\" for {} report... ", thisRecipient, familyType);
-			final var messageResponse = messagingClient.sendEmail(municipalityId,request);
+			final var messageResponse = messagingClient.sendEmail(municipalityId, request);
 			LOG.info("Response: {}", messageResponse);
 		}
 	}
@@ -222,7 +222,7 @@ public class RelocationCheckService {
 		if (citizens != null && !citizens.isEmpty()) {
 			moves = citizens;
 		} else {
-			moves = citizenIntegration.getAddressChanges(municipalityId,fromDate);
+			moves = citizenIntegration.getAddressChanges(municipalityId, fromDate);
 		}
 		LOG.info("Got {} changed addresses from Metakatalogen.", moves.size());
 		return moves.stream().collect(Collectors.toMap(CitizenWithChangedAddress::getPersonNumber, Function.identity()));

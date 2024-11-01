@@ -1,43 +1,37 @@
-[
-  {
-    "personId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "personNumber": "somePersonNumber",
-    "classified": "someClassified",
-    "unRegCode": "someUnRegCode",
-    "unRegDate": "2024-01-16T14:35:12.727Z",
-    "gender": "someGender",
-    "givenname": "someGivenname",
-    "lastname": "someLastname",
-    "typeOfSchool": "someTypeOfSchool",
-    "custodianFor": [
-      {
-        "personnumber": "somePersonnumber",
-        "typeOfSchool": "someTypeOfSchool",
-        "unRegCode": "someUnRegCode",
-        "unRegDate": "2024-01-16T14:35:12.727Z"
-      }
-    ],
-    "addresses": [
-      {
-        "status": "someStatus",
-        "nrDate": "2024-01-16T14:35:12.727Z",
-        "realEstateDescription": "someRealEstateDescription",
-        "co": "someCo",
-        "address": "someAddress",
-        "addressArea": "someAddressArea",
-        "addressNumber": "someAddressNumber",
-        "addressLetter": "someAddressLetter",
-        "appartmentNumber": "someAppartmentNumber",
-        "postalCode": "somePostalCode",
-        "city": "someCity",
-        "county": "someCounty",
-        "municipality": "someMunicipality",
-        "country": "someCountry",
-        "emigrated": true,
-        "addressType": "someAddressType",
-        "xCoordLocal": 0,
-        "yCoordLocal": 0
-      }
-    ]
-  }
-]
+[{
+	"typeOfSchool": "someTypeOfSchool",
+	"addresses": [{
+		"country": "someCountry",
+		"yCoordLocal": 0,
+		"address": "someAddress",
+		"city": "someCity",
+		"addressType": "someAddressType",
+		"xCoordLocal": 0,
+		"addressLetter": "someAddressLetter",
+		"postalCode": "somePostalCode",
+		"county": "someCounty",
+		"municipality": "someMunicipality",
+		"nrDate": "2024-01-16T14:35:12.727Z",
+		"co": "someCo",
+		"appartmentNumber": "someAppartmentNumber",
+		"realEstateDescription": "someRealEstateDescription",
+		"addressNumber": "someAddressNumber",
+		"emigrated": true,
+		"addressArea": "someAddressArea",
+		"status": "someStatus"
+	}],
+	"unRegCode": "someUnRegCode",
+	"gender": "someGender",
+	"unRegDate": "2024-01-16T14:35:12.727Z",
+	"givenname": "someGivenname",
+	"personId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+	"classified": "someClassified",
+	"custodianFor": [{
+		"typeOfSchool": "someTypeOfSchool",
+		"personnumber": "somePersonnumber",
+		"unRegCode": "someUnRegCode",
+		"unRegDate": "2024-01-16T14:35:12.727Z"
+	}],
+	"personNumber": "somePersonNumber",
+	"lastname": "someLastname"
+}]

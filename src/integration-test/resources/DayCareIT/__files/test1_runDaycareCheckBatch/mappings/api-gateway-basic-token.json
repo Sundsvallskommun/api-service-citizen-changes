@@ -1,19 +1,13 @@
 {
-  "name": "api-gateway",
-  "request": {
-    "urlPath": "/api-gateway/token",
-    "method": "POST",
-    "headers": {
-      "Authorization": {
-        "equalTo": "Basic dGhlLWNsaWVudC1pZDp0aGUtY2xpZW50LXNlY3JldA=="
-      }
-    }
-  },
-  "response": {
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "status": 200,
-    "bodyFileName": "test1_runDaycareCheckBatch/responses/api-gateway-token-response.json"
-  }
+	"request": {
+		"headers": {"Authorization": {"equalTo": "Basic dGhlLWNsaWVudC1pZDp0aGUtY2xpZW50LXNlY3JldA=="}},
+		"method": "POST",
+		"urlPath": "/api-gateway/token"
+	},
+	"response": {
+		"headers": {"Content-Type": "application/json"},
+		"bodyFileName": "test1_runDaycareCheckBatch/responses/api-gateway-token-response.json",
+		"status": 200
+	},
+	"name": "api-gateway"
 }

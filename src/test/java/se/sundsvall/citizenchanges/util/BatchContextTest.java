@@ -71,19 +71,17 @@ class BatchContextTest {
 		Assertions.assertThat(new BatchContext())
 			.hasAllNullFieldsOrPropertiesExcept("firstErrand", "numberOfErrands", "sendMessages")
 			.satisfies(bean -> {
-					Assertions.assertThat(bean.getFirstErrand()).isZero();
-					Assertions.assertThat(bean.getNumberOfErrands()).isZero();
-					Assertions.assertThat(bean.isSendMessages()).isFalse();
-				}
-			);
+				Assertions.assertThat(bean.getFirstErrand()).isZero();
+				Assertions.assertThat(bean.getNumberOfErrands()).isZero();
+				Assertions.assertThat(bean.isSendMessages()).isFalse();
+			});
 		Assertions.assertThat(BatchContext.builder().build())
 			.hasAllNullFieldsOrPropertiesExcept("firstErrand", "numberOfErrands", "sendMessages")
 			.satisfies(bean -> {
-					Assertions.assertThat(bean.getFirstErrand()).isZero();
-					Assertions.assertThat(bean.getNumberOfErrands()).isZero();
-					Assertions.assertThat(bean.isSendMessages()).isFalse();
-				}
-			);
+				Assertions.assertThat(bean.getFirstErrand()).isZero();
+				Assertions.assertThat(bean.getNumberOfErrands()).isZero();
+				Assertions.assertThat(bean.isSendMessages()).isFalse();
+			});
 	}
 
 }

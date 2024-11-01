@@ -43,15 +43,15 @@ class ParsedRowTest {
 			"calculatingFounder",
 			"guardian1",
 			"guardian2").containsExactly(
-			personId,
-			unit,
-			placementStart,
-			placementEnd,
-			changeStart,
-			taxCategory,
-			calculatingFounder,
-			guardian1,
-			guardian2);
+				personId,
+				unit,
+				placementStart,
+				placementEnd,
+				changeStart,
+				taxCategory,
+				calculatingFounder,
+				guardian1,
+				guardian2);
 	}
 
 	@Test

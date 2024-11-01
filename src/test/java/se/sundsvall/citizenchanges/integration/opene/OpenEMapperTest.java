@@ -27,33 +27,32 @@ class OpenEMapperTest {
 
 	@Test
 	void mapFlowIds() {
-		final var inputStream =
-			IOUtils.toInputStream("""
-				<FlowInstances>
-				    <FlowInstance>
-				        <flowInstanceID>172698</flowInstanceID>
-				        <added>2024-03-17 17:38</added>
-				        <updated>2024-04-17 14:41</updated>
-				        <firstSubmitted>2024-03-17 17:38</firstSubmitted>
-				    </FlowInstance>
-				    <FlowInstance>
-				        <flowInstanceID>172529</flowInstanceID>
-				        <added>2024-03-15 14:40</added>
-				        <updated>2024-03-18 09:52</updated>
-				        <remote>false</remote>
-				        <addedInMilliseconds>1710510056000</addedInMilliseconds>
-				        <updatedInMilliseconds>1710751974000</updatedInMilliseconds>
-				        <firstSubmittedInMilliseconds>1710510298000</firstSubmittedInMilliseconds>
-				        <lastStatusChangeInMilliseconds>1710751998000</lastStatusChangeInMilliseconds>
-				    </FlowInstance>
-				    <FlowInstance>
-				        <flowInstanceID>145263</flowInstanceID>
-				        <added>2024-03-15 14:40</added>
-				        <updated>2024-03-18 09:52</updated>
-				        <firstSubmitted>2024-03-15 14:44</firstSubmitted>
-				    </FlowInstance>
-				</FlowInstances>
-				""", "UTF-8");
+		final var inputStream = IOUtils.toInputStream("""
+			<FlowInstances>
+				<FlowInstance>
+					<flowInstanceID>172698</flowInstanceID>
+					<added>2024-03-17 17:38</added>
+					<updated>2024-04-17 14:41</updated>
+					<firstSubmitted>2024-03-17 17:38</firstSubmitted>
+				</FlowInstance>
+				<FlowInstance>
+					<flowInstanceID>172529</flowInstanceID>
+					<added>2024-03-15 14:40</added>
+					<updated>2024-03-18 09:52</updated>
+					<remote>false</remote>
+					<addedInMilliseconds>1710510056000</addedInMilliseconds>
+					<updatedInMilliseconds>1710751974000</updatedInMilliseconds>
+					<firstSubmittedInMilliseconds>1710510298000</firstSubmittedInMilliseconds>
+					<lastStatusChangeInMilliseconds>1710751998000</lastStatusChangeInMilliseconds>
+				</FlowInstance>
+				<FlowInstance>
+					<flowInstanceID>145263</flowInstanceID>
+					<added>2024-03-15 14:40</added>
+					<updated>2024-03-18 09:52</updated>
+					<firstSubmitted>2024-03-15 14:44</firstSubmitted>
+				</FlowInstance>
+			</FlowInstances>
+			""", "UTF-8");
 
 		final var result = mapper.mapFlowIds(inputStream);
 
@@ -62,11 +61,10 @@ class OpenEMapperTest {
 
 	@Test
 	void mapFlowIdsWithNoFlowInstances() {
-		final var inputStream =
-			IOUtils.toInputStream("""
-				<FlowInstances>
-				</FlowInstances>
-				""", "UTF-8");
+		final var inputStream = IOUtils.toInputStream("""
+			<FlowInstances>
+			</FlowInstances>
+			""", "UTF-8");
 
 		final var result = mapper.mapFlowIds(inputStream);
 
@@ -95,7 +93,9 @@ class OpenEMapperTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"errand_skolskjuts_valdbarn.xml", "errand_skolskjuts.xml", "errand_skolskjuts_BarnetsUppgifter.xml"})
+	@ValueSource(strings = {
+		"errand_skolskjuts_valdbarn.xml", "errand_skolskjuts.xml", "errand_skolskjuts_BarnetsUppgifter.xml"
+	})
 	void mapFlowInstance_Skolskjuts(final String filename) throws IOException {
 		// Arrange
 		final Path path = Paths.get("src/test/resources/mockfiles/" + filename);
@@ -137,19 +137,18 @@ class OpenEMapperTest {
 		assertThat(result).isNotNull().hasAllNullFieldsOrProperties();
 	}
 
-
 	@Test
 	void mapStatus() {
 		// Arrange
 		final var status = """
 			<Status>
-			  <statusID>123</statusID>
-			  <name>Beslut som upphört att gälla</name>
-			  <newExternalMessagesDisallowed>false</newExternalMessagesDisallowed>
-			  <addExternalMessage>false</addExternalMessage>
-			  <addInternalMessage>false</addInternalMessage>
-			  <isRestrictedAdminDeletable>false</isRestrictedAdminDeletable>
-			  <contentType>ARCHIVED</contentType>
+			<statusID>123</statusID>
+			<name>Beslut som upphört att gälla</name>
+			<newExternalMessagesDisallowed>false</newExternalMessagesDisallowed>
+			<addExternalMessage>false</addExternalMessage>
+			<addInternalMessage>false</addInternalMessage>
+			<isRestrictedAdminDeletable>false</isRestrictedAdminDeletable>
+			<contentType>ARCHIVED</contentType>
 			</Status>
 			""";
 		// Act

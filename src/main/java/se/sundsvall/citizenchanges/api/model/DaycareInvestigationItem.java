@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class DaycareInvestigationItem extends OepErrandItem {
 
 	@Schema(example = "S:t Olofsskolans fritidshem")
 	private String istPlacementName;
-	
+
 	private String istPlacement;
 
 }

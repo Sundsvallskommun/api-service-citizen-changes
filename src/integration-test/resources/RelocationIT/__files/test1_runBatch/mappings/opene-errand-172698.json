@@ -1,18 +1,12 @@
 {
-  "request": {
-    "method": "GET",
-    "urlPath": "/opene/api/instanceapi/getinstance/172698/xml",
-    "headers": {
-      "Authorization": {
-        "equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="
-      }
-    }
-  },
-  "response": {
-    "headers": {
-      "Content-Type": "application/xml"
-    },
-    "status": 200,
-    "bodyFileName": "test1_runBatch/responses/opene-errand.xml"
-  }
+	"request": {
+		"headers": {"Authorization": {"equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="}},
+		"method": "GET",
+		"urlPath": "/opene/api/instanceapi/getinstance/172698/xml"
+	},
+	"response": {
+		"headers": {"Content-Type": "application/xml"},
+		"bodyFileName": "test1_runBatch/responses/opene-errand.xml",
+		"status": 200
+	}
 }

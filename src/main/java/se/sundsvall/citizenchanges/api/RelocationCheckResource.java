@@ -33,9 +33,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @ApiResponse(responseCode = "200", description = "OK", useReturnTypeSchema = true)
-@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
+@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(oneOf = {
+	Problem.class, ConstraintViolationProblem.class
+})))
 @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = Problem.class)))
-@RequestMapping(value = "/{municipalityId}/relocations", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+@RequestMapping(value = "/{municipalityId}/relocations", produces = {
+	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
+})
 public class RelocationCheckResource {
 
 	private final RelocationCheckService relocationCheckService;
@@ -52,7 +56,7 @@ public class RelocationCheckResource {
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@RequestParam("backtrackDays") final Integer backtrackDays) {
 
-		return ResponseEntity.ok(relocationCheckService.runBatch(Optional.of(backtrackDays), null,municipalityId));
+		return ResponseEntity.ok(relocationCheckService.runBatch(Optional.of(backtrackDays), null, municipalityId));
 	}
 
 	@PostMapping(value = "/batchtrigger/relocations", consumes = APPLICATION_JSON_VALUE)
@@ -63,7 +67,7 @@ public class RelocationCheckResource {
 		@RequestParam("backtrackDays") final Integer backtrackDays,
 		@RequestBody final Set<CitizenWithChangedAddress> citizenWithChangedAddresses) {
 
-		return ResponseEntity.ok(relocationCheckService.runBatch(Optional.of(backtrackDays), citizenWithChangedAddresses,municipalityId));
+		return ResponseEntity.ok(relocationCheckService.runBatch(Optional.of(backtrackDays), citizenWithChangedAddresses, municipalityId));
 	}
 
 	@GetMapping(value = "/meta/recentmoves")
@@ -73,7 +77,7 @@ public class RelocationCheckResource {
 
 		final var fromDate = DateUtil.getFromDateMeta(LocalDate.now(), backtrackDays);
 
-		return ResponseEntity.ok(citizenIntegration.getAddressChanges(municipalityId,fromDate.toString()));
+		return ResponseEntity.ok(citizenIntegration.getAddressChanges(municipalityId, fromDate.toString()));
 	}
 
 }

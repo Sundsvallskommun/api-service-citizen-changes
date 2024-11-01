@@ -34,14 +34,13 @@ class ApplicantInfoTest {
 		final var applicantIdentifier = "someApplicantIdentifier";
 
 		// Act
-		final var result =
-			ApplicantInfo.builder()
-				.withPrimaryGuardian(primaryGuardian)
-				.withFirstName(firstName)
-				.withLastName(lastName)
-				.withApplicantName(applicantName)
-				.withApplicantIdentifier(applicantIdentifier)
-				.build();
+		final var result = ApplicantInfo.builder()
+			.withPrimaryGuardian(primaryGuardian)
+			.withFirstName(firstName)
+			.withLastName(lastName)
+			.withApplicantName(applicantName)
+			.withApplicantIdentifier(applicantIdentifier)
+			.build();
 
 		// Assert
 		assertThat(result).isNotNull().hasNoNullFieldsOrProperties();

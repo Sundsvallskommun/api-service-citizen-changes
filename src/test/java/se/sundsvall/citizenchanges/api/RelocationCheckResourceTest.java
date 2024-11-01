@@ -23,7 +23,6 @@ import se.sundsvall.citizenchanges.service.RelocationCheckService;
 
 import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 
-
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class RelocationCheckResourceTest {

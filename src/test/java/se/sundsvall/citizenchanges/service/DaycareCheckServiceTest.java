@@ -72,7 +72,9 @@ class DaycareCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any()))
 			.thenReturn(List.of("someErrandId", "someErrandId2"));
 		when(openEIntegrationMock.getErrand(any(), any()))
@@ -115,7 +117,9 @@ class DaycareCheckServiceTest {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
-		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[]{"someemail@test.se"});
+		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
+			"someemail@test.se"
+		});
 
 		// Act
 		final var result = service.runBatch(0, 1, 1, file, "2281");

@@ -9,7 +9,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DatumAndradFritidsplats {
 
-    @JacksonXmlProperty(localName = "StartDate")
-    private String startDate;
+	@JacksonXmlProperty(localName = "StartDate")
+	private String startDate;
 
 }

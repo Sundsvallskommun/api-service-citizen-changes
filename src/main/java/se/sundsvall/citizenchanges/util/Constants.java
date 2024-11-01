@@ -111,194 +111,194 @@ public final class Constants {
 	public static final String HTML_TEMPLATE_MAIN_START = """
 		<!DOCTYPE html>\r
 		<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">\r
-		    <head>\r
-		        <meta charset="UTF-8">\r
-		            <meta name="viewport" content="width=device-width,initial-scale=1">\r
-		                <meta name="x-apple-disable-message-reformatting">\r
-		                    <!--[if mso]>\r
-		         <noscript>\r
-		           <xml>\r
-		             <o:OfficeDocumentSettings>\r
-		               <o:PixelsPerInch>96</o:PixelsPerInch>\r
-		             </o:OfficeDocumentSettings>\r
-		           </xml>\r
-		         </noscript>\r
-		         <![endif]-->\r
-		                    <style>\r
-		    table, td, div, h1, p {font-family: Arial, sans-serif;}\r
-		  </style>\r
-		    </head>\r
-		    <body style="margin:0;padding:0;">\r
-		        <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">\r
-		            <tr>\r
-		                <td align="left" style="padding:0;">\r
-		                    <table role="presentation" style="width:border-collapse:collapse;border:1px solid #ffffff;border-spacing:0;text-align:left;">\r
-		                        <tr>\r
-		                            <td align="left" style="padding:0px 0px 0px 30px;background:#005595;">%%logoImage%%</td>\r
-		                        </tr>\r
-		                        <tr>\r
-		                            <td style="padding:36px 30px 42px 30px;">\r
-		                                <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">\r
+			<head>\r
+				<meta charset="UTF-8">\r
+					<meta name="viewport" content="width=device-width,initial-scale=1">\r
+						<meta name="x-apple-disable-message-reformatting">\r
+							<!--[if mso]>\r
+				<noscript>\r
+				<xml>\r
+					<o:OfficeDocumentSettings>\r
+					<o:PixelsPerInch>96</o:PixelsPerInch>\r
+					</o:OfficeDocumentSettings>\r
+				</xml>\r
+				</noscript>\r
+				<![endif]-->\r
+							<style>\r
+			table, td, div, h1, p {font-family: Arial, sans-serif;}\r
+		</style>\r
+			</head>\r
+			<body style="margin:0;padding:0;">\r
+				<table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">\r
+					<tr>\r
+						<td align="left" style="padding:0;">\r
+							<table role="presentation" style="width:border-collapse:collapse;border:1px solid #ffffff;border-spacing:0;text-align:left;">\r
+								<tr>\r
+									<td align="left" style="padding:0px 0px 0px 30px;background:#005595;">%%logoImage%%</td>\r
+								</tr>\r
+								<tr>\r
+									<td style="padding:36px 30px 42px 30px;">\r
+										<table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">\r
 		""";
 
 	public static final String HTML_TEMPLATE_MAIN_END = """
-		                                </table>\r
-		                            </td>\r
-		                        </tr>\r
-		                    </table>\r
-		                </td>\r
-		            </tr>\r
-		        </table>\r
-		    </body>\r
+										</table>\r
+									</td>\r
+								</tr>\r
+							</table>\r
+						</td>\r
+					</tr>\r
+				</table>\r
+			</body>\r
 		</html>\r
 		""";
 
 	public static final String HTML_TEMPLATE_INTRO = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <h1 style="font-size:16px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Automatgenererad rapport för %%familyType%%</h1>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Rapporten genererad: %%reportTimestamp%%<br>\r
-		                                                Omfattar registrerade ändringar i folkbokföringen från %%metaStartDate%% och ärenden från %%oepStartDate%%<br>\r
-		                                                Antal ändringar i folkbokföringen under perioden: %%changedAddressesCount%%<br>\r
-		                                                Antal beslutade ärenden som uppfyller kriterier för granskning: %%inspectErrandsCount%%<br>\r
-		                                            </p>\r
-		                                        </td>\r
-		                                    </tr>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<h1 style="font-size:16px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Automatgenererad rapport för %%familyType%%</h1>\r
+													<p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Rapporten genererad: %%reportTimestamp%%<br>\r
+														Omfattar registrerade ändringar i folkbokföringen från %%metaStartDate%% och ärenden från %%oepStartDate%%<br>\r
+														Antal ändringar i folkbokföringen under perioden: %%changedAddressesCount%%<br>\r
+														Antal beslutade ärenden som uppfyller kriterier för granskning: %%inspectErrandsCount%%<br>\r
+													</p>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_TABLE_HEAD_STUDENT_TRAVEL = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <h2 style="font-size:14px;margin:40px 0 5px 0;font-family:Arial,sans-serif;">%%headline%%</h2>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">%%leadText%%</p>\r
-		                                        </td>\r
-		                                    </tr>\r
-		                                    <tr>\r
-		                                        <td style="padding:0;">\r
-		                                            <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
-		                                                <tr style="background-color:#D9E6EF">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Skola/Enhet</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Program</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod start</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Flyttdatum</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (ny)</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (gammal)</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status</td>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<h2 style="font-size:14px;margin:40px 0 5px 0;font-family:Arial,sans-serif;">%%headline%%</h2>\r
+													<p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">%%leadText%%</p>\r
+												</td>\r
+											</tr>\r
+											<tr>\r
+												<td style="padding:0;">\r
+													<table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
+														<tr style="background-color:#D9E6EF">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Skola/Enhet</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Program</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod start</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Flyttdatum</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (ny)</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (gammal)</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status</td>\r
 		%%extraHeaders%%                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Sekretess</td>\r
-		                                                </tr>\r
+														</tr>\r
 		%%rowContent%%                                            </table>\r
-		                                        </td>\r
-		                                    </tr>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_TABLE_ROW_STUDENT_TRAVEL = """
-		                                                <tr style="background-color:#ffffff">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%schoolUnit%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%program%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionStart%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%moveDate%%<nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%newAddress%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%oldAddress%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%status%%</td>\r
+														<tr style="background-color:#ffffff">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%schoolUnit%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%program%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionStart%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%moveDate%%<nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%newAddress%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%oldAddress%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%status%%</td>\r
 		%%extraColumns%%                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%classified%%</td>\r
-		                                                </tr>\r
+														</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_TABLE_HEAD = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <h2 style="font-size:14px;margin:40px 0 5px 0;font-family:Arial,sans-serif;">%%headline%%</h2>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">%%leadText%%</p>\r
-		                                        </td>\r
-		                                    </tr>\r
-		                                    <tr>\r
-		                                        <td style="padding:0;">\r
-		                                            <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
-		                                                <tr style="background-color:#D9E6EF">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Skola/Enhet</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod start</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Flyttdatum</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (ny)</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (gammal)</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status</td>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<h2 style="font-size:14px;margin:40px 0 5px 0;font-family:Arial,sans-serif;">%%headline%%</h2>\r
+													<p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">%%leadText%%</p>\r
+												</td>\r
+											</tr>\r
+											<tr>\r
+												<td style="padding:0;">\r
+													<table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
+														<tr style="background-color:#D9E6EF">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Skola/Enhet</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod start</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Flyttdatum</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (ny)</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Adress (gammal)</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status</td>\r
 		%%extraHeaders%%                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Sekretess</td>\r
-		                                                </tr>\r
+														</tr>\r
 		%%rowContent%%                                            </table>\r
-		                                        </td>\r
-		                                    </tr>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_TABLE_ROW = """
-		                                                <tr style="background-color:#ffffff">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%schoolUnit%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionStart%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%moveDate%%<nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%newAddress%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%oldAddress%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%status%%</td>\r
+														<tr style="background-color:#ffffff">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%schoolUnit%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionStart%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%moveDate%%<nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%newAddress%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%oldAddress%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%status%%</td>\r
 		%%extraColumns%%                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%classified%%</td>\r
-		                                                </tr>\r
+														</tr>\r
 		""";
 
 	// Templates for daycare scope report
 	public static final String HTML_TEMPLATE_DAYCARE_INTRO = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <h1 style="font-size:16px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Automatgenererad rapport för %%familyType%% och ändrad omfattning av fritidshemsplats</h1>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Rapporten genererad: %%reportTimestamp%%<br>\r
-		                                                Omfattar senast registrerade ändringar i EduCloud/IST från %%startDate%% och ärenden från %%oepStartDate%%<br>\r
-		                                                Antal beslutade ärenden som uppfyller kriterier för granskning: %%inspectErrandsCount%%<br>\r
-		                                            </p>\r
-		                                        </td>\r
-		                                    </tr>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<h1 style="font-size:16px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Automatgenererad rapport för %%familyType%% och ändrad omfattning av fritidshemsplats</h1>\r
+													<p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Rapporten genererad: %%reportTimestamp%%<br>\r
+														Omfattar senast registrerade ändringar i EduCloud/IST från %%startDate%% och ärenden från %%oepStartDate%%<br>\r
+														Antal beslutade ärenden som uppfyller kriterier för granskning: %%inspectErrandsCount%%<br>\r
+													</p>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_DAYCARE_TABLE_HEAD = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <h2 style="font-size:14px;margin:40px 0 5px 0;font-family:Arial,sans-serif;">%%headline%%</h2>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">%%leadText%%</p>\r
-		                                        </td>\r
-		                                    </tr>\r
-		                                    <tr>\r
-		                                        <td style="padding:0;">\r
-		                                            <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
-		                                                <tr style="background-color:#D9E6EF">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Skola/Enhet</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod start</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Angiven omfattning i ansökan</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ny omfattning</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ändringsstart</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Fritidshem</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Handläggare</td>\r
-		                                                </tr>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<h2 style="font-size:14px;margin:40px 0 5px 0;font-family:Arial,sans-serif;">%%headline%%</h2>\r
+													<p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">%%leadText%%</p>\r
+												</td>\r
+											</tr>\r
+											<tr>\r
+												<td style="padding:0;">\r
+													<table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
+														<tr style="background-color:#D9E6EF">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Skola/Enhet</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod start</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Angiven omfattning i ansökan</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ny omfattning</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ändringsstart</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Fritidshem</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Handläggare</td>\r
+														</tr>\r
 		%%rowContent%%                                            </table>\r
-		                                        </td>\r
-		                                    </tr>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_DAYCARE_TABLE_ROW = """
-		                                                <tr style="background-color:#ffffff">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%schoolUnit%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionStart%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%oldScope%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%newScope%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%placementStart%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%daycareUnit%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%administrator%%</td>\r
-		                                                </tr>\r
+														<tr style="background-color:#ffffff">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%schoolUnit%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionStart%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%oldScope%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%newScope%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%placementStart%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%daycareUnit%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%administrator%%</td>\r
+														</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_EXTRA_HEADERCOL = "                                                    <td style=\"padding:5px;vertical-align:top;border:1px solid #cccccc\">%%extraValue%%</td>\r\n";
@@ -314,80 +314,80 @@ public final class Constants {
 	public static final String HTML_TEMPLATE_NONBREAKINGHYPHEN = "&#8209;";
 
 	public static final String HTML_TEMPLATE_REMINDER_REPORT_INTRO = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <h1 style="font-size:16px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Automatgenererad rapport för påminnelser om att ansöka om skolskjuts</h1>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Rapporten genererad: %%reportTimestamp%%<br>\r
-		                                                Antal ärenden som uppfyller kriterier för påminnelse: %%inspectErrandsCount%%<br>\r
-		                                            </p>\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Kontaktpersonen kan ansöka i egenskap av följande:<br>\r
-		                                                VH: vårdnadshavare<br>\r
-		                                                FGF: familjehem/god man/förmyndare\r
-		                                            </p>\r
-		                                        </td>\r
-		                                    </tr>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<h1 style="font-size:16px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Automatgenererad rapport för påminnelser om att ansöka om skolskjuts</h1>\r
+													<p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Rapporten genererad: %%reportTimestamp%%<br>\r
+														Antal ärenden som uppfyller kriterier för påminnelse: %%inspectErrandsCount%%<br>\r
+													</p>\r
+													<p style="margin:0 0 12px 0;font-size:12px;line-height:24px;font-family:Arial,sans-serif;">Kontaktpersonen kan ansöka i egenskap av följande:<br>\r
+														VH: vårdnadshavare<br>\r
+														FGF: familjehem/god man/förmyndare\r
+													</p>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_REMINDER_REPORT_TABLE_HEAD = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">Påminnelser skickade för följande ärenden:</p>\r
-		                                        </td>\r
-		                                    </tr>\r
-		                                    <tr>\r
-		                                        <td style="padding:0;">\r
-		                                            <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
-		                                                <tr style="background-color:#D9E6EF">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Elev</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Kontaktperson</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Epostadress</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Mobilnummer</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">SMS tillåtet</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status epost</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status SMS</td>\r
-		                                                </tr>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<p style="margin:0 0 12px 0;font-size:12px;font-family:Arial,sans-serif;">Påminnelser skickade för följande ärenden:</p>\r
+												</td>\r
+											</tr>\r
+											<tr>\r
+												<td style="padding:0;">\r
+													<table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #cccccc;font-size:12px;font-family:Arial,sans-serif;color:#212121">\r
+														<tr style="background-color:#D9E6EF">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Ärende</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Beslutsperiod slut</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Elev</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Kontaktperson</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Epostadress</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Mobilnummer</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">SMS tillåtet</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status epost</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">Status SMS</td>\r
+														</tr>\r
 		%%rowContent%%                                            </table>\r
-		                                        </td>\r
-		                                    </tr>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_REMINDER_REPORT_TABLE_ROW = """
-		                                    <tr style="background-color:#ffffff">\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%nameMinor%%<nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%contactName%%<nobr></td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%emailAddress%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%mobileNumber%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%smsAllowed%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%statusEmail%%</td>\r
-		                                                    <td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%statusSMS%%</td>\r
-		                                                </tr>\r
+											<tr style="background-color:#ffffff">\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%link%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%decisionEnd%%</nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%nameMinor%%<nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc"><nobr>%%contactName%%<nobr></td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%emailAddress%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%mobileNumber%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%smsAllowed%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%statusEmail%%</td>\r
+															<td style="padding:5px;vertical-align:top;border:1px solid #cccccc">%%statusSMS%%</td>\r
+														</tr>\r
 		""";
 
 	public static final String HTML_TEMPLATE_REMINDER_TEXT_BODY = """
-		                                    <tr>\r
-		                                        <td style="color:#212121;">\r
-		                                            <p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;">\r
-		                                                Hej!<br>\r
-		                                                %%minorName%% har ett beslut om skolskjuts i ärende %%errandNumber%%, som upphör att gälla %%decisionEndDate%%.<br>\r
-		                                                Du kan se beslutet i sin helhet genom att logga in i e-tjänsteportalen och läsa under Mina sidor: <a href="https://e-tjanster.sundsvall.se/">https://e-tjanster.sundsvall.se/</a><br>\r
-		                                                <br>\r
-		                                                Om behovet av skolskjuts kvarstår inför %%semester%% måste du ansöka om skolskjuts på nytt. Ansökan gör du via vår e-tjänst.<br>\r
-		                                                E-tjänsten samt mer information om skolskjuts hittar du på vår hemsida: <a href="https://sundsvall.se/utbildning-och-forskola/skolskjuts/">https://sundsvall.se/utbildning-och-forskola/skolskjuts/</a><br>\r
-		                                                För att vi ska hinna hantera ditt ärende till %%semester%%s start ska ansökan om skolskjuts vara inskickad senast den %%lastDay%%.<br>\r
-		                                                Om du redan har skickat in en ansökan om skolskjuts inför %%semester%% kan du bortse från denna påminnelse.<br>\r
-		                                                <br>\r
-		                                                Vid frågor, kontakta i första hand skoladministratör på skolan alternativt skolskjutssamordnare på <br>\r
-		                                                mejladress skolskjuts@sundsvall.se eller telefon 060-19 14 87 på vardagar mellan kl. 11-12.<br>\r
-		                                                <br>\r
-		                                                Vänliga hälsningar,<br>\r
-		                                                Skolskjutssamordnare på barn- och utbildningskontoret, Sundsvalls kommun\r
-		                                            </p>\r
-		                                        </td>\r
-		                                    </tr>\r
+											<tr>\r
+												<td style="color:#212121;">\r
+													<p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;">\r
+														Hej!<br>\r
+														%%minorName%% har ett beslut om skolskjuts i ärende %%errandNumber%%, som upphör att gälla %%decisionEndDate%%.<br>\r
+														Du kan se beslutet i sin helhet genom att logga in i e-tjänsteportalen och läsa under Mina sidor: <a href="https://e-tjanster.sundsvall.se/">https://e-tjanster.sundsvall.se/</a><br>\r
+														<br>\r
+														Om behovet av skolskjuts kvarstår inför %%semester%% måste du ansöka om skolskjuts på nytt. Ansökan gör du via vår e-tjänst.<br>\r
+														E-tjänsten samt mer information om skolskjuts hittar du på vår hemsida: <a href="https://sundsvall.se/utbildning-och-forskola/skolskjuts/">https://sundsvall.se/utbildning-och-forskola/skolskjuts/</a><br>\r
+														För att vi ska hinna hantera ditt ärende till %%semester%%s start ska ansökan om skolskjuts vara inskickad senast den %%lastDay%%.<br>\r
+														Om du redan har skickat in en ansökan om skolskjuts inför %%semester%% kan du bortse från denna påminnelse.<br>\r
+														<br>\r
+														Vid frågor, kontakta i första hand skoladministratör på skolan alternativt skolskjutssamordnare på <br>\r
+														mejladress skolskjuts@sundsvall.se eller telefon 060-19 14 87 på vardagar mellan kl. 11-12.<br>\r
+														<br>\r
+														Vänliga hälsningar,<br>\r
+														Skolskjutssamordnare på barn- och utbildningskontoret, Sundsvalls kommun\r
+													</p>\r
+												</td>\r
+											</tr>\r
 		""";
 
 	public static final String REMINDER_SMS_BODY = """
