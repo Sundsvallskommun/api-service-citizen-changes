@@ -1,5 +1,26 @@
 package se.sundsvall.citizenchanges.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import se.sundsvall.citizenchanges.api.model.BatchStatus;
+import se.sundsvall.citizenchanges.api.model.FamilyType;
+import se.sundsvall.citizenchanges.api.model.OepErrandItem;
+import se.sundsvall.citizenchanges.api.model.ReportMetaData;
+import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
+import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
+import se.sundsvall.citizenchanges.util.BatchContext;
+import se.sundsvall.citizenchanges.util.Constants;
+import se.sundsvall.citizenchanges.util.DateUtil;
+import se.sundsvall.citizenchanges.util.MessageMapper;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import static generated.se.sundsvall.messaging.MessageStatus.SENT;
 import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
 import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SENDER;
@@ -17,28 +38,6 @@ import static se.sundsvall.citizenchanges.util.DateUtil.isSpring;
 import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
 import static se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil.isOepErrandQualified;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
-import se.sundsvall.citizenchanges.api.model.BatchStatus;
-import se.sundsvall.citizenchanges.api.model.FamilyType;
-import se.sundsvall.citizenchanges.api.model.OepErrandItem;
-import se.sundsvall.citizenchanges.api.model.ReportMetaData;
-import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
-import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
-import se.sundsvall.citizenchanges.util.BatchContext;
-import se.sundsvall.citizenchanges.util.Constants;
-import se.sundsvall.citizenchanges.util.DateUtil;
-import se.sundsvall.citizenchanges.util.MessageMapper;
 
 @Service
 public class ReminderService {
@@ -92,7 +91,7 @@ public class ReminderService {
 	}
 
 	private void processFamilyId(final String familyId, final BatchContext batchContext, final String municipalityId) {
-		final var familyType = getFamilyType(familyId);
+		final var familyType = Constants.getFamilyType(familyId);
 
 		if (FamilyType.SKOLSKJUTS.equals(familyType)) {
 			final var errandItemList = getQualifiedErrands(familyId, batchContext, municipalityId);
@@ -134,10 +133,7 @@ public class ReminderService {
 	private void processErrand(final BatchContext batchContext, final List<OepErrandItem> errandItemList, final String flowInstanceId, final int qualifiedItems, final String municipalityId) {
 		try {
 			final var item = openEIntegration.getErrand(flowInstanceId, FamilyType.SKOLSKJUTS);
-			if (isOepErrandQualified(item, LocalDate.now()) &&
-				((qualifiedItems >= batchContext.getFirstErrand()) &&
-					((errandItemList.size() <= batchContext.getNumberOfErrands())
-						|| (batchContext.getNumberOfErrands() == 0)))) {
+			if (isOepErrandQualified(item, LocalDate.now()) && ((qualifiedItems >= batchContext.getFirstErrand()) && ((errandItemList.size() <= batchContext.getNumberOfErrands()) || (batchContext.getNumberOfErrands() == 0)))) {
 				sendEmailIfRequired(batchContext, item, flowInstanceId, municipalityId);
 				sendSmsIfRequired(batchContext, item, flowInstanceId, municipalityId);
 				errandItemList.add(item);

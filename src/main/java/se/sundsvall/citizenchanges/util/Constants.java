@@ -1,10 +1,10 @@
 package se.sundsvall.citizenchanges.util;
 
+import se.sundsvall.citizenchanges.api.model.FamilyType;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import se.sundsvall.citizenchanges.api.model.FamilyType;
 
 public final class Constants {
 
@@ -62,6 +62,8 @@ public final class Constants {
 
 	public static final String REMINDER_DATE_LIMIT_PATTERN_SPRING = "%s-08-31"; // The current year is prepended to this string (2022-08-31 etc.) to form the date limit.
 
+	public static final String REMINDER_DATE_LIMIT_PATTERN_AUTUMN = "%s-01-31";
+
 	public static final String REMINDER_LAST_DAY_SPRING = "30 april";
 
 	public static final String REMINDER_LAST_DAY_AUTUMN = "15 november";
@@ -71,11 +73,11 @@ public final class Constants {
 	public static final String REMINDER_TARGET_SEMESTER_AUTUMN = "vårterminen";
 
 	private static final List<String> PROCESSABLE_SKOLSKJUTS_STATUSES = List.of(
-		OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED,
-		OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION,
-		OEP_ERRAND_STATUS_DECIDED,
-		OEP_ERRAND_STATUS_GRANTED,
-		OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION)
+			OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED,
+			OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION,
+			OEP_ERRAND_STATUS_DECIDED,
+			OEP_ERRAND_STATUS_GRANTED,
+			OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION)
 		.stream()
 		.map(String::toLowerCase)
 		.toList();
