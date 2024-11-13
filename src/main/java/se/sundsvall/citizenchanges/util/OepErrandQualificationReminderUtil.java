@@ -1,12 +1,13 @@
 package se.sundsvall.citizenchanges.util;
 
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_SPRING;
+import se.sundsvall.citizenchanges.api.model.ContactInfo;
+import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import se.sundsvall.citizenchanges.api.model.ContactInfo;
-import se.sundsvall.citizenchanges.api.model.OepErrandItem;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_AUTUMN;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_SPRING;
 
 public final class OepErrandQualificationReminderUtil {
 
@@ -28,10 +29,10 @@ public final class OepErrandQualificationReminderUtil {
 		final var nextYear = today.plusYears(1).getYear();
 		final var thisMonth = today.getMonthValue();
 		final var isSpring = thisMonth < 7;
-		final var limitDate = REMINDER_DATE_LIMIT_PATTERN_SPRING.formatted(isSpring ? thisYear : nextYear);
-		final var lastDayOfAugust = LocalDate.parse(limitDate);
+		final var limitDate = isSpring ? REMINDER_DATE_LIMIT_PATTERN_SPRING.formatted(thisYear) : REMINDER_DATE_LIMIT_PATTERN_AUTUMN.formatted(nextYear);
+		final var lastDay = LocalDate.parse(limitDate);
 		final var minorName = Optional.ofNullable(item.getMinorName()).orElse("").toLowerCase();
-		final var contactName = Optional.ofNullable(Optional.ofNullable(item.getContactInfo()).orElse(ContactInfo.builder().build()).getDisplayName()).orElse("").toLowerCase();
+		final var contactName = Optional.ofNullable(item.getContactInfo()).orElse(ContactInfo.builder().build()).getDisplayName().toLowerCase();
 		final var protectedIdentityIndicator = Constants.PROTECTED_IDENTITY_INDICATOR.toLowerCase();
 
 		if (Optional.ofNullable(item.getDecision())
@@ -46,7 +47,7 @@ public final class OepErrandQualificationReminderUtil {
 		}
 		if ((decisionEnd != null) && (!decisionEnd.isEmpty()) && (decisionStart != null) && (!decisionStart.isEmpty())) {
 			final var valid = ((!today.isAfter(LocalDate.parse(decisionEnd))) && (!today.isBefore(LocalDate.parse(decisionStart))));
-			if (!valid || lastDayOfAugust.isBefore(LocalDate.parse(decisionEnd))) {
+			if (!valid || lastDay.isBefore(LocalDate.parse(decisionEnd))) {
 				return false;
 			} else {
 				var minorIdentifier = Optional.of(item.getMinorIdentifier()).orElse("");

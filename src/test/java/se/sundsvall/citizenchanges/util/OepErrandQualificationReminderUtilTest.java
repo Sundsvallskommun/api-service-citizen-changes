@@ -1,16 +1,16 @@
 package se.sundsvall.citizenchanges.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 
 class OepErrandQualificationReminderUtilTest {
 
 	@Test
-	void isOepErrandQualifiedWhenEndDateOfDecisionIsBeforeAutumStartOfSchoolDate() {
+	void isOepErrandQualifiedWhenEndDateOfDecisionIsBeforeAutumnStartOfSchoolDate() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(30));
 		// Act
@@ -20,7 +20,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualifiedWhenEndDateOfDecisionIsEqualToAutumStartOfSchoolDate() {
+	void isOepErrandQualifiedWhenEndDateOfDecisionIsEqualToAutumnStartOfSchoolDate() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(31));
 		// Act
@@ -30,7 +30,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualifiedWhenEndDateOfDecisionIsAfterAutumStartOfSchoolDate() {
+	void isOepErrandQualifiedWhenEndDateOfDecisionIsAfterAutumnStartOfSchoolDate() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(9).withDayOfMonth(1));
 		// Act

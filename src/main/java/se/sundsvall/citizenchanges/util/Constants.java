@@ -1,10 +1,10 @@
 package se.sundsvall.citizenchanges.util;
 
+import se.sundsvall.citizenchanges.api.model.FamilyType;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import se.sundsvall.citizenchanges.api.model.FamilyType;
 
 public final class Constants {
 
@@ -61,6 +61,8 @@ public final class Constants {
 	public static final int REMINDER_MAX_AGE = 16;
 
 	public static final String REMINDER_DATE_LIMIT_PATTERN_SPRING = "%s-08-31"; // The current year is prepended to this string (2022-08-31 etc.) to form the date limit.
+
+	public static final String REMINDER_DATE_LIMIT_PATTERN_AUTUMN = "%s-01-31";
 
 	public static final String REMINDER_LAST_DAY_SPRING = "30 april";
 
