@@ -239,8 +239,4 @@ public class ReminderService {
 		});
 	}
 
-	private FamilyType getFamilyType(final String familyId) {
-		return Constants.getFamilyType(familyId);
-	}
-
 }
