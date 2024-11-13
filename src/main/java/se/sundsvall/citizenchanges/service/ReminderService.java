@@ -133,7 +133,10 @@ public class ReminderService {
 	private void processErrand(final BatchContext batchContext, final List<OepErrandItem> errandItemList, final String flowInstanceId, final int qualifiedItems, final String municipalityId) {
 		try {
 			final var item = openEIntegration.getErrand(flowInstanceId, FamilyType.SKOLSKJUTS);
-			if (isOepErrandQualified(item, LocalDate.now()) && ((qualifiedItems >= batchContext.getFirstErrand()) && ((errandItemList.size() <= batchContext.getNumberOfErrands()) || (batchContext.getNumberOfErrands() == 0)))) {
+			if (isOepErrandQualified(item, LocalDate.now()) &&
+				((qualifiedItems >= batchContext.getFirstErrand()) &&
+					((errandItemList.size() <= batchContext.getNumberOfErrands())
+						|| (batchContext.getNumberOfErrands() == 0)))) {
 				sendEmailIfRequired(batchContext, item, flowInstanceId, municipalityId);
 				sendSmsIfRequired(batchContext, item, flowInstanceId, municipalityId);
 				errandItemList.add(item);
