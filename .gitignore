@@ -40,4 +40,4 @@ nb-configuration.xml
 
 # Misc
 *.bak
-/lastRun.xls
+*.xls
