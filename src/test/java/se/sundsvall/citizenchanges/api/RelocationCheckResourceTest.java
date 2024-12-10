@@ -33,10 +33,10 @@ class RelocationCheckResourceTest {
 	@Autowired
 	private WebTestClient webTestClient;
 
-	@MockBean
+	@MockitoBean
 	private CitizenIntegration citizenIntegration;
 
-	@MockBean
+	@MockitoBean
 	private RelocationCheckService relocationCheckService;
 
 	@Test

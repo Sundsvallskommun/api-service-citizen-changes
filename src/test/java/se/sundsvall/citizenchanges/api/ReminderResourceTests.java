@@ -27,7 +27,7 @@ class ReminderResourceTests {
 
 	private static final String PATH = "/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm";
 
-	@MockBean
+	@MockitoBean
 	private ReminderService reminderService;
 
 	@Autowired

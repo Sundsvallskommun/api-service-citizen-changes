@@ -33,7 +33,7 @@ class DayCareCheckResourceTest {
 	@Autowired
 	private WebTestClient webTestClient;
 
-	@MockBean
+	@MockitoBean
 	private DaycareCheckService daycareCheckService;
 
 	@Test

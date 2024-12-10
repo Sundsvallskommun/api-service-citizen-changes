@@ -29,7 +29,7 @@ class CitizenConfigurationTest {
 	@Mock
 	private ClientRegistration clientRegistrationMock;
 
-	@Spy
+	@MockitoSpyBean
 	private FeignMultiCustomizer feignMultiCustomizerSpy;
 
 	@Mock
