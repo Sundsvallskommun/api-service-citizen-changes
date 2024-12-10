@@ -1,7 +1,6 @@
 package se.sundsvall.citizenchanges.scheduler;
 
 import com.poiji.annotation.ExcelCell;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

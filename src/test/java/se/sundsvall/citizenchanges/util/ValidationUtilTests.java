@@ -7,7 +7,6 @@ import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifi
 import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
 
 import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

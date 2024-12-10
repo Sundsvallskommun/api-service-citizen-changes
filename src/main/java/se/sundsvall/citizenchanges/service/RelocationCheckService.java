@@ -8,6 +8,7 @@ import static se.sundsvall.citizenchanges.util.Constants.getFamilyType;
 import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForRelocationCheck;
 
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,12 +20,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.api.model.FamilyType;

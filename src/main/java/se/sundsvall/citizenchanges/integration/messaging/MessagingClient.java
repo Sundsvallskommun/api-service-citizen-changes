@@ -2,15 +2,13 @@ package se.sundsvall.citizenchanges.integration.messaging;
 
 import static se.sundsvall.citizenchanges.integration.messaging.configuration.MessagingConfiguration.CLIENT_ID;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import se.sundsvall.citizenchanges.integration.messaging.configuration.MessagingConfiguration;
-
 import generated.se.sundsvall.messaging.EmailRequest;
 import generated.se.sundsvall.messaging.MessageResult;
 import generated.se.sundsvall.messaging.SmsRequest;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import se.sundsvall.citizenchanges.integration.messaging.configuration.MessagingConfiguration;
 
 @FeignClient(
 	name = CLIENT_ID,

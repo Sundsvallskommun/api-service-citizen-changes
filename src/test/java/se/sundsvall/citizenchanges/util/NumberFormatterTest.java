@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
 
 import java.util.regex.Pattern;
-
 import org.junit.jupiter.api.Test;
 
 class NumberFormatterTest {

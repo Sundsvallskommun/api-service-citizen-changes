@@ -1,14 +1,13 @@
 package se.sundsvall.citizenchanges;
 
+import generated.se.sundsvall.citizen.CitizenAddress;
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
+import generated.se.sundsvall.citizen.CustodyChildrenPupil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
-import generated.se.sundsvall.citizen.CitizenAddress;
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
-import generated.se.sundsvall.citizen.CustodyChildrenPupil;
 import se.sundsvall.citizenchanges.api.model.AddressItem;
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.ContactInfo;

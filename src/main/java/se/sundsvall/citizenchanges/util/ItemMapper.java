@@ -1,14 +1,12 @@
 package se.sundsvall.citizenchanges.util;
 
+import generated.se.sundsvall.citizen.CitizenAddress;
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-
-import generated.se.sundsvall.citizen.CitizenAddress;
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import se.sundsvall.citizenchanges.api.model.AddressItem;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
 import se.sundsvall.citizenchanges.api.model.InvestigationItem;

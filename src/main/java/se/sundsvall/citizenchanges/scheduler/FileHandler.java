@@ -1,5 +1,8 @@
 package se.sundsvall.citizenchanges.scheduler;
 
+import com.poiji.bind.Poiji;
+import com.poiji.option.PoijiOptions;
+import com.poiji.option.PoijiOptions.PoijiOptionsBuilder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,17 +13,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
-
-import com.poiji.bind.Poiji;
-import com.poiji.option.PoijiOptions;
-import com.poiji.option.PoijiOptions.PoijiOptionsBuilder;
-
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;

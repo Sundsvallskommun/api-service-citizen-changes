@@ -7,7 +7,6 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import se.sundsvall.citizenchanges.integration.opene.configuration.OpenEIntegrationConfiguration;
 
 @FeignClient(

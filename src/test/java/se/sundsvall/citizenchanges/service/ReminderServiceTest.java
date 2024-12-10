@@ -15,10 +15,12 @@ import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECID
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION;
 
+import generated.se.sundsvall.messaging.DeliveryResult;
+import generated.se.sundsvall.messaging.MessageResult;
+import generated.se.sundsvall.messaging.MessageStatus;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,16 +29,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
 import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
 import se.sundsvall.citizenchanges.util.MessageMapper;
 import se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil;
-
-import generated.se.sundsvall.messaging.DeliveryResult;
-import generated.se.sundsvall.messaging.MessageResult;
-import generated.se.sundsvall.messaging.MessageStatus;
 
 @ExtendWith(MockitoExtension.class)
 class ReminderServiceTest {

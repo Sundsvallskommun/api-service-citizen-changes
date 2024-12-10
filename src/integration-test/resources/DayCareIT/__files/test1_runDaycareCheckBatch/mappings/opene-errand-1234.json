@@ -4,7 +4,9 @@
 		"urlPath": "/opene/api/instanceapi/getinstance/1234/xml"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/xml"},
+		"headers": {
+			"Content-Type": "application/xml"
+		},
 		"bodyFileName": "test1_runDaycareCheckBatch/responses/opene-errand.xml",
 		"status": 200
 	}

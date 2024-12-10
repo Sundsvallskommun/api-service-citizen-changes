@@ -1,11 +1,10 @@
 package se.sundsvall.citizenchanges.integration.opene.configuration;
 
+import feign.auth.BasicAuthRequestInterceptor;
+import feign.soap.SOAPErrorDecoder;
 import org.springframework.cloud.openfeign.FeignBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-
-import feign.auth.BasicAuthRequestInterceptor;
-import feign.soap.SOAPErrorDecoder;
 import se.sundsvall.dept44.configuration.feign.FeignConfiguration;
 import se.sundsvall.dept44.configuration.feign.FeignMultiCustomizer;
 

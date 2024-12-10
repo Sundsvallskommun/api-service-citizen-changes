@@ -5,7 +5,6 @@ import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.regex.Pattern;
-
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 
 public final class ValidationUtil {

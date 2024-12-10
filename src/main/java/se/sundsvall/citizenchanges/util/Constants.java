@@ -1,10 +1,9 @@
 package se.sundsvall.citizenchanges.util;
 
-import se.sundsvall.citizenchanges.api.model.FamilyType;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import se.sundsvall.citizenchanges.api.model.FamilyType;
 
 public final class Constants {
 
