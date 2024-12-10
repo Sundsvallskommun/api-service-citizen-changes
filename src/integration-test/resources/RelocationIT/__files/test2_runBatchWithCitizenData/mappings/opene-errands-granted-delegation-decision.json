@@ -4,7 +4,9 @@
 		"urlPath": "/opene/api/instanceapi/getinstances/family/344/beviljat%20delegationsbeslut"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/xml"},
+		"headers": {
+			"Content-Type": "application/xml"
+		},
 		"bodyFileName": "test2_runBatchWithCitizenData/responses/opene-errands-granted-delegation-decision.xml",
 		"status": 200
 	}

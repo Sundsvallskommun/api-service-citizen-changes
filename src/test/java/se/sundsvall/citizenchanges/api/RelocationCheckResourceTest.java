@@ -8,20 +8,17 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.citizenchanges.integration.citizen.CitizenIntegration;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
-
-import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")

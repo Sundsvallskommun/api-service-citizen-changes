@@ -1,7 +1,6 @@
 package se.sundsvall.citizenchanges.integration.opene.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.Data;
 
 @Data

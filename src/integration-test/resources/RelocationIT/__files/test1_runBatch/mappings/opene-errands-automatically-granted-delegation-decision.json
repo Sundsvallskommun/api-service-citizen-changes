@@ -1,11 +1,17 @@
 {
 	"request": {
-		"headers": {"Authorization": {"equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="}},
+		"headers": {
+			"Authorization": {
+				"equalTo": "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA=="
+			}
+		},
 		"method": "GET",
 		"urlPath": "/opene/api/instanceapi/getinstances/family/344/automatiskt%20beviljat%20delegationsbeslut"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/xml"},
+		"headers": {
+			"Content-Type": "application/xml"
+		},
 		"bodyFileName": "test1_runBatch/responses/opene-errands-automatically-granted-delegation-decision.xml",
 		"status": 200
 	}

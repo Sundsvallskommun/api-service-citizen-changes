@@ -28,6 +28,9 @@ import static se.sundsvall.citizenchanges.util.Constants.STATUS_NO;
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_YES;
 import static se.sundsvall.citizenchanges.util.Constants.TRUSTEE_NOTATION;
 
+import generated.se.sundsvall.messaging.EmailRequest;
+import generated.se.sundsvall.messaging.EmailSender;
+import generated.se.sundsvall.messaging.SmsRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -38,23 +41,17 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
-
 import se.sundsvall.citizenchanges.api.model.AddressItem;
 import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
 import se.sundsvall.citizenchanges.api.model.InvestigationItem;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 import se.sundsvall.citizenchanges.api.model.ReportMetaData;
-
-import generated.se.sundsvall.messaging.EmailRequest;
-import generated.se.sundsvall.messaging.EmailSender;
-import generated.se.sundsvall.messaging.SmsRequest;
 
 @Component
 @EnableConfigurationProperties(MessageMapperProperties.class)

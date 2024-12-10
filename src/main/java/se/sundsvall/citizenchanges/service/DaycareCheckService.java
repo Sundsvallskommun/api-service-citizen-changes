@@ -18,12 +18,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
 import se.sundsvall.citizenchanges.api.model.FamilyType;

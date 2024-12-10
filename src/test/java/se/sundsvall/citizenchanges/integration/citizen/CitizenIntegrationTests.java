@@ -9,18 +9,16 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildCitizen;
 
+import generated.se.sundsvall.citizen.CitizenAddress;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.zalando.problem.Problem;
-
-import generated.se.sundsvall.citizen.CitizenAddress;
 
 @ExtendWith(MockitoExtension.class)
 class CitizenIntegrationTests {

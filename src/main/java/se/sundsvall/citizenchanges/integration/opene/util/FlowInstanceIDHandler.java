@@ -2,11 +2,9 @@ package se.sundsvall.citizenchanges.integration.opene.util;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import lombok.Getter;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
-
-import lombok.Getter;
 
 @Getter
 public class FlowInstanceIDHandler extends DefaultHandler {

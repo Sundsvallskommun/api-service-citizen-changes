@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.InputStreamResource;
 import org.zalando.problem.Problem;
-
 import se.sundsvall.citizenchanges.api.model.FamilyType;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 import se.sundsvall.citizenchanges.integration.opene.util.OpenEMapper;
