@@ -1,8 +1,7 @@
 package se.sundsvall.citizenchanges.api.model;
 
-import java.time.OffsetDateTime;
-
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

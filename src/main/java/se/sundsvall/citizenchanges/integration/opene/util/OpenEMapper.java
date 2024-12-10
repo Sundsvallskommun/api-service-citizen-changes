@@ -2,19 +2,16 @@ package se.sundsvall.citizenchanges.integration.opene.util;
 
 import static java.util.Collections.emptyList;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.ContactInfo;
 import se.sundsvall.citizenchanges.api.model.FamilyType;

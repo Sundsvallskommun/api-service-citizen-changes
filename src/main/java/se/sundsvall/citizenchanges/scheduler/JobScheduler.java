@@ -1,15 +1,12 @@
 package se.sundsvall.citizenchanges.scheduler;
 
 import java.time.LocalDateTime;
-
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
-
-import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 
 @Component
 public class JobScheduler {

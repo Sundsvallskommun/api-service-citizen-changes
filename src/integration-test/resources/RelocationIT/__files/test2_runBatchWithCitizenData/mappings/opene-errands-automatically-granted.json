@@ -4,7 +4,9 @@
 		"urlPath": "/opene/api/instanceapi/getinstances/family/344/automatiskt%20beviljat"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/xml"},
+		"headers": {
+			"Content-Type": "application/xml"
+		},
 		"bodyFileName": "test2_runBatchWithCitizenData/responses/opene-errands-automatically-granted.xml",
 		"status": 200
 	}

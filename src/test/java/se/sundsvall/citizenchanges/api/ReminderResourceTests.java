@@ -10,14 +10,12 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.citizenchanges.service.ReminderService;
 
@@ -29,7 +27,7 @@ class ReminderResourceTests {
 
 	private static final String PATH = "/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm";
 
-	@MockBean
+	@MockitoBean
 	private ReminderService reminderService;
 
 	@Autowired

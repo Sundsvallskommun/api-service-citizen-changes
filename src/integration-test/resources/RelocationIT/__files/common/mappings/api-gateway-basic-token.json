@@ -1,11 +1,17 @@
 {
 	"request": {
-		"headers": {"Authorization": {"equalTo": "Basic dGhlLWNsaWVudC1pZDp0aGUtY2xpZW50LXNlY3JldA=="}},
+		"headers": {
+			"Authorization": {
+				"equalTo": "Basic dGhlLWNsaWVudC1pZDp0aGUtY2xpZW50LXNlY3JldA=="
+			}
+		},
 		"method": "POST",
 		"urlPath": "/api-gateway/token"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/json"},
+		"headers": {
+			"Content-Type": "application/json"
+		},
 		"bodyFileName": "common/responses/api-gateway-token-response.json",
 		"status": 200
 	},

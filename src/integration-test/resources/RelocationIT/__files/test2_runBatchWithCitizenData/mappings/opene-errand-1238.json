@@ -4,7 +4,9 @@
 		"urlPath": "/opene/api/instanceapi/getinstance/1238/xml"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/xml"},
+		"headers": {
+			"Content-Type": "application/xml"
+		},
 		"bodyFileName": "test2_runBatchWithCitizenData/responses/opene-errand.xml",
 		"status": 200
 	}
