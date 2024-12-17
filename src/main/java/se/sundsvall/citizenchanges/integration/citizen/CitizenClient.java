@@ -3,6 +3,7 @@ package se.sundsvall.citizenchanges.integration.citizen;
 import static se.sundsvall.citizenchanges.integration.citizen.configuration.CitizenIntegrationConfiguration.CLIENT_ID;
 
 import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,9 @@ import se.sundsvall.citizenchanges.integration.citizen.configuration.CitizenInte
 	name = CLIENT_ID,
 	url = "${integration.citizen.base-url}",
 	configuration = CitizenIntegrationConfiguration.class)
+@CircuitBreaker(name = CLIENT_ID)
 public interface CitizenClient {
 
 	@GetMapping("/changedaddress")
 	Set<CitizenWithChangedAddress> getAddressChanges(@RequestParam("changedDateFrom") String changedDateFrom);
-
 }
