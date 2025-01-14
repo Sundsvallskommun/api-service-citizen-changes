@@ -76,7 +76,7 @@ class DayCareCheckResourceTest {
 			.uri("/" + MUNICIPALITY_ID + "/daycare/cachedFile")
 			.exchange()
 			.expectStatus()
-			.isOk();
+			.isNoContent();
 
 		verify(daycareCheckService).deleteCachedFile();
 		verifyNoMoreInteractions(daycareCheckService);

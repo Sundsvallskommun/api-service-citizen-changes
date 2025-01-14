@@ -1,5 +1,6 @@
 package se.sundsvall.citizenchanges.api;
 
+import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 
@@ -26,10 +27,10 @@ import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 
 @RestController
 @ApiResponse(responseCode = "200", description = "OK", useReturnTypeSchema = true)
-@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(oneOf = {
+@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
 	Problem.class, ConstraintViolationProblem.class
 })))
-@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = Problem.class)))
+@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 @RequestMapping(value = "/{municipalityId}/daycare")
 public class DayCareCheckResource {
 
@@ -39,9 +40,7 @@ public class DayCareCheckResource {
 		this.daycareCheckService = daycareCheckService;
 	}
 
-	@PostMapping(value = "/batchtrigger/daycarechecker", produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/batchtrigger/daycarechecker", produces = APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<BatchStatus> runDaycareCheckBatch(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@RequestParam("firstErrand") final int firstErrand,
@@ -53,9 +52,7 @@ public class DayCareCheckResource {
 		return ResponseEntity.ok(thisResponse);
 	}
 
-	@GetMapping(value = "/cachedFile", produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	})
+	@GetMapping(value = "/cachedFile", produces = APPLICATION_JSON_VALUE)
 	@Schema(description = "Check if a cached file exists. Returns true if file exists or false if" +
 		" it does not.")
 	public ResponseEntity<Boolean> checkCachedFile(
@@ -63,14 +60,12 @@ public class DayCareCheckResource {
 		return ResponseEntity.ok(daycareCheckService.checkCachedFile());
 	}
 
-	@DeleteMapping(value = "/cachedFile", produces = {
-		APPLICATION_PROBLEM_JSON_VALUE
-	})
+	@DeleteMapping(value = "/cachedFile", produces = ALL_VALUE)
 	@Schema(description = "Try to delete cached file. If successful returns true else false." +
 		" it does not.")
 	public ResponseEntity<Void> deleteCachedFile(@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId) {
 		daycareCheckService.deleteCachedFile();
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}
 
 }

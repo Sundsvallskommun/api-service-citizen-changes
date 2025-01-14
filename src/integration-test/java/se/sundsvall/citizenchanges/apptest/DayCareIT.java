@@ -1,12 +1,10 @@
 package se.sundsvall.citizenchanges.apptest;
 
 import java.io.FileNotFoundException;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
@@ -50,7 +48,7 @@ class DayCareIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.DELETE)
 			.withServicePath(CACHED_FILE)
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(HttpStatus.NO_CONTENT)
 			.sendRequestAndVerifyResponse();
 	}
 
