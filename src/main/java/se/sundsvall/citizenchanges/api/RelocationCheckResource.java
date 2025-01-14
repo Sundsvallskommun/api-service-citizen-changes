@@ -30,13 +30,11 @@ import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 
 @RestController
 @ApiResponse(responseCode = "200", description = "OK", useReturnTypeSchema = true)
-@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(oneOf = {
+@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
 	Problem.class, ConstraintViolationProblem.class
 })))
-@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = Problem.class)))
-@RequestMapping(value = "/{municipalityId}/relocations", produces = {
-	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-})
+@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
+@RequestMapping(value = "/{municipalityId}/relocations", produces = APPLICATION_JSON_VALUE)
 public class RelocationCheckResource {
 
 	private final RelocationCheckService relocationCheckService;
