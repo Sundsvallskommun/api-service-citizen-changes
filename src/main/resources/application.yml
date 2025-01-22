@@ -31,7 +31,9 @@ integration:
     connect-timeout: 5
     read-timeout: 30
 scheduling:
+  name: relocation_check
   lock-at-most-for: PT2M
+  maximum-execution-time: PT2M
 logbook:
   body-filters:
     jsonPath:
