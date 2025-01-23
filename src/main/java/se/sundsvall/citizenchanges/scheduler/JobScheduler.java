@@ -1,33 +1,37 @@
 package se.sundsvall.citizenchanges.scheduler;
 
-import java.time.LocalDateTime;
-import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
+import se.sundsvall.dept44.scheduling.Dept44Scheduled;
+import se.sundsvall.dept44.scheduling.health.Dept44HealthUtility;
 
 @Component
 public class JobScheduler {
 
 	private static final Logger LOG = LoggerFactory.getLogger(JobScheduler.class);
-
 	private static final String SUNDSVALL_MUNICIPALITY_ID = "2281";
-
 	private final RelocationCheckService relocationCheckService;
+	private final Dept44HealthUtility dept44HealthUtility;
+	@Value("${scheduling.name}")
+	private String jobName;
 
-	public JobScheduler(final RelocationCheckService relocationCheckService) {
+	public JobScheduler(final RelocationCheckService relocationCheckService, final Dept44HealthUtility dept44HealthUtility) {
 		this.relocationCheckService = relocationCheckService;
+		this.dept44HealthUtility = dept44HealthUtility;
 	}
 
-	@Scheduled(cron = "${scheduling.expression}")
-	@SchedulerLock(name = "relocation_check", lockAtMostFor = "${scheduling.lock-at-most-for}")
+	@Dept44Scheduled(cron = "${scheduling.expression}",
+		name = "${scheduling.name}",
+		lockAtMostFor = "${scheduling.lock-at-most-for}",
+		maximumExecutionTime = "${scheduling.maximum-execution-time}")
 	void startRelocationCheck() {
-		final var thisTime = LocalDateTime.now();
-		LOG.info("Scheduler executed at {}. About to run batch job for relocation check...", thisTime);
 		final var result = relocationCheckService.runBatch(SUNDSVALL_MUNICIPALITY_ID);
-		LOG.info("Batch job is done. {}", result);
+		if (result.equals(BatchStatus.ERROR))
+			dept44HealthUtility.setHealthIndicatorUnhealthy(jobName, "Could not process relocation job");
 	}
 
 }
