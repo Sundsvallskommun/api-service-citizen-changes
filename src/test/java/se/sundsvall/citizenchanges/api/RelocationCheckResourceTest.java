@@ -25,9 +25,7 @@ import se.sundsvall.citizenchanges.service.RelocationCheckService;
 class RelocationCheckResourceTest {
 
 	private static final String MUNICIPALITY_ID = "2281";
-
 	private static final String PATH = "/" + MUNICIPALITY_ID + "/relocations/batchtrigger/relocations";
-
 	private static final String PATH_RECENT_MOVES = "/" + MUNICIPALITY_ID + "/relocations/meta/recentmoves?backtrackDays%s";
 
 	@Autowired

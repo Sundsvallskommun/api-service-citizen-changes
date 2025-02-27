@@ -1,5 +1,6 @@
 package se.sundsvall.citizenchanges.integration.opene;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
@@ -49,8 +50,7 @@ class OpenEMapperTest {
 					<updated>2024-03-18 09:52</updated>
 					<firstSubmitted>2024-03-15 14:44</firstSubmitted>
 				</FlowInstance>
-			</FlowInstances>
-			""", "UTF-8");
+			</FlowInstances>""", UTF_8);
 
 		final var result = mapper.mapFlowIds(inputStream);
 
@@ -61,8 +61,7 @@ class OpenEMapperTest {
 	void mapFlowIdsWithNoFlowInstances() {
 		final var inputStream = IOUtils.toInputStream("""
 			<FlowInstances>
-			</FlowInstances>
-			""", "UTF-8");
+			</FlowInstances>""", UTF_8);
 
 		final var result = mapper.mapFlowIds(inputStream);
 
@@ -71,7 +70,7 @@ class OpenEMapperTest {
 	}
 
 	@Test
-	void mapFlowInstance_Elevresa() throws IOException {
+	void mapFlowInstanceElevresa() throws IOException {
 		// Arrange
 		final Path path = Paths.get("src/test/resources/mockfiles/errand_elevresa.xml");
 		final var bytes = Files.readAllBytes(path);
@@ -94,7 +93,7 @@ class OpenEMapperTest {
 	@ValueSource(strings = {
 		"errand_skolskjuts_valdbarn.xml", "errand_skolskjuts.xml", "errand_skolskjuts_BarnetsUppgifter.xml"
 	})
-	void mapFlowInstance_Skolskjuts(final String filename) throws IOException {
+	void mapFlowInstanceSkolskjuts(final String filename) throws IOException {
 		// Arrange
 		final Path path = Paths.get("src/test/resources/mockfiles/" + filename);
 		final var bytes = Files.readAllBytes(path);
@@ -107,7 +106,7 @@ class OpenEMapperTest {
 	}
 
 	@Test
-	void mapFlowInstance_skolskjuts_empty_uppgifterOmBarnet() throws IOException {
+	void mapFlowInstanceSkolskjuts_empty_uppgifterOmBarnet() throws IOException {
 		// Arrange
 		final Path path = Paths.get("src/test/resources/mockfiles/errand_skolskjuts_empty_uppgifterOmBarnet.xml");
 		final var bytes = Files.readAllBytes(path);
@@ -147,8 +146,8 @@ class OpenEMapperTest {
 			<addInternalMessage>false</addInternalMessage>
 			<isRestrictedAdminDeletable>false</isRestrictedAdminDeletable>
 			<contentType>ARCHIVED</contentType>
-			</Status>
-			""";
+			</Status>""";
+
 		// Act
 		final var result = mapper.mapStatus(status.getBytes());
 
@@ -166,5 +165,4 @@ class OpenEMapperTest {
 		// Assert
 		assertThat(result).isNull();
 	}
-
 }

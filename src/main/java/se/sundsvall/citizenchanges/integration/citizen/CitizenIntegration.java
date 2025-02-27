@@ -19,11 +19,10 @@ public class CitizenIntegration {
 
 	public Set<CitizenWithChangedAddress> getAddressChanges(final String municipalityId, final String changedDateFrom) {
 		try {
-			return client.getAddressChanges(changedDateFrom);
+			return client.getAddressChanges(municipalityId, changedDateFrom);
 		} catch (final Exception e) {
 			LOG.info("Unable to get address changes", e);
 			return Set.of();
 		}
 	}
-
 }

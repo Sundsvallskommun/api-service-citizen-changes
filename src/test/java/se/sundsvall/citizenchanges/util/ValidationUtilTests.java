@@ -62,7 +62,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void shouldProcessErrand_numOfErrandsZero() {
+	void shouldProcessErrandNumOfErrandsZero() {
 		// Arrange
 		final var qualifiedItems = 1;
 		final var errandListSize = 1;
@@ -74,7 +74,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void shouldProcessErrand_errandListSizeZero() {
+	void shouldProcessErrandErrandListSizeZero() {
 		// Arrange
 		final var qualifiedItems = 1;
 		final var errandListSize = 0;
@@ -86,7 +86,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void shouldProcessErrand_qualifiedItemsZero() {
+	void shouldProcessErrandQualifiedItemsZero() {
 		// Arrange
 		final var qualifiedItems = 0;
 		final var errandListSize = 1;
@@ -98,7 +98,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void shouldProcessErrand_allZero() {
+	void shouldProcessErrandAllZero() {
 		// Arrange
 		final var qualifiedItems = 0;
 		final var errandListSize = 0;
@@ -110,7 +110,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_valid() {
+	void isOepErrandQualifiedForDayCareCheckValid() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		// Act
@@ -120,7 +120,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_denied() {
+	void isOepErrandQualifiedForDayCareCheckDenied() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecision(OEP_ERRAND_SKOLSKJUTS_DENIED);
@@ -131,7 +131,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_noDaycarePlacement() {
+	void isOepErrandQualifiedForDayCareCheckNoDaycarePlacement() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDaycarePlacement(null);
@@ -142,7 +142,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_noMinorIdentifier() {
+	void isOepErrandQualifiedForDayCareCheckNoMinorIdentifier() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setMinorIdentifier(null);
@@ -153,7 +153,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_noDecisionStart() {
+	void isOepErrandQualifiedForDayCareCheckNoDecisionStart() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionStart(null);
@@ -164,7 +164,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_noDecisionEnd() {
+	void isOepErrandQualifiedForDayCareCheckNoDecisionEnd() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionEnd(null);
@@ -175,7 +175,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_todayBeforeDecisionStart() {
+	void isOepErrandQualifiedForDayCareCheckTodayBeforeDecisionStart() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionStart(LocalDate.now().plusDays(1).toString());
@@ -186,7 +186,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForDayCareCheck_todayAfterDecisionEnd() {
+	void isOepErrandQualifiedForDayCareCheckTodayAfterDecisionEnd() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionEnd(LocalDate.now().minusDays(1).toString());
@@ -197,7 +197,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_valid() {
+	void isOepErrandQualifiedForRelocationCheckValid() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		// Act
@@ -207,7 +207,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_denied_skolskjuts() {
+	void isOepErrandQualifiedForRelocationCheckDeniedSkolskjuts() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecision(OEP_ERRAND_SKOLSKJUTS_DENIED);
@@ -218,7 +218,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_denied_elevresa() {
+	void isOepErrandQualifiedForRelocationCheckDeniedElevresa() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecision(Constants.OEP_ERRAND_ELEVRESA_DENIED);
@@ -229,7 +229,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_todayBeforeDecisionStart() {
+	void isOepErrandQualifiedForRelocationCheckTodayBeforeDecisionStart() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionStart(LocalDate.now().plusDays(1).toString());
@@ -240,7 +240,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_todayAfterDecisionEnd() {
+	void isOepErrandQualifiedForRelocationCheckTodayAfterDecisionEnd() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionEnd(LocalDate.now().minusDays(1).toString());
@@ -251,7 +251,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_noDecisionStart() {
+	void isOepErrandQualifiedForRelocationCheckNoDecisionStart() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionStart(null);
@@ -262,7 +262,7 @@ class ValidationUtilTests {
 	}
 
 	@Test
-	void isOepErrandQualifiedForRelocationCheck_noDecisionEnd() {
+	void isOepErrandQualifiedForRelocationCheckNoDecisionEnd() {
 		// Arrange
 		final var oepErrandItem = buildOepErrandItem("Ja", "someApplicantIdentifier", "someMinorIdentifier");
 		oepErrandItem.setDecisionEnd(null);

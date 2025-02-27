@@ -1,7 +1,5 @@
 package se.sundsvall.citizenchanges.scheduler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
@@ -12,10 +10,11 @@ import se.sundsvall.dept44.scheduling.health.Dept44HealthUtility;
 @Component
 public class JobScheduler {
 
-	private static final Logger LOG = LoggerFactory.getLogger(JobScheduler.class);
 	private static final String SUNDSVALL_MUNICIPALITY_ID = "2281";
+
 	private final RelocationCheckService relocationCheckService;
 	private final Dept44HealthUtility dept44HealthUtility;
+
 	@Value("${scheduling.name}")
 	private String jobName;
 
@@ -30,8 +29,8 @@ public class JobScheduler {
 		maximumExecutionTime = "${scheduling.maximum-execution-time}")
 	void startRelocationCheck() {
 		final var result = relocationCheckService.runBatch(SUNDSVALL_MUNICIPALITY_ID);
-		if (result.equals(BatchStatus.ERROR))
+		if (result.equals(BatchStatus.ERROR)) {
 			dept44HealthUtility.setHealthIndicatorUnhealthy(jobName, "Could not process relocation job");
+		}
 	}
-
 }

@@ -3,6 +3,7 @@ package se.sundsvall.citizenchanges.integration.citizen;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -30,15 +31,17 @@ class CitizenIntegrationTests {
 	private CitizenIntegration citizenIntegration;
 
 	@Test
-	void getAddressChanges_ok() {
+	void getAddressChangesOK() {
+
 		// Arrange
+		final var municipalityId = "2281";
 		final var citizen = buildCitizen("someApplicantIdentifier");
 
 		// Mock
-		when(mockCitizenClient.getAddressChanges(any(String.class))).thenReturn(Set.of(citizen));
+		when(mockCitizenClient.getAddressChanges(eq(municipalityId), any(String.class))).thenReturn(Set.of(citizen));
 
 		// Act
-		final var result = citizenIntegration.getAddressChanges("2281", "someDate");
+		final var result = citizenIntegration.getAddressChanges(municipalityId, "someDate");
 
 		// Assert
 		assertThat(result).isNotNull().isNotEmpty();
@@ -56,7 +59,7 @@ class CitizenIntegrationTests {
 		assertThat(resultItem.getAddresses().getFirst()).isNotNull().satisfies(this::assertAddressValues);
 
 		// Verify
-		verify(mockCitizenClient, times(1)).getAddressChanges(any(String.class));
+		verify(mockCitizenClient, times(1)).getAddressChanges(eq(municipalityId), any(String.class));
 		verifyNoMoreInteractions(mockCitizenClient);
 	}
 
@@ -76,18 +79,20 @@ class CitizenIntegrationTests {
 	}
 
 	@Test
-	void getAddressChanges_error() {
+	void getAddressChangesNOK() {
 
-		// Mock
-		when(mockCitizenClient.getAddressChanges(any(String.class)))
-			.thenThrow(Problem.builder().build());
+		// Arrange
+		final var municipalityId = "2281";
+
+		when(mockCitizenClient.getAddressChanges(eq(municipalityId), any(String.class))).thenThrow(Problem.builder().build());
+
 		// Act
-		final var result = citizenIntegration.getAddressChanges("2281", "someDate");
+		final var result = citizenIntegration.getAddressChanges(municipalityId, "someDate");
+
 		// Assert
 		assertThat(result).isEqualTo(Set.of());
 		// Verify
-		verify(mockCitizenClient, times(1)).getAddressChanges(any(String.class));
+		verify(mockCitizenClient, times(1)).getAddressChanges(eq(municipalityId), any(String.class));
 		verifyNoMoreInteractions(mockCitizenClient);
 	}
-
 }

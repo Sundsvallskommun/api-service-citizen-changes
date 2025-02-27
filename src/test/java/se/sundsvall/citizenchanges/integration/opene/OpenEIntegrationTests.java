@@ -1,5 +1,6 @@
 package se.sundsvall.citizenchanges.integration.opene;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -35,6 +36,8 @@ class OpenEIntegrationTests {
 
 	@Test
 	void getErrandIds() {
+
+		// Arrange
 		final var inputStream = IOUtils.toInputStream("""
 			<FlowInstances>
 				<FlowInstance>
@@ -47,8 +50,7 @@ class OpenEIntegrationTests {
 					<flowInstanceID>145263</flowInstanceID>
 				</FlowInstance>
 			</FlowInstances>
-			""", "UTF-8");
-		// Arrange
+			""", UTF_8);
 
 		when(client.getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class))).thenReturn(new InputStreamResource(inputStream));
 		when(mapper.mapFlowIds(any())).thenReturn(List.of("172529", "145263", "172698"));
@@ -66,7 +68,7 @@ class OpenEIntegrationTests {
 	}
 
 	@Test
-	void getErrandIds_error() {
+	void getErrandIdsError() {
 		// Arrange
 		when(client.getErrandIds(any(String.class), any(String.class), any(String.class), any(String.class)))
 			.thenThrow(Problem.builder().build());
@@ -99,7 +101,7 @@ class OpenEIntegrationTests {
 	}
 
 	@Test
-	void getErrand_error() {
+	void getErrandError() {
 		// Arrange
 		when(client.getErrand(any(String.class))).thenThrow(Problem.builder().build());
 
@@ -112,5 +114,4 @@ class OpenEIntegrationTests {
 		verifyNoMoreInteractions(client);
 		verifyNoInteractions(mapper);
 	}
-
 }

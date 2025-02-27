@@ -103,7 +103,7 @@ class DaycareCheckServiceTest {
 	}
 
 	@Test
-	void runBatch_noOepErrands() throws IOException {
+	void runBatchNoOepErrands() throws IOException {
 
 		// Arrange
 		final var path = Paths.get("src/test/resources/mockfiles/mockfile.xls");

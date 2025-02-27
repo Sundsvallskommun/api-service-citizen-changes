@@ -110,7 +110,7 @@ class RelocationCheckServiceTest {
 	}
 
 	@Test
-	void runBatch_noMoves() {
+	void runBatchNoMoves() {
 		// Mock
 		when(citizenIntegrationMock.getAddressChanges(any(String.class), any(String.class))).thenReturn(Collections.emptySet());
 		// Act
@@ -123,7 +123,7 @@ class RelocationCheckServiceTest {
 	}
 
 	@Test
-	void runBatch_NoOepErrands() {
+	void runBatchNoOepErrands() {
 
 		// Arrange
 		final var minor = buildCitizen("M2");
@@ -163,7 +163,7 @@ class RelocationCheckServiceTest {
 	}
 
 	@Test
-	void runBatch_OepThrowsException() {
+	void runBatchOepThrowsException() {
 
 		// Arrange
 		final var minor = buildCitizen("M2");
@@ -208,7 +208,7 @@ class RelocationCheckServiceTest {
 	}
 
 	@Test
-	void runBatch_includeCitizenInfos() {
+	void runBatchIncludeCitizenInfos() {
 
 		// Arrange
 		final var minor = buildCitizen("M2");
@@ -252,5 +252,4 @@ class RelocationCheckServiceTest {
 		verifyNoMoreInteractions(propertiesMock, itemMapperMock, mapperMock, openEIntegrationMock, messagingClientMock);
 		verifyNoInteractions(citizenIntegrationMock);
 	}
-
 }

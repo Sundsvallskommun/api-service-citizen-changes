@@ -35,7 +35,7 @@ class FileHandlerTest {
 	@ValueSource(strings = {
 		"Nej", "Ja, deltid"
 	})
-	void getISTPlacement_nej_ja_deltid(final String daycarePlacement) {
+	void getISTPlacementNejJaDeltid(final String daycarePlacement) {
 		// Arrange
 		final var parsedRows = new ArrayList<ParsedRow>();
 		parsedRows.add(ParsedRow.builder()
@@ -73,7 +73,7 @@ class FileHandlerTest {
 	}
 
 	@Test
-	void getISTPlacementWithDayCare_Heltid() {
+	void getISTPlacementWithDayCareHeltid() {
 
 		// Arrange
 		final var parsedRows = new ArrayList<ParsedRow>();
