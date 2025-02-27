@@ -39,7 +39,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualifiedDecisionDenied() {
+	void isOepErrandQualifiedNotQualifiedDecisionDenied() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
 		errand.setDecision("Avslås");
@@ -50,7 +50,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_MinorProtected() {
+	void isOepErrandQualifiedNotQualifiedMinorProtected() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
 		errand.setMinorName("Skyddad");
@@ -61,7 +61,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_minorIdentifierMissing() {
+	void isOepErrandQualifiedNotQualifiedMinorIdentifierMissing() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", null);
 		// Act
@@ -71,7 +71,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_minorNameMissing() {
+	void isOepErrandQualifiedNotQualifiedMinorNameMissing() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
 		errand.setMinorName(null);
@@ -82,7 +82,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_DateSpanNotValid() {
+	void isOepErrandQualifiedNotQualifiedDateSpanNotValid() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
 		errand.setDecisionEnd(LocalDate.now().minusDays(1).toString());
@@ -93,7 +93,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_minorAgeTooOld() {
+	void isOepErrandQualifiedNotQualifiedMinorAgeTooOld() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "20071011234");
 		// Act
@@ -103,7 +103,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_validAfterAugust() {
+	void isOepErrandQualifiedNotQualifiedValidAfterAugust() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
 		errand.setDecisionStart(LocalDate.of(2024, 2, 1).toString());
@@ -115,7 +115,7 @@ class OepErrandQualificationReminderUtilTest {
 	}
 
 	@Test
-	void isOepErrandQualified_notQualified_invalidDateSpan() {
+	void isOepErrandQualifiedNotQualifiedInvalidDateSpan() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234");
 		errand.setDecisionEnd(null);
@@ -124,5 +124,4 @@ class OepErrandQualificationReminderUtilTest {
 		// Assert
 		assertThat(result).isFalse();
 	}
-
 }

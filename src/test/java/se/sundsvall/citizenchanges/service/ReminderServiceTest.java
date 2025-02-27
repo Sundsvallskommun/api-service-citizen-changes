@@ -101,7 +101,7 @@ class ReminderServiceTest {
 	}
 
 	@Test
-	void runBatch_dryRun() {
+	void runBatchDryRun() {
 		// Arrange
 		// Mock
 		when(openEIntegrationMock.getErrandIds(any(), any(), any(), any())).thenReturn(List.of("1"));
@@ -130,7 +130,7 @@ class ReminderServiceTest {
 	}
 
 	@Test
-	void runBatch_SpecifyEmailAndSms() {
+	void runBatchSpecifyEmailAndSms() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(30));
 
@@ -161,11 +161,10 @@ class ReminderServiceTest {
 		verify(mapperMock).composeReminderContentEmail(any());
 
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
-
 	}
 
 	@Test
-	void runBatch_failedToSendEmailAndSms() {
+	void runBatchFailedToSendEmailAndSms() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(30));
 
@@ -200,7 +199,7 @@ class ReminderServiceTest {
 	}
 
 	@Test
-	void runBatch_emailThrowsExceptionAndBadlyFormattedSms() {
+	void runBatchEmailThrowsExceptionAndBadlyFormattedSms() {
 		// Arrange
 		final var errand = buildOepErrandItem("Ja", "P1", "202301011234", LocalDate.now().withMonth(8).withDayOfMonth(30));
 
@@ -231,11 +230,10 @@ class ReminderServiceTest {
 		verify(mapperMock, times(2)).composeEmailRequest(any(), any(), any(), any());
 		verify(mapperMock).composeReminderContentEmail(any());
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
-
 	}
 
 	@Test
-	void runBatch_getOepErrandThrowException() {
+	void runBatchGetOepErrandThrowException() {
 
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
@@ -266,7 +264,7 @@ class ReminderServiceTest {
 	}
 
 	@Test
-	void runBatch_noOepErrandsFound() {
+	void runBatchNoOepErrandsFound() {
 		// Mock
 		when(propertiesMock.familyId()).thenReturn("344,349");
 		when(mapperMock.getEmailRecipients(any())).thenReturn(new String[] {
@@ -291,5 +289,4 @@ class ReminderServiceTest {
 		verify(mapperMock).composeEmailRequest(any(), any(), any(), any());
 		verifyNoMoreInteractions(openEIntegrationMock, messagingClientMock, mapperMock, propertiesMock);
 	}
-
 }

@@ -6,7 +6,7 @@
 			}
 		},
 		"method": "GET",
-		"urlPattern": "/citizen/changedaddress\\?changedDateFrom=.*"
+		"urlPattern": "/citizen/2281/changedaddress\\?changedDateFrom=.*"
 	},
 	"response": {
 		"headers": {

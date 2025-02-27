@@ -82,7 +82,7 @@ class MessageMapperTest {
 	}
 
 	@Test
-	void getImageData_shouldThrowException() {
+	void getImageDataShouldThrowException() {
 		assertThatThrownBy(() -> messageMapper.getImageData("/images/doesnotexist.png"))
 			.isInstanceOf(NullPointerException.class);
 	}
@@ -102,7 +102,7 @@ class MessageMapperTest {
 	}
 
 	@Test
-	void getEmailRecipients_shouldReturnEmptyList() {
+	void getEmailRecipientsShouldReturnEmptyList() {
 
 		// Mock
 		when(messageMapperProperties.recipientsSkolskjuts()).thenReturn("");
