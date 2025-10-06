@@ -15,7 +15,7 @@ class ValidationUtilTests {
 
 	@ParameterizedTest
 	@ValueSource(strings = {
-		"+46701234567", "+4513245"
+		"+46701740605", "+4513245"
 	})
 	void validMSISDNTest(final String number) {
 		// Act & Assert
