@@ -50,7 +50,7 @@ class ReminderIT extends AbstractAppTest {
 
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
-			.withServicePath("/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm/dryrun?firstErrand=1&numOfErrands=1&email=mail%40example.com&sms=0701234567")
+			.withServicePath("/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm/dryrun?firstErrand=1&numOfErrands=1&email=mail%40example.com&sms=0701740605")
 			.withExpectedResponseStatus(HttpStatus.OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
