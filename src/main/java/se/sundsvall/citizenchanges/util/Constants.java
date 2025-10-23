@@ -381,8 +381,7 @@ public final class Constants {
 														För att vi ska hinna hantera ditt ärende till %%semester%%s start ska ansökan om skolskjuts vara inskickad senast den %%lastDay%%.<br>\r
 														Om du redan har skickat in en ansökan om skolskjuts inför %%semester%% kan du bortse från denna påminnelse.<br>\r
 														<br>\r
-														Vid frågor, kontakta i första hand skoladministratör på skolan alternativt skolskjutssamordnare på <br>\r
-														mejladress skolskjuts@sundsvall.se eller telefon 060-19 14 87 på vardagar mellan kl. 11-12.<br>\r
+														Om du har frågor, kontakta kommunen på telefon 060-19 10 00 eller e-post kontakt@sundsvall.se.<br>\r
 														<br>\r
 														Vänliga hälsningar,<br>\r
 														Skolskjutssamordnare på barn- och utbildningskontoret, Sundsvalls kommun\r
@@ -401,7 +400,7 @@ public final class Constants {
 		\r
 		Om du redan har skickat in en ansökan om skolskjuts inför %%semester%% kan du bortse från denna påminnelse.\r
 		\r
-		Vid frågor, kontakta i första hand skoladministratör på skolan alternativt skolskjutssamordnare på mejladress skolskjuts@sundsvall.se eller telefon 060-19 14 87 på vardagar mellan kl. 11-12.\r
+		Om du har frågor, kontakta kommunen på telefon 060-19 10 00 eller e-post kontakt@sundsvall.se.\r
 		\r
 		Vänliga hälsningar,\r
 		Skolskjutssamordnare på barn- och utbildningskontoret, Sundsvalls kommun""";
