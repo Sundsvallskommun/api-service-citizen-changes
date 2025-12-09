@@ -13,39 +13,39 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 public class AddressItem {
 
-	@Schema(example = "Current")
+	@Schema(examples = "Current")
 	private String status;
 
-	@Schema(example = "2021-11-01T00:00:00")
+	@Schema(examples = "2021-11-01T00:00:00")
 	private OffsetDateTime nrDate;
 
 	private String co;
 
-	@Schema(example = "Testvägen 18")
+	@Schema(examples = "Testvägen 18")
 	private String address;
 
-	@Schema(example = "LGH 1001")
+	@Schema(examples = "LGH 1001")
 	private String apartmentNumber;
 
-	@Schema(example = "123 45")
+	@Schema(examples = "123 45")
 	private String postalCode;
 
-	@Schema(example = "Sundsvall")
+	@Schema(examples = "Sundsvall")
 	private String city;
 
-	@Schema(example = "22")
+	@Schema(examples = "22")
 	private String county;
 
-	@Schema(example = "81")
+	@Schema(examples = "81")
 	private String municipality;
 
-	@Schema(example = "POPULATION_REGISTRATION_ADDRESS")
+	@Schema(examples = "POPULATION_REGISTRATION_ADDRESS")
 	private String addressType;
 
-	@Schema(example = "6915726.967")
+	@Schema(examples = "6915726.967")
 	private Double coordinateX;
 
-	@Schema(example = "156025.571")
+	@Schema(examples = "156025.571")
 	private Double coordinateY;
 
 	@Override
