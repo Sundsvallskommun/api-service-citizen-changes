@@ -16,13 +16,13 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(setterPrefix = "with")
 public class DaycareInvestigationItem extends OepErrandItem {
 
-	@Schema(example = "2021-01-01")
+	@Schema(examples = "2021-01-01")
 	private String istChangeStartDate;
 
-	@Schema(example = "2023-06-14")
+	@Schema(examples = "2023-06-14")
 	private String istPlacementEndDate;
 
-	@Schema(example = "S:t Olofsskolans fritidshem")
+	@Schema(examples = "S:t Olofsskolans fritidshem")
 	private String istPlacementName;
 
 	private String istPlacement;

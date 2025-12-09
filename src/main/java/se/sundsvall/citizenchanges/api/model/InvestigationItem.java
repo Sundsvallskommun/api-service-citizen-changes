@@ -12,47 +12,47 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 public class InvestigationItem {
 
-	@Schema(example = "1699")
+	@Schema(examples = "1699")
 	private String flowInstanceId;
 
-	@Schema(example = "344")
+	@Schema(examples = "344")
 	private String familyId;
 
-	@Schema(example = "2021-01-01")
+	@Schema(examples = "2021-01-01")
 	private String decisionStart;
 
-	@Schema(example = "2021-12-31")
+	@Schema(examples = "2021-12-31")
 	private String decisionEnd;
 
 	private AddressItem newAddress;
 
 	private AddressItem oldAddress;
 
-	@Schema(example = "Test Testorsson")
+	@Schema(examples = "Test Testorsson")
 	private String nameGuardian;
 
-	@Schema(example = "Test Testorsson")
+	@Schema(examples = "Test Testorsson")
 	private String nameMinor;
 
-	@Schema(example = "Utflyttad")
+	@Schema(examples = "Utflyttad")
 	private String status;
 
-	@Schema(example = "Nej")
+	@Schema(examples = "Nej")
 	private String classified;
 
-	@Schema(example = "Admin Adminsson")
+	@Schema(examples = "Admin Adminsson")
 	private String administratorName;
 
-	@Schema(example = "Sundsvalls gymnasium Hedbergska")
+	@Schema(examples = "Sundsvalls gymnasium Hedbergska")
 	private String schoolUnit;
 
-	@Schema(example = "Ja")
+	@Schema(examples = "Ja")
 	private String minorToSameAddress;
 
-	@Schema(example = "VH,Elev")
+	@Schema(examples = "VH,Elev")
 	private String moverList;
 
-	@Schema(example = "Introduktionsprogrammet, Västermalm")
+	@Schema(examples = "Introduktionsprogrammet, Västermalm")
 	private String schoolProgram;
 
 }

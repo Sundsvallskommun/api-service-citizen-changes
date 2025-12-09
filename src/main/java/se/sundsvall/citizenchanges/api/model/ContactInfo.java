@@ -12,22 +12,22 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 public class ContactInfo {
 
-	@Schema(example = "noname@sundsvall.se")
+	@Schema(examples = "noname@sundsvall.se")
 	private String emailAddress;
 
-	@Schema(example = "+4670111222333")
+	@Schema(examples = "+4670111222333")
 	private String phoneNumber;
 
-	@Schema(example = "true")
+	@Schema(examples = "true")
 	private boolean contactBySMS;
 
-	@Schema(example = "Alpha Adminsson")
+	@Schema(examples = "Alpha Adminsson")
 	private String displayName;
 
-	@Schema(example = "Alpha")
+	@Schema(examples = "Alpha")
 	private String firstName;
 
-	@Schema(example = "Adminsson")
+	@Schema(examples = "Adminsson")
 	private String lastName;
 
 }

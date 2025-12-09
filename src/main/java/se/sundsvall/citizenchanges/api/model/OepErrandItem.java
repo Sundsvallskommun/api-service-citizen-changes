@@ -13,60 +13,60 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(setterPrefix = "with")
 public class OepErrandItem {
 
-	@Schema(example = "1699")
+	@Schema(examples = "1699")
 	private String flowInstanceId;
 
-	@Schema(example = "Beslutad")
+	@Schema(examples = "Beslutad")
 	private String status;
 
 	private List<ApplicantInfo> applicants;
 
-	@Schema(example = "197408233333")
+	@Schema(examples = "197408233333")
 	private String minorIdentifier;
 
-	@Schema(example = "Minor Besson")
+	@Schema(examples = "Minor Besson")
 	private String minorName;
 
-	@Schema(example = "2021-01-01")
+	@Schema(examples = "2021-01-01")
 	private String decisionStart;
 
-	@Schema(example = "2021-12-31")
+	@Schema(examples = "2021-12-31")
 	private String decisionEnd;
 
-	@Schema(example = "344")
+	@Schema(examples = "344")
 	private String familyId;
 
-	@Schema(example = "Avslås")
+	@Schema(examples = "Avslås")
 	private String decision;
 
-	@Schema(example = "Admin Adminsson")
+	@Schema(examples = "Admin Adminsson")
 
 	private String administratorName;
 
-	@Schema(example = "Sundsvalls gymnasium Hedbergska")
+	@Schema(examples = "Sundsvalls gymnasium Hedbergska")
 	private String school;
 
-	@Schema(example = "Introduktionsprogrammet, Västermalm")
+	@Schema(examples = "Introduktionsprogrammet, Västermalm")
 	private String schoolUnit;
 
 	private ContactInfo contactInfo;
 
-	@Schema(example = "Skickat")
+	@Schema(examples = "Skickat")
 	private String emailStatus;
 
-	@Schema(example = "Fel")
+	@Schema(examples = "Fel")
 	private String smsStatus;
 
-	@Schema(example = "Jag ansöker för ett barn som jag är vårdnadshavare för")
+	@Schema(examples = "Jag ansöker för ett barn som jag är vårdnadshavare för")
 	private String applicantCapacity;
 
-	@Schema(example = "Ja, deltid|Ja, heltid|Nej")
+	@Schema(examples = "Ja, deltid|Ja, heltid|Nej")
 	private String daycarePlacement;
 
-	@Schema(example = "Ja, fritidsplatsen är ändrad till deltid|Ja, fritidsplatsen är uppsagd")
+	@Schema(examples = "Ja, fritidsplatsen är ändrad till deltid|Ja, fritidsplatsen är uppsagd")
 	private String daycarePlacementChanged;
 
-	@Schema(example = "2022-08-24")
+	@Schema(examples = "2022-08-24")
 	private String daycarePlacementChangedFrom;
 
 }
