@@ -1,7 +1,5 @@
 package se.sundsvall.citizenchanges.integration.citizen;
 
-import static se.sundsvall.citizenchanges.integration.citizen.configuration.CitizenIntegrationConfiguration.CLIENT_ID;
-
 import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.util.Set;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.sundsvall.citizenchanges.integration.citizen.configuration.CitizenIntegrationConfiguration;
+
+import static se.sundsvall.citizenchanges.integration.citizen.configuration.CitizenIntegrationConfiguration.CLIENT_ID;
 
 @FeignClient(
 	name = CLIENT_ID,

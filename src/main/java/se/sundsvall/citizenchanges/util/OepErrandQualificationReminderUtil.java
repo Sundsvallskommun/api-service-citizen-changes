@@ -1,12 +1,12 @@
 package se.sundsvall.citizenchanges.util;
 
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_AUTUMN;
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_SPRING;
-
 import java.time.LocalDate;
 import java.util.Optional;
 import se.sundsvall.citizenchanges.api.model.ContactInfo;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
+
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_AUTUMN;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_DATE_LIMIT_PATTERN_SPRING;
 
 public final class OepErrandQualificationReminderUtil {
 

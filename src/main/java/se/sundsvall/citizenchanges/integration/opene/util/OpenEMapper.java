@@ -1,7 +1,5 @@
 package se.sundsvall.citizenchanges.integration.opene.util;
 
-import static java.util.Collections.emptyList;
-
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -39,6 +37,8 @@ import se.sundsvall.citizenchanges.integration.opene.model.UppgifterSokande;
 import se.sundsvall.citizenchanges.integration.opene.model.ValdBarn;
 import se.sundsvall.citizenchanges.integration.opene.model.Values;
 import se.sundsvall.citizenchanges.integration.opene.model.VemGallerArendet;
+
+import static java.util.Collections.emptyList;
 
 @Component
 public class OpenEMapper {

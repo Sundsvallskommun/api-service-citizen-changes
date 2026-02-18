@@ -1,7 +1,5 @@
 package se.sundsvall.citizenchanges.integration.messaging;
 
-import static se.sundsvall.citizenchanges.integration.messaging.configuration.MessagingConfiguration.CLIENT_ID;
-
 import generated.se.sundsvall.messaging.EmailRequest;
 import generated.se.sundsvall.messaging.MessageResult;
 import generated.se.sundsvall.messaging.SmsRequest;
@@ -10,6 +8,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import se.sundsvall.citizenchanges.integration.messaging.configuration.MessagingConfiguration;
+
+import static se.sundsvall.citizenchanges.integration.messaging.configuration.MessagingConfiguration.CLIENT_ID;
 
 @FeignClient(
 	name = CLIENT_ID,

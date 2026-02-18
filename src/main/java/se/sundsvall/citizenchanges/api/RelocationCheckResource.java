@@ -1,8 +1,5 @@
 package se.sundsvall.citizenchanges.api;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-
 import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,6 +24,9 @@ import se.sundsvall.citizenchanges.integration.citizen.CitizenIntegration;
 import se.sundsvall.citizenchanges.service.RelocationCheckService;
 import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 
 @RestController
 @ApiResponse(responseCode = "200", description = "OK", useReturnTypeSchema = true)

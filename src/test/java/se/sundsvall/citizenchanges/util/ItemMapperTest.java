@@ -1,14 +1,14 @@
 package se.sundsvall.citizenchanges.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static se.sundsvall.citizenchanges.TestDataFactory.buildCitizen;
-import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static se.sundsvall.citizenchanges.TestDataFactory.buildCitizen;
+import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 
 @ExtendWith(MockitoExtension.class)
 class ItemMapperTest {
