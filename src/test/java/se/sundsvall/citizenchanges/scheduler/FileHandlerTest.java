@@ -1,9 +1,5 @@
 package se.sundsvall.citizenchanges.scheduler;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +17,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 
 @ExtendWith(MockitoExtension.class)
 class FileHandlerTest {

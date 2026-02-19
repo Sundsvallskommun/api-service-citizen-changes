@@ -1,5 +1,30 @@
 package se.sundsvall.citizenchanges.util;
 
+import generated.se.sundsvall.messaging.EmailRequest;
+import generated.se.sundsvall.messaging.EmailSender;
+import generated.se.sundsvall.messaging.SmsRequest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.stereotype.Component;
+import se.sundsvall.citizenchanges.api.model.AddressItem;
+import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
+import se.sundsvall.citizenchanges.api.model.FamilyType;
+import se.sundsvall.citizenchanges.api.model.InvestigationItem;
+import se.sundsvall.citizenchanges.api.model.OepErrandItem;
+import se.sundsvall.citizenchanges.api.model.ReportMetaData;
+
 import static se.sundsvall.citizenchanges.util.Constants.APPLICANT_CAPACITY_GUARDIAN;
 import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_LEAD_TEXT;
 import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_ADDRESS;
@@ -27,31 +52,6 @@ import static se.sundsvall.citizenchanges.util.Constants.REMINDER_TARGET_SEMESTE
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_NO;
 import static se.sundsvall.citizenchanges.util.Constants.STATUS_YES;
 import static se.sundsvall.citizenchanges.util.Constants.TRUSTEE_NOTATION;
-
-import generated.se.sundsvall.messaging.EmailRequest;
-import generated.se.sundsvall.messaging.EmailSender;
-import generated.se.sundsvall.messaging.SmsRequest;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
-import se.sundsvall.citizenchanges.api.model.AddressItem;
-import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
-import se.sundsvall.citizenchanges.api.model.FamilyType;
-import se.sundsvall.citizenchanges.api.model.InvestigationItem;
-import se.sundsvall.citizenchanges.api.model.OepErrandItem;
-import se.sundsvall.citizenchanges.api.model.ReportMetaData;
 
 @Component
 @EnableConfigurationProperties(MessageMapperProperties.class)

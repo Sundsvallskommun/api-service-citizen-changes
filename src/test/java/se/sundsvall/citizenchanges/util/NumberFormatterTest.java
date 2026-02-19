@@ -1,10 +1,10 @@
 package se.sundsvall.citizenchanges.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
-
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
 
 class NumberFormatterTest {
 

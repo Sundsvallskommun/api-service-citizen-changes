@@ -1,15 +1,15 @@
 package se.sundsvall.citizenchanges.util;
 
+import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_SKOLSKJUTS_DENIED;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
 import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
-
-import java.time.LocalDate;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class ValidationUtilTests {
 

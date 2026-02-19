@@ -1,13 +1,5 @@
 package se.sundsvall.citizenchanges.service;
 
-import static java.util.Collections.emptyList;
-import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
-import static se.sundsvall.citizenchanges.util.Constants.META_BACKTRACK_DAYS_DEFAULT;
-import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
-import static se.sundsvall.citizenchanges.util.Constants.getFamilyType;
-import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
-import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForRelocationCheck;
-
 import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,6 +27,14 @@ import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.citizenchanges.util.ItemMapper;
 import se.sundsvall.citizenchanges.util.MessageConstants;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+
+import static java.util.Collections.emptyList;
+import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
+import static se.sundsvall.citizenchanges.util.Constants.META_BACKTRACK_DAYS_DEFAULT;
+import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
+import static se.sundsvall.citizenchanges.util.Constants.getFamilyType;
+import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
+import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForRelocationCheck;
 
 @Service
 public class RelocationCheckService {

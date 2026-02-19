@@ -1,23 +1,5 @@
 package se.sundsvall.citizenchanges.service;
 
-import static generated.se.sundsvall.messaging.MessageStatus.SENT;
-import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SENDER;
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SUBJECT_AUTUMN;
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SUBJECT_SPRING;
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_REPORT_EMAIL_SUBJECT_AUTUMN;
-import static se.sundsvall.citizenchanges.util.Constants.REMINDER_REPORT_EMAIL_SUBJECT_SPRING;
-import static se.sundsvall.citizenchanges.util.Constants.STATUS_FAILED;
-import static se.sundsvall.citizenchanges.util.Constants.STATUS_NOT_SENT;
-import static se.sundsvall.citizenchanges.util.Constants.STATUS_SENT;
-import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
-import static se.sundsvall.citizenchanges.util.DateUtil.getCurrentYear;
-import static se.sundsvall.citizenchanges.util.DateUtil.getNextYear;
-import static se.sundsvall.citizenchanges.util.DateUtil.isSpring;
-import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
-import static se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil.isOepErrandQualified;
-import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,6 +19,24 @@ import se.sundsvall.citizenchanges.util.BatchContext;
 import se.sundsvall.citizenchanges.util.Constants;
 import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+
+import static generated.se.sundsvall.messaging.MessageStatus.SENT;
+import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SENDER;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SUBJECT_AUTUMN;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_EMAIL_SUBJECT_SPRING;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_REPORT_EMAIL_SUBJECT_AUTUMN;
+import static se.sundsvall.citizenchanges.util.Constants.REMINDER_REPORT_EMAIL_SUBJECT_SPRING;
+import static se.sundsvall.citizenchanges.util.Constants.STATUS_FAILED;
+import static se.sundsvall.citizenchanges.util.Constants.STATUS_NOT_SENT;
+import static se.sundsvall.citizenchanges.util.Constants.STATUS_SENT;
+import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
+import static se.sundsvall.citizenchanges.util.DateUtil.getCurrentYear;
+import static se.sundsvall.citizenchanges.util.DateUtil.getNextYear;
+import static se.sundsvall.citizenchanges.util.DateUtil.isSpring;
+import static se.sundsvall.citizenchanges.util.NumberFormatter.formatMobileNumber;
+import static se.sundsvall.citizenchanges.util.OepErrandQualificationReminderUtil.isOepErrandQualified;
+import static se.sundsvall.citizenchanges.util.ValidationUtil.validMSISDN;
 
 @Service
 public class ReminderService {

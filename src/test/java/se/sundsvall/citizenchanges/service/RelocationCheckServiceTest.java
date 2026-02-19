@@ -1,5 +1,22 @@
 package se.sundsvall.citizenchanges.service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import se.sundsvall.citizenchanges.api.model.BatchStatus;
+import se.sundsvall.citizenchanges.api.model.InvestigationItem;
+import se.sundsvall.citizenchanges.integration.citizen.CitizenIntegration;
+import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
+import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
+import se.sundsvall.citizenchanges.util.ItemMapper;
+import se.sundsvall.citizenchanges.util.MessageMapper;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -17,23 +34,6 @@ import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_DECID
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_GRANTED_DELEGATION_DECISION;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_READY;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import se.sundsvall.citizenchanges.api.model.BatchStatus;
-import se.sundsvall.citizenchanges.api.model.InvestigationItem;
-import se.sundsvall.citizenchanges.integration.citizen.CitizenIntegration;
-import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
-import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
-import se.sundsvall.citizenchanges.util.ItemMapper;
-import se.sundsvall.citizenchanges.util.MessageMapper;
 
 @ExtendWith(MockitoExtension.class)
 class RelocationCheckServiceTest {

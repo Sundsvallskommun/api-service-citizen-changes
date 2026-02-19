@@ -1,5 +1,16 @@
 package se.sundsvall.citizenchanges.util;
 
+import java.io.IOException;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import se.sundsvall.citizenchanges.api.model.FamilyType;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -11,17 +22,6 @@ import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildReportMetaData;
 import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_ADDRESS;
 import static se.sundsvall.citizenchanges.util.Constants.REMINDER_SMS_SENDER;
-
-import java.io.IOException;
-import java.util.List;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import se.sundsvall.citizenchanges.api.model.FamilyType;
 
 @ExtendWith(MockitoExtension.class)
 class MessageMapperTest {

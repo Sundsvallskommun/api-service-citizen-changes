@@ -1,13 +1,5 @@
 package se.sundsvall.citizenchanges.service;
 
-import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_EMAIL_SUBJECT;
-import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_START_POINT;
-import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
-import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
-import static se.sundsvall.citizenchanges.util.DateUtil.getFromDate;
-import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
-import static se.sundsvall.citizenchanges.util.ValidationUtil.shouldProcessErrand;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -32,6 +24,14 @@ import se.sundsvall.citizenchanges.scheduler.FileHandler;
 import se.sundsvall.citizenchanges.util.Constants;
 import se.sundsvall.citizenchanges.util.DateUtil;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+
+import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_EMAIL_SUBJECT;
+import static se.sundsvall.citizenchanges.util.Constants.DAYCARE_REPORT_START_POINT;
+import static se.sundsvall.citizenchanges.util.Constants.EMAIL_SENDER_NAME;
+import static se.sundsvall.citizenchanges.util.Constants.getProcessableSkolskjutsStatuses;
+import static se.sundsvall.citizenchanges.util.DateUtil.getFromDate;
+import static se.sundsvall.citizenchanges.util.ValidationUtil.isOepErrandQualifiedForDayCareCheck;
+import static se.sundsvall.citizenchanges.util.ValidationUtil.shouldProcessErrand;
 
 @Service
 public class DaycareCheckService {

@@ -1,11 +1,11 @@
 package se.sundsvall.citizenchanges.util;
 
-import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
-
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
+
+import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
 
 public final class ValidationUtil {
 

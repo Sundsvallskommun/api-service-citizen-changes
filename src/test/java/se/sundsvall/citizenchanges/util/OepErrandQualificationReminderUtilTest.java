@@ -1,10 +1,10 @@
 package se.sundsvall.citizenchanges.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
-
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 
 class OepErrandQualificationReminderUtilTest {
 
