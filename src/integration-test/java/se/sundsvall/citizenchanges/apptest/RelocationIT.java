@@ -2,11 +2,11 @@ package se.sundsvall.citizenchanges.apptest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(files = "classpath:/RelocationIT/", classes = Application.class)
 class RelocationIT extends AbstractAppTest {
@@ -23,7 +23,7 @@ class RelocationIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
 			.withServicePath(PATH)
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
 	}
@@ -34,7 +34,7 @@ class RelocationIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.POST)
 			.withServicePath(PATH)
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withRequest("request.json")
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
@@ -46,7 +46,7 @@ class RelocationIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
 			.withServicePath(PATH_RECENT_MOVES)
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("response.json")
 			.sendRequestAndVerifyResponse();
 	}

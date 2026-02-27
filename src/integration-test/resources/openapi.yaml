@@ -1,47 +1,47 @@
 openapi: 3.1.0
 info:
   title: api-citizenchanges
-  contact: { }
+  contact: {}
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-  - url: http://localhost:63507
-    description: Generated server url
+- url: http://localhost:57555
+  description: Generated server url
 paths:
   /{municipalityId}/reminder/batchtrigger/reminder/endofterm:
     get:
       tags:
-        - reminder-resource
+      - reminder-resource
       description: Use this to do a live run of the batch job. Messages will be sent
         to the citizens if sendMessage is true.
       operationId: runReminderBatch
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: firstErrand
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: numOfErrands
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: sendMessage
-          in: query
-          required: true
-          schema:
-            type: boolean
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: firstErrand
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: numOfErrands
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: sendMessage
+        in: query
+        required: true
+        schema:
+          type: boolean
       responses:
         "200":
           description: OK
@@ -50,16 +50,16 @@ paths:
               schema:
                 type: string
                 enum:
-                  - DONE
-                  - ERROR
+                - DONE
+                - ERROR
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -68,21 +68,21 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       tags:
-        - reminder-resource
+      - reminder-resource
       operationId: runReminderBatch_1
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: sendMessage
-          in: query
-          required: true
-          schema:
-            type: boolean
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: sendMessage
+        in: query
+        required: true
+        schema:
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -99,16 +99,16 @@ paths:
               schema:
                 type: string
                 enum:
-                  - DONE
-                  - ERROR
+                - DONE
+                - ERROR
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -118,22 +118,22 @@ paths:
   /{municipalityId}/relocations/batchtrigger/relocations:
     get:
       tags:
-        - relocation-check-resource
+      - relocation-check-resource
       operationId: runBatch
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: backtrackDays
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: backtrackDays
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: OK
@@ -142,16 +142,16 @@ paths:
               schema:
                 type: string
                 enum:
-                  - DONE
-                  - ERROR
+                - DONE
+                - ERROR
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -160,24 +160,24 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       tags:
-        - relocation-check-resource
+      - relocation-check-resource
       description: 'Use this if you want to send a set of Citizeninfo to the batch
         job and bypass the citizen api. '
       operationId: runBatch_1
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: backtrackDays
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: backtrackDays
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
@@ -195,16 +195,16 @@ paths:
               schema:
                 type: string
                 enum:
-                  - DONE
-                  - ERROR
+                - DONE
+                - ERROR
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -214,34 +214,34 @@ paths:
   /{municipalityId}/daycare/batchtrigger/daycarechecker:
     post:
       tags:
-        - day-care-check-resource
+      - day-care-check-resource
       operationId: runDaycareCheckBatch
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: firstErrand
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: numOfErrands
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: backtrackDays
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: firstErrand
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: numOfErrands
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: backtrackDays
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           multipart/form-data:
@@ -252,7 +252,7 @@ paths:
                   type: string
                   format: binary
               required:
-                - file
+              - file
       responses:
         "200":
           description: OK
@@ -261,16 +261,16 @@ paths:
               schema:
                 type: string
                 enum:
-                  - DONE
-                  - ERROR
+                - DONE
+                - ERROR
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -280,40 +280,40 @@ paths:
   /{municipalityId}/reminder/batchtrigger/reminder/endofterm/dryrun:
     get:
       tags:
-        - reminder-resource
+      - reminder-resource
       description: Use this to do a dry run of the batch job. No messages will be
         sent to the citizens. Sms and email will be sent to the specified recipients.
       operationId: runReminderBatch_2
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: firstErrand
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: numOfErrands
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: sms
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: email
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: firstErrand
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: numOfErrands
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: sms
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -322,16 +322,16 @@ paths:
               schema:
                 type: string
                 enum:
-                  - DONE
-                  - ERROR
+                - DONE
+                - ERROR
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -341,22 +341,22 @@ paths:
   /{municipalityId}/relocations/meta/recentmoves:
     get:
       tags:
-        - relocation-check-resource
+      - relocation-check-resource
       operationId: getRecentMoves
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: backtrackDays
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: backtrackDays
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: OK
@@ -373,8 +373,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -384,16 +384,16 @@ paths:
   /{municipalityId}/daycare/cachedFile:
     get:
       tags:
-        - day-care-check-resource
+      - day-care-check-resource
       operationId: checkCachedFile
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       responses:
         "200":
           description: OK
@@ -407,8 +407,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -417,16 +417,16 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       tags:
-        - day-care-check-resource
+      - day-care-check-resource
       operationId: deleteCachedFile
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       responses:
         "200":
           description: OK
@@ -436,8 +436,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -447,7 +447,7 @@ paths:
   /api-docs:
     get:
       tags:
-        - API
+      - API
       summary: OpenAPI
       operationId: getApiDocs
       responses:
@@ -465,186 +465,58 @@ components:
     Problem:
       type: object
       properties:
-        status:
-          $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
-        detail:
-          type: string
         instance:
           type: string
           format: uri
         type:
           type: string
           format: uri
-        parameters:
-          type: object
-          additionalProperties: { }
-    StatusType:
-      type: object
-      properties:
-        statusCode:
+        title:
+          type: string
+        detail:
+          type: string
+        status:
           type: integer
           format: int32
-        reasonPhrase:
-          type: string
     ConstraintViolationProblem:
       type: object
       properties:
-        cause:
-          $ref: "#/components/schemas/ThrowableProblem"
-        stackTrace:
-          type: array
-          items:
-            type: object
-            properties:
-              classLoaderName:
-                type: string
-              moduleName:
-                type: string
-              moduleVersion:
-                type: string
-              methodName:
-                type: string
-              fileName:
-                type: string
-              lineNumber:
-                type: integer
-                format: int32
-              className:
-                type: string
-              nativeMethod:
-                type: boolean
         type:
           type: string
           format: uri
         status:
-          $ref: "#/components/schemas/StatusType"
+          type: integer
+          format: int32
         violations:
           type: array
           items:
             $ref: "#/components/schemas/Violation"
         title:
           type: string
-        message:
-          type: string
-        detail:
-          type: string
         instance:
           type: string
           format: uri
-        parameters:
-          type: object
-          additionalProperties: { }
-        suppressed:
-          type: array
-          items:
-            type: object
-            properties:
-              stackTrace:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    classLoaderName:
-                      type: string
-                    moduleName:
-                      type: string
-                    moduleVersion:
-                      type: string
-                    methodName:
-                      type: string
-                    fileName:
-                      type: string
-                    lineNumber:
-                      type: integer
-                      format: int32
-                    className:
-                      type: string
-                    nativeMethod:
-                      type: boolean
-              message:
-                type: string
-              localizedMessage:
-                type: string
-        localizedMessage:
+        causeAsProblem:
+          $ref: "#/components/schemas/ThrowableProblem"
+        detail:
           type: string
     ThrowableProblem:
       type: object
       properties:
-        cause: { }
-        stackTrace:
-          type: array
-          items:
-            type: object
-            properties:
-              classLoaderName:
-                type: string
-              moduleName:
-                type: string
-              moduleVersion:
-                type: string
-              methodName:
-                type: string
-              fileName:
-                type: string
-              lineNumber:
-                type: integer
-                format: int32
-              className:
-                type: string
-              nativeMethod:
-                type: boolean
-        message:
+        type:
           type: string
-        status:
-          $ref: "#/components/schemas/StatusType"
+          format: uri
         title:
           type: string
+        status:
+          type: integer
+          format: int32
         detail:
           type: string
         instance:
           type: string
           format: uri
-        type:
-          type: string
-          format: uri
-        parameters:
-          type: object
-          additionalProperties: { }
-        suppressed:
-          type: array
-          items:
-            type: object
-            properties:
-              stackTrace:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    classLoaderName:
-                      type: string
-                    moduleName:
-                      type: string
-                    moduleVersion:
-                      type: string
-                    methodName:
-                      type: string
-                    fileName:
-                      type: string
-                    lineNumber:
-                      type: integer
-                      format: int32
-                    className:
-                      type: string
-                    nativeMethod:
-                      type: boolean
-              message:
-                type: string
-              localizedMessage:
-                type: string
-        localizedMessage:
-          type: string
+        causeAsProblem: {}
     Violation:
       type: object
       properties:
@@ -737,4 +609,4 @@ components:
         unRegDate:
           type: string
           format: date-time
-  securitySchemes: { }
+  securitySchemes: {}

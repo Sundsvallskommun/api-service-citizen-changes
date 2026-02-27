@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.zalando.problem.Problem;
-import org.zalando.problem.Status;
 import se.sundsvall.citizenchanges.api.model.ApplicantInfo;
 import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
+import se.sundsvall.dept44.problem.Problem;
 import se.sundsvall.dept44.util.jacoco.ExcludeFromJacocoGeneratedCoverageReport;
+
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @Component
 @ExcludeFromJacocoGeneratedCoverageReport
@@ -154,7 +155,7 @@ public class FileHandler {
 		try {
 			Files.delete(Path.of(BACKUP_FILE_PATH));
 		} catch (final IOException e) {
-			throw Problem.valueOf(Status.INTERNAL_SERVER_ERROR, "Could not delete cached file");
+			throw Problem.valueOf(INTERNAL_SERVER_ERROR, "Could not delete cached file");
 		}
 	}
 

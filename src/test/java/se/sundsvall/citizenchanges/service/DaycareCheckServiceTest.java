@@ -10,14 +10,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
-import org.zalando.problem.Problem;
-import org.zalando.problem.Status;
 import se.sundsvall.citizenchanges.api.model.BatchStatus;
 import se.sundsvall.citizenchanges.api.model.DaycareInvestigationItem;
 import se.sundsvall.citizenchanges.integration.messaging.MessagingClient;
 import se.sundsvall.citizenchanges.integration.opene.OpenEIntegration;
 import se.sundsvall.citizenchanges.scheduler.FileHandler;
 import se.sundsvall.citizenchanges.util.MessageMapper;
+import se.sundsvall.dept44.problem.Problem;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,6 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static se.sundsvall.citizenchanges.TestDataFactory.buildOepErrandItem;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED;
 import static se.sundsvall.citizenchanges.util.Constants.OEP_ERRAND_STATUS_AUTOMATICALLY_GRANTED_DELEGATION_DECISION;
@@ -155,7 +155,7 @@ class DaycareCheckServiceTest {
 	void deleteCachedFileException() {
 
 		// Mock
-		doThrow(Problem.valueOf(Status.INTERNAL_SERVER_ERROR, "Some exception")).when(fileHandlerMock).deleteCachedFile();
+		doThrow(Problem.valueOf(INTERNAL_SERVER_ERROR, "Some exception")).when(fileHandlerMock).deleteCachedFile();
 
 		assertThatThrownBy(() -> service.deleteCachedFile())
 			.isInstanceOf(Problem.class)

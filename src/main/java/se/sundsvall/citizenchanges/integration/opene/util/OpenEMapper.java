@@ -1,6 +1,5 @@
 package se.sundsvall.citizenchanges.integration.opene.util;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -37,6 +36,7 @@ import se.sundsvall.citizenchanges.integration.opene.model.UppgifterSokande;
 import se.sundsvall.citizenchanges.integration.opene.model.ValdBarn;
 import se.sundsvall.citizenchanges.integration.opene.model.Values;
 import se.sundsvall.citizenchanges.integration.opene.model.VemGallerArendet;
+import tools.jackson.dataformat.xml.XmlMapper;
 
 import static java.util.Collections.emptyList;
 
@@ -64,8 +64,9 @@ public class OpenEMapper {
 		final FlowInstance flowInstance;
 		final var item = OepErrandItem.builder();
 		try {
-			flowInstance = new XmlMapper()
-				.registerModule(new StringTrimModule())
+			flowInstance = XmlMapper.builder()
+				.addModule(new StringTrimModule())
+				.build()
 				.readValue(xmlString, FlowInstance.class);
 		} catch (final Exception e) {
 			LOG.info("Something went wrong parsing flowInstance", e);
@@ -190,8 +191,9 @@ public class OpenEMapper {
 
 		final var xmlString = new String(errandStatus);
 		try {
-			return new XmlMapper()
-				.registerModule(new StringTrimModule())
+			return XmlMapper.builder()
+				.addModule(new StringTrimModule())
+				.build()
 				.readValue(xmlString, Status.class)
 				.getName();
 		} catch (final Exception e) {
