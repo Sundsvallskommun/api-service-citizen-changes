@@ -8,10 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.InputStreamResource;
-import org.zalando.problem.Problem;
 import se.sundsvall.citizenchanges.api.model.FamilyType;
 import se.sundsvall.citizenchanges.api.model.OepErrandItem;
 import se.sundsvall.citizenchanges.integration.opene.util.OpenEMapper;
+import se.sundsvall.dept44.problem.Problem;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;

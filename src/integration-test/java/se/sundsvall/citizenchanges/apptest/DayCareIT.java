@@ -3,11 +3,12 @@ package se.sundsvall.citizenchanges.apptest;
 import java.io.FileNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(files = "classpath:/DayCareIT/", classes = Application.class)
 class DayCareIT extends AbstractAppTest {
@@ -26,7 +27,7 @@ class DayCareIT extends AbstractAppTest {
 			.withServicePath(PATH)
 			.withContentType(MediaType.valueOf("multipart/form-data"))
 			.withRequestFile("file", "mockfile.xls")
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
 	}
@@ -37,7 +38,7 @@ class DayCareIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
 			.withServicePath(CACHED_FILE)
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("true")
 			.sendRequestAndVerifyResponse();
 	}
@@ -48,7 +49,7 @@ class DayCareIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.DELETE)
 			.withServicePath(CACHED_FILE)
-			.withExpectedResponseStatus(HttpStatus.NO_CONTENT)
+			.withExpectedResponseStatus(NO_CONTENT)
 			.sendRequestAndVerifyResponse();
 	}
 

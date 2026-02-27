@@ -2,11 +2,11 @@ package se.sundsvall.citizenchanges.apptest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(
 	files = "classpath:/ReminderIT/",
@@ -25,7 +25,7 @@ class ReminderIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
 			.withServicePath(PATH)
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
 
@@ -38,7 +38,7 @@ class ReminderIT extends AbstractAppTest {
 			.withHttpMethod(HttpMethod.POST)
 			.withServicePath(PATH)
 			.withRequest("request.json")
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
 
@@ -51,7 +51,7 @@ class ReminderIT extends AbstractAppTest {
 		setupCall()
 			.withHttpMethod(HttpMethod.GET)
 			.withServicePath("/" + MUNICIPALITY_ID + "/reminder/batchtrigger/reminder/endofterm/dryrun?firstErrand=1&numOfErrands=1&email=mail%40example.com&sms=0701740605")
-			.withExpectedResponseStatus(HttpStatus.OK)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse("DONE")
 			.sendRequestAndVerifyResponse();
 

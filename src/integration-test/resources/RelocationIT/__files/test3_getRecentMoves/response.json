@@ -4,11 +4,9 @@
 		"addresses": [
 			{
 				"country": "someCountry",
-				"yCoordLocal": 0,
 				"address": "someAddress",
 				"city": "someCity",
 				"addressType": "someAddressType",
-				"xCoordLocal": 0,
 				"addressLetter": "someAddressLetter",
 				"postalCode": "somePostalCode",
 				"county": "someCounty",
