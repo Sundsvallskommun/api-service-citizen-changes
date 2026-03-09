@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-- url: http://localhost:57555
+- url: http://localhost:51693
   description: Generated server url
 paths:
   /{municipalityId}/reminder/batchtrigger/reminder/endofterm:
@@ -465,16 +465,16 @@ components:
     Problem:
       type: object
       properties:
+        title:
+          type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
         type:
           type: string
           format: uri
-        title:
-          type: string
-        detail:
-          type: string
         status:
           type: integer
           format: int32
@@ -493,13 +493,13 @@ components:
             $ref: "#/components/schemas/Violation"
         title:
           type: string
+        detail:
+          type: string
+        causeAsProblem:
+          $ref: "#/components/schemas/ThrowableProblem"
         instance:
           type: string
           format: uri
-        causeAsProblem:
-          $ref: "#/components/schemas/ThrowableProblem"
-        detail:
-          type: string
     ThrowableProblem:
       type: object
       properties:
