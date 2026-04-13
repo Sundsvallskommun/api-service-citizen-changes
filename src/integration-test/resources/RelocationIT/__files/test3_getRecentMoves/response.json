@@ -18,7 +18,9 @@
 				"addressNumber": "someAddressNumber",
 				"emigrated": true,
 				"addressArea": "someAddressArea",
-				"status": "someStatus"
+				"status": "someStatus",
+				"xCoordLocal": 0.0,
+				"yCoordLocal": 0.0
 			}
 		],
 		"unRegCode": "someUnRegCode",
