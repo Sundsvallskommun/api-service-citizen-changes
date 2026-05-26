@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-- url: http://localhost:51693
+- url: http://localhost:60740
   description: Generated server url
 paths:
   /{municipalityId}/reminder/batchtrigger/reminder/endofterm:
@@ -528,85 +528,151 @@ components:
       type: object
       properties:
         status:
-          type: string
+          type:
+          - string
+          - "null"
         nrDate:
-          type: string
+          type:
+          - string
+          - "null"
           format: date-time
         realEstateDescription:
-          type: string
+          type:
+          - string
+          - "null"
         co:
-          type: string
+          type:
+          - string
+          - "null"
         address:
-          type: string
+          type:
+          - string
+          - "null"
         addressArea:
-          type: string
+          type:
+          - string
+          - "null"
         addressNumber:
-          type: string
+          type:
+          - string
+          - "null"
         addressLetter:
-          type: string
+          type:
+          - string
+          - "null"
         appartmentNumber:
-          type: string
+          type:
+          - string
+          - "null"
         postalCode:
-          type: string
+          type:
+          - string
+          - "null"
         city:
-          type: string
+          type:
+          - string
+          - "null"
         county:
-          type: string
+          type:
+          - string
+          - "null"
         municipality:
-          type: string
+          type:
+          - string
+          - "null"
         country:
-          type: string
+          type:
+          - string
+          - "null"
         emigrated:
-          type: boolean
+          type:
+          - boolean
+          - "null"
         addressType:
-          type: string
+          type:
+          - string
+          - "null"
         xCoordLocal:
-          type: number
+          type:
+          - number
+          - "null"
           format: double
         yCoordLocal:
-          type: number
+          type:
+          - number
+          - "null"
           format: double
     CitizenWithChangedAddress:
       type: object
       properties:
         personId:
-          type: string
+          type:
+          - string
+          - "null"
           format: uuid
         personNumber:
-          type: string
+          type:
+          - string
+          - "null"
         classified:
-          type: string
+          type:
+          - string
+          - "null"
         unRegCode:
-          type: string
+          type:
+          - string
+          - "null"
         unRegDate:
-          type: string
+          type:
+          - string
+          - "null"
           format: date-time
         gender:
-          type: string
+          type:
+          - string
+          - "null"
         givenname:
-          type: string
+          type:
+          - string
+          - "null"
         lastname:
-          type: string
+          type:
+          - string
+          - "null"
         typeOfSchool:
-          type: string
+          type:
+          - string
+          - "null"
         custodianFor:
-          type: array
+          type:
+          - array
+          - "null"
           items:
             $ref: "#/components/schemas/CustodyChildrenPupil"
         addresses:
-          type: array
+          type:
+          - array
+          - "null"
           items:
             $ref: "#/components/schemas/CitizenAddress"
     CustodyChildrenPupil:
       type: object
       properties:
         personnumber:
-          type: string
+          type:
+          - string
+          - "null"
         typeOfSchool:
-          type: string
+          type:
+          - string
+          - "null"
         unRegCode:
-          type: string
+          type:
+          - string
+          - "null"
         unRegDate:
-          type: string
+          type:
+          - string
+          - "null"
           format: date-time
   securitySchemes: {}
