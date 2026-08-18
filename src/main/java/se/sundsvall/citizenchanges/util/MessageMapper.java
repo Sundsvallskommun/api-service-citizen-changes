@@ -6,6 +6,7 @@ import generated.se.sundsvall.messaging.SmsRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -331,8 +332,8 @@ public class MessageMapper {
 
 	public String composeReminderContentEmail(final OepErrandItem item) {
 
-		final var lastDay = LocalDate.now().getMonthValue() < 7 ? REMINDER_LAST_DAY_SPRING : REMINDER_LAST_DAY_AUTUMN;
-		final var targetSemester = LocalDate.now().getMonthValue() < 7 ? REMINDER_TARGET_SEMESTER_SPRING : REMINDER_TARGET_SEMESTER_AUTUMN;
+		final var lastDay = LocalDate.now(ZoneId.systemDefault()).getMonthValue() < 7 ? REMINDER_LAST_DAY_SPRING : REMINDER_LAST_DAY_AUTUMN;
+		final var targetSemester = LocalDate.now(ZoneId.systemDefault()).getMonthValue() < 7 ? REMINDER_TARGET_SEMESTER_SPRING : REMINDER_TARGET_SEMESTER_AUTUMN;
 		var mainStart = HTML_TEMPLATE_MAIN_START;
 
 		mainStart = mainStart.concat(HTML_TEMPLATE_REMINDER_TEXT_BODY).replace("%%minorName%%", item.getMinorName())
@@ -348,8 +349,8 @@ public class MessageMapper {
 
 	public String composeReminderContentSMS(final OepErrandItem item, final String targetYear) {
 
-		final String lastDay = LocalDate.now().getMonthValue() < 7 ? REMINDER_LAST_DAY_SPRING : REMINDER_LAST_DAY_AUTUMN;
-		final var targetSemester = LocalDate.now().getMonthValue() < 7 ? REMINDER_TARGET_SEMESTER_SPRING : REMINDER_TARGET_SEMESTER_AUTUMN;
+		final String lastDay = LocalDate.now(ZoneId.systemDefault()).getMonthValue() < 7 ? REMINDER_LAST_DAY_SPRING : REMINDER_LAST_DAY_AUTUMN;
+		final var targetSemester = LocalDate.now(ZoneId.systemDefault()).getMonthValue() < 7 ? REMINDER_TARGET_SEMESTER_SPRING : REMINDER_TARGET_SEMESTER_AUTUMN;
 
 		var payload = REMINDER_SMS_BODY;
 		payload = payload.replace("%%thisYear%%", targetYear)

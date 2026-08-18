@@ -3,6 +3,7 @@ package se.sundsvall.citizenchanges.service;
 import generated.se.sundsvall.citizen.CitizenWithChangedAddress;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -71,7 +72,7 @@ public class RelocationCheckService {
 	public BatchStatus runBatch(final Optional<Integer> backtrackDays, final Set<CitizenWithChangedAddress> citizens, final String municipalityId) {
 		LOG.info("Batch job running...");
 
-		final var today = LocalDate.now();
+		final var today = LocalDate.now(ZoneId.systemDefault());
 		final var fromDateMeta = DateUtil.getFromDateMeta(today, backtrackDays.orElse(META_BACKTRACK_DAYS_DEFAULT)).toString();
 		final var fromDateOeP = DateUtil.getFromDateOeP(today).toString();
 		// Get information from Metakatalogen about registered moves
@@ -176,7 +177,7 @@ public class RelocationCheckService {
 			.withInspectErrandsCount(investigationItemList.size())
 			.withMetaStartDate(fromDateMeta)
 			.withOepStartDate(fromDateOeP)
-			.withReportTimestamp(DateUtil.format(LocalDateTime.now()))
+			.withReportTimestamp(DateUtil.format(LocalDateTime.now(ZoneId.systemDefault())))
 			.build();
 
 		final var htmlPayload = mapper.composeHtmlContent(familyType, investigationItemList, metaData);

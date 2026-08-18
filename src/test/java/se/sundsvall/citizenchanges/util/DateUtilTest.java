@@ -2,6 +2,7 @@ package se.sundsvall.citizenchanges.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +56,7 @@ class DateUtilTest {
 	@MethodSource("isSpringArgumentsProvider")
 	void isSpring(LocalDate localDateToTest, boolean expectedResult) {
 		try (MockedStatic<LocalDate> topDateTimeUtilMock = Mockito.mockStatic(LocalDate.class)) {
-			topDateTimeUtilMock.when(LocalDate::now).thenReturn(localDateToTest);
+			topDateTimeUtilMock.when(() -> LocalDate.now(ZoneId.systemDefault())).thenReturn(localDateToTest);
 			assertThat(DateUtil.isSpring()).isEqualTo(expectedResult);
 		}
 	}

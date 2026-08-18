@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +71,7 @@ public class RelocationCheckResource {
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@RequestParam("backtrackDays") final Integer backtrackDays) {
 
-		final var fromDate = DateUtil.getFromDateMeta(LocalDate.now(), backtrackDays);
+		final var fromDate = DateUtil.getFromDateMeta(LocalDate.now(ZoneId.systemDefault()), backtrackDays);
 
 		return ResponseEntity.ok(citizenIntegration.getAddressChanges(municipalityId, fromDate.toString()));
 	}
