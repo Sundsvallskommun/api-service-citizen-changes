@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -81,7 +82,7 @@ public class FileHandler {
 		if (placementStop.isEmpty()) {
 			return true;
 		}
-		return LocalDate.parse(placementStop).isAfter(LocalDate.now());
+		return LocalDate.parse(placementStop).isAfter(LocalDate.now(ZoneId.systemDefault()));
 	}
 
 	private boolean checkIfApplicantIsTheSameAsPlacement(final ParsedRow row, final OepErrandItem item) {

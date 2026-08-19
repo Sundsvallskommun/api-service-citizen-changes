@@ -2,6 +2,7 @@ package se.sundsvall.citizenchanges.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public final class DateUtil {
@@ -38,15 +39,15 @@ public final class DateUtil {
 	}
 
 	public static boolean isSpring() {
-		return LocalDate.now().getMonthValue() < JULY;
+		return LocalDate.now(ZoneId.systemDefault()).getMonthValue() < JULY;
 	}
 
 	public static int getCurrentYear() {
-		return LocalDate.now().getYear();
+		return LocalDate.now(ZoneId.systemDefault()).getYear();
 	}
 
 	public static int getNextYear() {
-		return LocalDate.now().plusYears(1).getYear();
+		return LocalDate.now(ZoneId.systemDefault()).plusYears(1).getYear();
 	}
 
 }

@@ -2,6 +2,7 @@ package se.sundsvall.citizenchanges.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,8 +98,8 @@ public class ReminderService {
 			final var metaData = ReportMetaData.builder()
 				.withReportType(familyType.toString())
 				.withInspectErrandsCount(errandItemList.size())
-				.withOepStartDate(DateUtil.getFromDateOeP(LocalDate.now()).toString())
-				.withReportTimestamp(DateUtil.format(LocalDateTime.now())).build();
+				.withOepStartDate(DateUtil.getFromDateOeP(LocalDate.now(ZoneId.systemDefault())).toString())
+				.withReportTimestamp(DateUtil.format(LocalDateTime.now(ZoneId.systemDefault()))).build();
 			composeAndSendReport(metaData, errandItemList, familyType, municipalityId);
 		}
 	}
@@ -106,7 +107,7 @@ public class ReminderService {
 	private List<OepErrandItem> getQualifiedErrands(final String familyId, final BatchContext batchContext, final String municipalityId) {
 		final var errandItemList = new ArrayList<OepErrandItem>();
 		final var oepErrands = Optional.ofNullable(batchContext.getOepErrandIds())
-			.orElseGet(() -> getErrandIdsFromOeP(familyId, DateUtil.getFromDateOeP(LocalDate.now()).toString(), LocalDate.now()));
+			.orElseGet(() -> getErrandIdsFromOeP(familyId, DateUtil.getFromDateOeP(LocalDate.now(ZoneId.systemDefault())).toString(), LocalDate.now(ZoneId.systemDefault())));
 
 		if (!oepErrands.isEmpty()) {
 			var qualifiedItems = 0;
@@ -132,7 +133,7 @@ public class ReminderService {
 	private void processErrand(final BatchContext batchContext, final List<OepErrandItem> errandItemList, final String flowInstanceId, final int qualifiedItems, final String municipalityId) {
 		try {
 			final var item = openEIntegration.getErrand(flowInstanceId, FamilyType.SKOLSKJUTS);
-			if (isOepErrandQualified(item, LocalDate.now()) &&
+			if (isOepErrandQualified(item, LocalDate.now(ZoneId.systemDefault())) &&
 				((qualifiedItems >= batchContext.getFirstErrand()) &&
 					((errandItemList.size() <= batchContext.getNumberOfErrands())
 						|| (batchContext.getNumberOfErrands() == 0)))) {
@@ -199,7 +200,7 @@ public class ReminderService {
 		final var formattedMobileNumber = formatMobileNumber(mobileNumber);
 
 		if (validMSISDN(formattedMobileNumber)) {
-			final var targetYear = isSpring() ? String.valueOf(LocalDate.now().getYear()) : String.valueOf(LocalDate.now().plusYears(1).getYear());
+			final var targetYear = isSpring() ? String.valueOf(LocalDate.now(ZoneId.systemDefault()).getYear()) : String.valueOf(LocalDate.now(ZoneId.systemDefault()).plusYears(1).getYear());
 			if (sendMessage) {
 				LOG.info("Sending reminder SMS to Messaging service for {}", formattedMobileNumber);
 				try {
@@ -224,7 +225,8 @@ public class ReminderService {
 
 	private void composeAndSendReport(final ReportMetaData metaData, final List<OepErrandItem> errandItemList, final FamilyType familyType, final String municipalityId) {
 		// Compose and send report
-		final var reminderReportEmailSubject = LocalDate.now().getMonthValue() < 7 ? REMINDER_REPORT_EMAIL_SUBJECT_SPRING + LocalDate.now().getYear() : REMINDER_REPORT_EMAIL_SUBJECT_AUTUMN + LocalDate.now().plusYears(1).getYear();
+		final var reminderReportEmailSubject = LocalDate.now(ZoneId.systemDefault()).getMonthValue() < 7 ? REMINDER_REPORT_EMAIL_SUBJECT_SPRING + LocalDate.now(ZoneId.systemDefault()).getYear()
+			: REMINDER_REPORT_EMAIL_SUBJECT_AUTUMN + LocalDate.now(ZoneId.systemDefault()).plusYears(1).getYear();
 		final var reportSubject = reminderReportEmailSubject + " (" + metaData.getReportTimestamp() + ")";
 
 		final var htmlPayload = Optional.ofNullable(mapper.composeReminderReportHtmlContent(errandItemList, metaData))

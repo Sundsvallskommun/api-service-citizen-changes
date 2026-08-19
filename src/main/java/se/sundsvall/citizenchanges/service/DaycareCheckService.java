@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,7 +70,7 @@ public class DaycareCheckService {
 	}
 
 	private BatchStatus runBatch(final int firstErrand, final int numOfErrands, final List<String> oepErrands, final int backtrackDays, final String municipalityId) {
-		final var today = LocalDate.now();
+		final var today = LocalDate.now(ZoneId.systemDefault());
 		final var istThresholdDate = getFromDate(today, backtrackDays);
 		final var startPoint = (backtrackDays == 0) ? DAYCARE_REPORT_START_POINT : istThresholdDate.toString();
 		final var fromDateOeP = DateUtil.getFromDateOeP(today).toString();
@@ -105,7 +106,7 @@ public class DaycareCheckService {
 			.withReportType(familyType.toString())
 			.withInspectErrandsCount(errandItemList.size())
 			.withOepStartDate(fromDateOeP)
-			.withReportTimestamp(DateUtil.format(LocalDateTime.now()))
+			.withReportTimestamp(DateUtil.format(LocalDateTime.now(ZoneId.systemDefault())))
 			.withEduCloudStartDate(startPoint)
 			.build();
 
