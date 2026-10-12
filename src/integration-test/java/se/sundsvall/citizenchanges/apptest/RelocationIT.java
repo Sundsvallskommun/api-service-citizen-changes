@@ -2,10 +2,10 @@ package se.sundsvall.citizenchanges.apptest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
-
 import se.sundsvall.citizenchanges.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
+
 import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(files = "classpath:/RelocationIT/", classes = Application.class)
